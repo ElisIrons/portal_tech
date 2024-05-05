@@ -10,7 +10,7 @@ public class Setor {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
     @Column (length = 100, nullable = false)
     private String nome;
@@ -18,11 +18,19 @@ public class Setor {
     public Setor() {
     }
 
-    public Long getId() {
+    public Setor(long id) {
+    }
+
+    public Setor(long id, String nome) {
+        this.id = id;
+        this.nome = nome;
+    }
+
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -33,4 +41,5 @@ public class Setor {
     public void setNome(String nome) {
         this.nome = nome;
     }
+
 }

@@ -22,22 +22,41 @@ public class Pessoa {
     @Column (length = 100)
     private String telefone;
 
-    @ManyToOne(optional = false)
+    @ManyToOne(cascade=CascadeType.PERSIST, optional = false)
     @JoinColumn(name = "id_tipo")
     private Tipo tipo;
 
-    @ManyToOne(optional = true) //opcional pois só Usuário terá setor
-    @JoinColumn(name = "id_setor", nullable = true)
+
+//    @ManyToOne(optional = true) //opcional pois só Usuário terá setor
+    @ManyToOne(cascade=CascadeType.ALL, optional = true)
+    @JoinColumn(name = "id_setor")
     private Setor setor;
 
     public Pessoa() {
     }
 
-    public Long getId() {
+    public Pessoa(Long id, String nome, String email, String senha, String telefone, Tipo tipo, Setor setor) {
+        this.id = id;
+        this.nome = nome;
+        this.email = email;
+        this.senha = senha;
+        this.telefone = telefone;
+        this.tipo = tipo;
+        this.setor = setor;
+    }
+
+    public Pessoa(Long id) {
+        this.id = id;
+    }
+
+    public Pessoa(Pessoa pessoa) {
+    }
+
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -87,6 +106,10 @@ public class Pessoa {
 
     public void setSetor(Setor setor) {
         this.setor = setor;
+    }
+
+
+    public void setSetor(long idsetor) {
     }
 }
 
