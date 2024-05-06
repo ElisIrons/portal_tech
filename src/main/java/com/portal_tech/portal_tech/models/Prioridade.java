@@ -8,15 +8,25 @@ public class Prioridade {
 
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
     @Column (length = 30, nullable = false)
     private String nome;
 
+
+    // Construtor padrão
     public Prioridade() {
+
     }
 
-    public Long getId() {
+    // Construtor com argumento
+    public Prioridade(String nome) {
+        this.nome = nome;
+    }
+
+
+    // Getters e setters
+    public long getId() {
         return id;
     }
 
@@ -30,5 +40,9 @@ public class Prioridade {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public void setIdPrioridade(Long id) {
+        this.id = id;
     }
 }

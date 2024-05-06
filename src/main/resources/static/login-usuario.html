@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link rel="stylesheet" type="text/css" href="styles/login-usuario.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100..700&display=swap" rel="stylesheet" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+            href="https://fonts.googleapis.com/css2?family=Jersey+20&family=Orbitron:wght@400..900&family=Righteous&family=Roboto+Mono:wght@100..700&display=swap"
+            rel="stylesheet" />
+
+    <title>Portal Tech</title>
+    <link rel="icon" href="images/logo.jpeg" />
+
+</head>
+<body>
+<header class="cabecalho">
+    <div class="logo">
+        <img src="images/logo.jpeg" alt="logo Portal Tech" />
+    </div>
+    <div class="titulo">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <h1>Portal Tech</h1>
+    </div>
+    <nav class="cabecalhoMenu">
+
+    </nav>
+</header>
+
+<section class="home">
+    <div class="container">
+
+
+        <main class="login">
+
+            <section class="login-box">
+                <h1 class="login-texto">Login</h1>
+
+                <div class="campo-login">
+
+                    <div class="campo">
+
+                        <fieldset>
+                            <legend class="campo-legenda"><strong>Gostaria de entrar como:</strong></legend>
+                            <label>
+                                <input type="radio" name="devweb" value="frontend" checked>Usuário
+                            </label>
+                            <label>
+                                <input type="radio" name="devweb" value="backend">Técnico
+                            </label>
+                            <label>
+                                <input type="radio" name="devweb" value="backend">Administrador
+                            </label>
+                        </fieldset>
+                    </div>
+
+                    <!-- Formulário login -->
+                    <form method="post" class="formLogin">
+                        <div>
+                            <label for="email">E-mail</label> <!-- Rótulo do campo de e-mail -->
+                            <input type="email" id="email" class="input-email" name="email"
+                                   placeholder="Digite seu e-mail:">
+
+                        </div>
+
+                        <div>
+                            <label for="password">Senha</label> <!-- Rótulo do campo senha -->
+                            <input type="password" id="password" class="input-senha" name="password"
+                                   placeholder="Digite sua senha:">
+
+                        </div>
+                        <div class="lembrar-esqueceu">
+                            <div class="lembrar">
+                                <input type="checkbox" id="lembrar">
+                                <label for="lembrar">Lembrar-me</label>
+                            </div>
+                            <div class="esqueceu">
+                                <a href="#">Esqueceu a senha</a>
+                            </div>
+                        </div>
+
+                        <div class="container-input-login">
+                            <input type="submit" class="submit-input" value="Login">
+                        </div>
+
+                        <div class="registrar">
+                            <p>Ainda não tem uma conta?
+                                <a href="#">Registrar</a>
+                            </p>
+                        </div>
+
+                    </form>
+                </div>
+            </section>
+        </main>
+
+
+        <img src="images/persona.jpeg" class="img" />
+    </div>
+</section>
+
+<footer class="footer">
+    <div class="container">
+        <div class="footer-content">
+            <div class="github">
+                <img src="images/github.png" alt="GitHub Logo" class="github-img" />
+            </div>
+            <div class="github-links">
+                <a href="https://github.com/keilaarakaki">Keila Arakaki</a>
+                <a href="https://github.com/ElisIrons">Elis Rodrigues</a>
+                <a href="https://github.com/nayarakarinearaujo">Nayara Karine</a>
+                <a href="#">Thais Abe </a>
+                <a href="#">Aline Alves </a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>
