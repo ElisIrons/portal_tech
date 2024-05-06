@@ -16,7 +16,15 @@ public class Tipo {
     public Tipo() {
     }
 
-    public Long getId() {
+    public Tipo(Long id) {
+    }
+
+    public Tipo(Long id, String nome) {
+        this.id = id;
+        this.nome = nome;
+    }
+
+    public long getId() {
         return id;
     }
 
