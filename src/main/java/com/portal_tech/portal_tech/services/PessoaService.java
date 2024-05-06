@@ -24,6 +24,7 @@ public class PessoaService {
     @Autowired
     private PessoaRepository pessoaRepository;
 
+//    Falta ajustar para salvar os dados sem setar os dados no código
     public ResponseEntity<PessoaDTO> save(PessoaDTO pessoaDTO){
         Pessoa pessoa = new Pessoa();
         pessoa.setNome(pessoaDTO.nome());
@@ -41,20 +42,7 @@ public class PessoaService {
         return new ResponseEntity<>(pessoaDTO, HttpStatus.CREATED);
     }
 
-    public List<Pessoa> findAll() {
-        List<Pessoa> listOfAll = this.pessoaRepository.findAll();
-//        Pessoa pessoa = new Pessoa();
-//        PessoaDTO pessoaDTO = new PessoaDTO((int) pessoa.getId(),pessoa.getNome(), pessoa.getEmail(), pessoa.getSenha(), pessoa.getEmail(), pessoa.getSetor().getId(), Math.toIntExact((Long) pessoa.getTipo().getId()));
 
-
-//        List<PessoaDTO> ListOfUser = new ArrayList<>();
-//        List<PessoaDTO> ListOfTechnicians = new ArrayList<>();
-//        List<PessoaDTO> ListOfAdmins = new ArrayList<>();
-
-//        return listOfAll;
-        return listOfAll.stream().map(Pessoa :: new).collect(Collectors.toList());
-//        return collect;
-    }
 
     public ResponseEntity<PessoaDTO> updateInfById(long id, PessoaDTO pessoaDTO) {
         Optional <Pessoa> pessoa = this.pessoaRepository.findById(id);
@@ -63,7 +51,6 @@ public class PessoaService {
         }
         else {
             Pessoa pessoaNova = new Pessoa();
-            pessoaNova.setId(id);
             pessoaNova.setId(id);
             pessoaNova.setNome(pessoaDTO.nome());
             pessoaNova.setEmail(pessoaDTO.email());
@@ -91,5 +78,22 @@ public class PessoaService {
         else {
             return new ResponseEntity<>(new PessoaDTO((int) pessoa.get().getId(),pessoa.get().getNome(),pessoa.get().getEmail(),pessoa.get().getTelefone(), pessoa.get().getSenha(), pessoa.get().getSetor().getId(), (int) pessoa.get().getTipo().getId()), HttpStatus.OK); //usei get para retornar o objeto dentro de Optional
         }
+    }
+
+//    Método a ser ajustado - findAll()
+    public List<Pessoa> findAll() {
+        List<Pessoa> listOfAll = this.pessoaRepository.findAll();
+//        Pessoa pessoa = new Pessoa();
+//        PessoaDTO pessoaDTO = new PessoaDTO((int) pessoa.getId(),pessoa.getNome(), pessoa.getEmail(), pessoa.getSenha(), pessoa.getEmail(), pessoa.getSetor().getId(), Math.toIntExact((Long) pessoa.getTipo().getId()));
+
+
+//        List<PessoaDTO> ListOfUser = new ArrayList<>();
+//        List<PessoaDTO> ListOfTechnicians = new ArrayList<>();
+//        List<PessoaDTO> ListOfAdmins = new ArrayList<>();
+
+//        return listOfAll;
+
+        return listOfAll.stream().map(Pessoa :: new).collect(Collectors.toList());
+//        return collect;
     }
 }

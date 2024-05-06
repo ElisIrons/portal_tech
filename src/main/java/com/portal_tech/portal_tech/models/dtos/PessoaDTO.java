@@ -4,7 +4,7 @@ import com.portal_tech.portal_tech.models.Setor;
 import com.portal_tech.portal_tech.models.Tipo;
 import com.portal_tech.portal_tech.models.TiposEnums;
 
-public record PessoaDTO(Integer id, String nome, String email, String senha, String telefone, Long idtipo,
+public record PessoaDTO(long id, String nome, String email, String senha, String telefone, Long idtipo,
                         int idsetor) {
 
     public String nome() {
