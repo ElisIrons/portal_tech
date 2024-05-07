@@ -322,7 +322,6 @@ body {
   display: flex;
   justify-content: flex-start; /* Alinha o conteúdo à esquerda */
   align-self: flex-end; /* Alinha o conteúdo na parte inferior */
-  margin-top: 100px; /* Adiciona margem superior */
   text-align: center; /* Centraliza o conteúdo */
 }
 
@@ -332,6 +331,9 @@ body {
   align-items: center;
   text-decoration: none;
   color: white;
+  font-size: 12px;
+    margin-top: 40px; /* Adicione a margem superior desejada */
+
 }
 
 

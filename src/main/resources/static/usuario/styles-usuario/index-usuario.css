@@ -33,14 +33,13 @@ body {
 }
 
 .logo img {
-  margin-right: auto;
-  max-width: 5rem;
-  height: auto;
-  border-radius: 100px;
-  box-shadow: 1px 0 1px #03e9f4, 0 0 5px #03e9f4, 0 0 10px #03e9f4,
-    0 0 550px #03e9f4;
+    margin-right: auto;
+    max-width: 5rem;
+    height: auto;
+    border-radius: 100px;
+    box-shadow: 1px 0 1px #03e9f4, 0 0 5px #03e9f4, 0 0 10px #03e9f4,
+        0 0 550px #03e9f4;
 }
-
 .titulo {
   flex-grow: 1;
   text-align: center;
@@ -427,4 +426,4 @@ body {
   body {
     padding-bottom: 6rem;
   }
-}
+}}
