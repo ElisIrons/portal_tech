@@ -3,10 +3,7 @@ package com.portal_tech.portal_tech.services;
 import com.portal_tech.portal_tech.models.Pessoa;
 import com.portal_tech.portal_tech.models.Setor;
 import com.portal_tech.portal_tech.models.Tipo;
-import com.portal_tech.portal_tech.models.TiposEnums;
 import com.portal_tech.portal_tech.models.dtos.PessoaDTO;
-import com.portal_tech.portal_tech.models.dtos.SetorDTO;
-import com.portal_tech.portal_tech.models.dtos.TipoDTO;
 import com.portal_tech.portal_tech.repositores.PessoaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -24,25 +22,26 @@ public class PessoaService {
     @Autowired
     private PessoaRepository pessoaRepository;
 
-//    Falta ajustar para salvar os dados sem setar os dados no código
-    public ResponseEntity<PessoaDTO> save(PessoaDTO pessoaDTO){
+    public ResponseEntity<PessoaDTO> save(Map<String, Object> pessoaDTO){
+        String nomeTipo = (String) pessoaDTO.get("nomeTipo");
+        String nomeSetor = (String) pessoaDTO.get("nomeSetor");
         Pessoa pessoa = new Pessoa();
-        pessoa.setNome(pessoaDTO.nome());
-        pessoa.setEmail(pessoaDTO.email());
-        pessoa.setSenha(pessoaDTO.senha());
-        pessoa.setTelefone(pessoaDTO.telefone());
+        pessoa.setNome((String) pessoaDTO.get("nome"));
+        pessoa.setEmail((String) pessoaDTO.get("email"));
+        pessoa.setSenha((String) pessoaDTO.get("senha"));
+        pessoa.setTelefone((String) pessoaDTO.get("telefone"));
 
-        Tipo tipo = new Tipo(pessoaDTO.idTipo(), "USUARIO");
+        Tipo tipo = new Tipo( nomeTipo);
+
         pessoa.setTipo(tipo);
 
-        Setor setor = new Setor( pessoaDTO.idSetor(), "ADMINISTRATIVO");
+        Setor setor = new Setor(nomeSetor);
         pessoa.setSetor(setor);
 
         this.pessoaRepository.save(pessoa);
-        return new ResponseEntity<>(pessoaDTO, HttpStatus.CREATED);
+        return new ResponseEntity<>(new PessoaDTO((int) pessoa.getId(),pessoa.getNome(),pessoa.getEmail(),pessoa.getTelefone(), pessoa.getSenha(), pessoa.getSetor().getId(), (int) pessoa.getTipo().getId()), HttpStatus.OK); //usei get para retornar o objeto dentro de Optional
+
     }
-
-
 
     public ResponseEntity<PessoaDTO> updateInfById(long id, PessoaDTO pessoaDTO) {
         Optional <Pessoa> pessoa = this.pessoaRepository.findById(id);
@@ -65,6 +64,7 @@ public class PessoaService {
         }
 
     }
+
     public ResponseEntity<String> deleteById(long id) {
         this.pessoaRepository.deleteById(id);
         return new ResponseEntity<>("Os dados foram deletados com sucesso", HttpStatus.OK);
@@ -81,19 +81,27 @@ public class PessoaService {
     }
 
 //    Método a ser ajustado - findAll()
-    public List<Pessoa> findAll() {
-        List<Pessoa> listOfAll = this.pessoaRepository.findAll();
-//        Pessoa pessoa = new Pessoa();
-//        PessoaDTO pessoaDTO = new PessoaDTO((int) pessoa.getId(),pessoa.getNome(), pessoa.getEmail(), pessoa.getSenha(), pessoa.getEmail(), pessoa.getSetor().getId(), Math.toIntExact((Long) pessoa.getTipo().getId()));
+//    public List<Pessoa> findAll() {
+//        public ResponseEntity<PessoaDTO> findAll(){
+//        List<Pessoa> listOfAll = this.pessoaRepository.findAll();
+////        Pessoa pessoa = new Pessoa();
+////        PessoaDTO pessoaDTO = new PessoaDTO((int) pessoa.getId(),pessoa.getNome(), pessoa.getEmail(), pessoa.getSenha(), pessoa.getEmail(), pessoa.getSetor().getId(), Math.toIntExact((Long) pessoa.getTipo().getId()));
+//        List<PessoaDTO> listOfPessoaDTO = new ArrayList<>();
+//        PessoaDTO pessoaDTO;
+//        for(Pessoa pessoa : listOfAll){
+//            pessoaDTO = new PessoaDTO(pessoa.getId(), pessoa.getNome(), pessoa.getSenha(), pessoa.getTelefone(),pessoa.getSenha(), pessoa.getTipo().getId(), pessoa.getSetor().getId());
+//
+//        }
+//
+////        List<PessoaDTO> ListOfUser = new ArrayList<>();
+////        List<PessoaDTO> ListOfTechnicians = new ArrayList<>();
+////        List<PessoaDTO> ListOfAdmins = new ArrayList<>();
+//
+////        return listOfAll;
+//
+////        return listOfAll.stream().map(Pessoa :: new).collect(Collectors.toList());
+//        return new ResponseEntity<>(pessoaDTO, HttpStatus.OK);
+////        return collect;
+//    }
 
-
-//        List<PessoaDTO> ListOfUser = new ArrayList<>();
-//        List<PessoaDTO> ListOfTechnicians = new ArrayList<>();
-//        List<PessoaDTO> ListOfAdmins = new ArrayList<>();
-
-//        return listOfAll;
-
-        return listOfAll.stream().map(Pessoa :: new).collect(Collectors.toList());
-//        return collect;
-    }
 }

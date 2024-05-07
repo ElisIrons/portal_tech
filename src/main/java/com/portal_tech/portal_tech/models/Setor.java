@@ -18,6 +18,10 @@ public class Setor {
     public Setor() {
     }
 
+    public Setor(String nome) {
+        this.nome = nome;
+    }
+
     public Setor(long id) {
     }
 

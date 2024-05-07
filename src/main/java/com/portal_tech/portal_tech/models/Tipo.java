@@ -19,6 +19,10 @@ public class Tipo {
     public Tipo(Long id) {
     }
 
+    public Tipo(String nome) {
+        this.nome = nome;
+    }
+
     public Tipo(Long id, String nome) {
         this.id = id;
         this.nome = nome;
