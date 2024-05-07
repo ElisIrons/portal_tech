@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import java.security.Timestamp;
 
 @Entity
-@Table(name="chamado")
+//@Table(name="chamado") -não precisa, se não tiver, assume q é o nome da classe
 public class Chamado {
 
     @Id
@@ -26,21 +26,25 @@ public class Chamado {
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "id_usuario")
-    private Pessoa Usuario;
+    private Pessoa id_usuario;
 
     @ManyToOne(optional = true) //não obrigatório pois só terá técnico após chamado ser atribuído
     @JoinColumn(name = "id_tecnico")
-    private Pessoa Tecnico;
+    private Pessoa id_tecnico;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "id_status")
-    private Status status;
+    private Status id_status;
 
     @ManyToOne(optional = true) //qdo abrir o chamado não terá prioridade, só após o adm ou técnico atribuírem
     @JoinColumn(name = "id_prioridade")
-    private Prioridade prioridade;
+    private Prioridade id_prioridade;
 
     public Chamado() {
+    }
+
+    public Chamado(Long id) {
+        this.id = id;
     }
 
     public Long getId() {
@@ -83,35 +87,35 @@ public class Chamado {
         this.dt_fim = dt_fim;
     }
 
-    public Pessoa getUsuario() {
-        return Usuario;
+    public Pessoa getIdUsuario() {
+        return id_usuario;
     }
 
-    public void setUsuario(Pessoa usuario) {
-        Usuario = usuario;
+    public void setIdUsuario(Pessoa id_usuario) {
+        this.id_usuario = id_usuario;
     }
 
-    public Pessoa getTecnico() {
-        return Tecnico;
+    public Pessoa getIdTecnico() {
+        return id_tecnico;
     }
 
-    public void setTecnico(Pessoa tecnico) {
-        Tecnico = tecnico;
+    public void setIdTecnico(Pessoa id_tecnico) {
+        this.id_tecnico = id_tecnico;
     }
 
-    public Status getStatus() {
-        return status;
+    public Status getIdStatus() {
+        return id_status;
     }
 
-    public void setStatus(Status status) {
-        this.status = status;
+    public void setIdStatus(Status id_status) {
+        this.id_status = id_status;
     }
 
-    public Prioridade getPrioridade() {
-        return prioridade;
+    public Prioridade getIdPrioridade() {
+        return id_prioridade;
     }
 
-    public void setPrioridade(Prioridade prioridade) {
-        this.prioridade = prioridade;
+    public void setIdPrioridade(Prioridade id_prioridade) {
+        this.id_prioridade = id_prioridade;
     }
 }
