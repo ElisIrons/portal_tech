@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link rel="stylesheet" type="text/css" href="styles-usuario/usuario.chamado.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100..700&display=swap" rel="stylesheet" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+            href="https://fonts.googleapis.com/css2?family=Jersey+20&family=Orbitron:wght@400..900&family=Righteous&family=Roboto+Mono:wght@100..700&display=swap"
+            rel="stylesheet" />
+
+    <title>Portal Tech</title>
+    <link rel="icon" href="/static/images/logo.jpeg"/>
+</head>
+
+<body>
+<header class="cabecalho">
+    <div class="logo">
+        <img src="/static/images/logo.jpeg" alt="logo Portal Tech" />
+    </div>
+    <div class="titulo">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <h1>Portal Tech</h1>
+    </div>
+    <nav class="cabecalhoMenu">
+
+    </nav>
+</header>
+
+<section class="home">
+    <div class="container">
+
+
+        <main class="container-form">
+
+
+            <section class="container-box">
+                <h1 class="container-texto" th:text="'Bem-vindo, ' + ${userName} + '!'">Bem-vindo(a)!</h1>
+
+                <h2 class="container-subtitulo">Criar novo chamado</h2>
+
+                <div class="campo-container">
+
+                    <form action="/salvarChamado" method="post">
+
+
+
+                        <div class="descricao">
+                            <div class="">
+                                <span class="input-group-text">Descrição</span>
+                            </div>
+                            <textarea class="form-control" rows="1" id="descricao" name="descricao"
+                                      placeholder="Digite uma descrição"></textarea>
+                        </div>
+                        <div class="">
+                            <div class="">
+                                <span class="input-group-text">Prioridade</span>
+                            </div>
+                            <select class="form-control" id="prioridade" name="prioridade">
+                                <option value="" disabled selected>Escolha a prioridade</option>
+                                <option value="alta">Alta</option>
+                                <option value="media">Média</option>
+                                <option value="baixa">Baixa</option>
+                            </select>
+                        </div>
+                        <div class="data">
+                            <div class="data-inicio">
+                                <label for="dataInicio" class="input-group-text">Data da abertura do chamado</label>
+                            </div>
+                            <input type="text" class="form-control" id="dataInicio" name="dataInicio"
+                                   placeholder="DD-MM-AAAA">
+                        </div>
+
+                        <div class="">
+                            <div class="setor">
+                                <span class="input-group-text">Setor</span>
+                            </div>
+                            <select class="form-control" id="setor" name="setor">
+                                <option value="" disabled selected>Escolha o Setor</option>
+                                <option value="Financeiro">Financeiro</option>
+                                <option value="Comercial">Comercial</option>
+                                <option value="Jurídico">Jurídico</option>
+                                <option value="Administrativo">Administrativo</option>
+                                <option value="Suporte Técnico">Suporte Técnico</option>
+                                <option value="Suporte Técnico">Recursos Humanos</option>
+                            </select>
+                        </div>
+                        <div class="">
+                            <div class="status">
+                                <span class="input-group-text">Status</span>
+                            </div>
+                            <select class="form-control" id="chamadoStatus" name="chamadoStatus">
+                                <option value="Aguardando">Aguardando Atendimento</option>
+
+                            </select>
+                        </div>
+                        <button type="submit" class="salvar">Cadastrar</button>
+                    </form>
+
+
+                    <div class="return-index">
+                        <p><a href="index.usuario.html"><img class="color-image" src="imagens/voltar.png" /></a>Voltar para tela inicial</p>
+                    </div>
+
+                </div>
+            </section>
+        </main>
+
+
+
+    </div>
+</section>
+
+<footer class="footer">
+    <div class="container">
+        <div class="footer-content">
+            <div class="github">
+                <img src="/static/images/github.png" alt="GitHub Logo" class="github-img" />
+            </div>
+            <div class="github-links">
+                <a href="https://github.com/keilaarakaki">Keila Arakaki</a>
+                <a href="https://github.com/ElisIrons">Elis Rodrigues</a>
+                <a href="https://github.com/nayarakarinearaujo">Nayara Karine</a>
+                <a href="#">Thais Abe </a>
+                <a href="#">Aline Alves </a>
+            </div>
+        </div>
+    </div>
+</footer>
+</body>
+
+</html>
