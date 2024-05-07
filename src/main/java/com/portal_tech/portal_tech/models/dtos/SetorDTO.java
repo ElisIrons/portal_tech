@@ -1,14 +1,40 @@
 package com.portal_tech.portal_tech.models.dtos;
 
-import jakarta.persistence.Column;
+import com.portal_tech.portal_tech.models.Setor;
 
-public record SetorDTO(long id, String nome) {
+public class SetorDTO {
+    private long id;
+    private String nome;
 
-    public long setorId() {
-        return this.id;
+    public SetorDTO(){
+
     }
 
-    public String nome() {
-        return this.nome;
+public SetorDTO(Setor setor){
+this.id = setor.getId();
+this.nome = setor.getNome();
+}
+
+public static Setor convert(SetorDTO setorDTO){
+    Setor setor = new Setor();
+    setor.setId(setorDTO.getId());
+    setor.setNome(setorDTO.getNome());
+    return setor;
+}
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 }
