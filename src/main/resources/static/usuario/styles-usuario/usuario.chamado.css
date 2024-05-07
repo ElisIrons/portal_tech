@@ -1,0 +1,584 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+
+  --primeira-cor: #c6c3c3;
+  --segunda-cor: #ffffff;
+  --black-cor: #000000;
+  --hover-cor: rgb(245, 207, 242);
+}
+
+body {
+  background-image: url("https://img.freepik.com/vetores-gratis/plano-de-fundo-realista-em-estilo-futurista_23-2149129125.jpg?w=740&t=st=1714738576~exp=1714739176~hmac=1f700f9ca9e6cbd1e61691696b1886b625b3931ea713cba4a22a26f65644fccc");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  font-family: 'Roboto Mono', sans-serif;
+  font-weight: 700;
+}
+
+.cabecalho {
+  background: radial-gradient(50% 100% at bottom center,
+      rgb(145, 32, 138),
+      rgb(11, 22, 40));
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  height: 6rem;
+}
+
+.logo img {
+  margin-right: auto;
+  max-width: 5rem;
+  height: auto;
+  border-radius: 100px;
+  box-shadow: 1px 0 1px #03e9f4, 0 0 5px #03e9f4, 0 0 10px #03e9f4,
+    0 0 550px #03e9f4;
+}
+
+.titulo {
+  flex-grow: 1;
+  text-align: center;
+}
+
+.cabecalhoMenu {
+  display: flex;
+}
+
+.titulo {
+  font-family: "Orbitron", sans-serif;
+  letter-spacing: 100px;
+  font-size: 50px;
+  font-weight: 700;
+  color: #14fff1;
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.3), 0 0 29px #14fff1;
+}
+
+.cabecalhoMenu a,
+.titulo {
+  position: relative;
+  display: inline-block;
+  padding: 10px 20px;
+  color: #03e9f4;
+  font-size: 16px;
+  text-decoration: none;
+  text-transform: uppercase;
+  overflow: hidden;
+  transition: 0.5s;
+  margin-top: 5px;
+  letter-spacing: 4px;
+}
+
+.cabecalhoMenu a:hover {
+  background: #03e9f4;
+  color: #f1eee6;
+  border-radius: 5px;
+  box-shadow: 0 0 5px #03e9f4, 0 0 25px #03e9f4, 0 0 50px #03e9f4,
+    0 0 100px #03e9f4;
+}
+
+.cabecalhoMenu a span {
+  position: absolute;
+  display: block;
+}
+
+.cabecalhoMenu a span:nth-child(1) {
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #03e9f4);
+  animation: btn-anim1 1s linear infinite;
+}
+
+@keyframes btn-anim1 {
+  0% {
+    left: -100%;
+  }
+
+  50%,
+  100% {
+    left: 100%;
+  }
+}
+
+.cabecalhoMenu span:nth-child(2) {
+  top: -100%;
+  right: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(180deg, transparent, #03e9f4);
+  animation: btn-anim2 1s linear infinite;
+  animation-delay: 0.25s;
+}
+
+@keyframes btn-anim2 {
+  0% {
+    top: -100%;
+  }
+
+  50%,
+  100% {
+    top: 100%;
+  }
+}
+
+.cabecalhoMenu span:nth-child(3) {
+  bottom: 0;
+  tight: -100%;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(270deg, transparent, #03e9f4);
+  animation: btn-anim3 1s linear infinite;
+  animation-delay: 0.5s;
+}
+
+@keyframes btn-anim3 {
+  0% {
+    right: -100%;
+  }
+
+  50%,
+  100% {
+    right: 100%;
+  }
+}
+
+.cabecalhoMenu span:nth-child(4) {
+  bottom: -100%;
+  left: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(360deg, transparent, #30e9f4);
+  animation: btn-anim4 1s linear infinite;
+  animation-dealy: 0.75s;
+}
+
+@keyframes btn-anim4 {
+  0% {
+    bottom: -100%;
+  }
+
+  50%,
+  100% {
+    bottom: 100%;
+  }
+}
+
+.home .container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 1rem 0 0 1rem;
+}
+
+.home .texto {
+  flex-grow: 1;
+  text-align: center;
+  font-size: 1.1rem;
+}
+
+.home .texto h1 {
+  font-size: 50px;
+  margin-bottom: 80px;
+}
+
+.home .texto p {
+  flex-grow: 1;
+  margin-left: 8px;
+  text-align: left;
+  font-size: 1.4rem;
+  font-weight: 400;
+  padding: 0 20px;
+  color: #0c0c0c;
+}
+
+.home .texto h1 {
+  font-size: 2rem;
+  white-space: nowrap;
+  margin-bottom: 60px;
+  text-align: center;
+  padding: 20px 0;
+  color: rgb(83, 181, 181);
+}
+
+
+.header {
+  position: absolute;
+  top: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 140px;
+  height: 70px;
+  border-radius: 0 0 20px 20px;
+  color: var(--segunda-cor);
+}
+
+.container-box {
+  position: fixed;
+  width: 750px;
+  height: 700px; /* Ajustando a altura para 400px */
+
+  backdrop-filter: blur(25px);
+  box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.2);
+  border-radius: 15px;
+  padding: 7.5em 2.5em 2em 2.5em;
+  color: var(--segunda-cor);
+  background: radial-gradient(100% 100% at bottom center,
+      rgb(145, 32, 138),
+      rgb(18, 28, 90), rgb(145, 32, 138));
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.container-texto {
+  font-size: 30px;
+  color: #03e9f4;
+  text-align: center;
+  font-size: 40px;
+  margin-top: -15%;
+  margin-bottom: 20px;
+}
+
+.container-subtitulo {
+  font-size: 25px;
+  color: #03e9f4;
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+
+.campo-container {
+  display: flexbox;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+  text-align: center;
+
+}
+
+.campo {
+  margin-bottom: 10px;
+}
+
+.campo-container input[type="text"],
+.campo-container textarea,
+.campo-container select {
+  width: 100%;
+  height: 40px;
+  font-size: 16px;
+  padding: 10px;
+  border: 2px solid rgb(145, 32, 138);
+  border-radius: 15px;
+  outline: none;
+  margin: 0 auto;
+}
+
+.campo-container input[type="text"]:hover,
+.campo-container textarea:hover,
+.campo-container select:hover {
+  background-color: var(--hover-cor);
+  color: var(--black-cor);
+}
+
+#descricao{
+  width: 100%;
+  height: 100px;
+
+}
+
+.salvar {
+  color: rgb(121, 28, 114);
+  background-color: #30e9f4;
+  width: 50%;
+  height: 40px;
+  font-size: 16px;
+  font-weight: 500;
+  font-weight: bold;
+  border: 2px solid rgb(121, 28, 114);
+  border-radius: 30px;
+  cursor: pointer;
+  transition: 0.3s;
+  margin-top: 20px;
+}
+
+.salvar:hover {
+  background-color: #b1f3f8;
+  color: var(--black-cor);
+}
+
+
+.return-index {
+  display: flex;
+  justify-content: flex-start; /* Alinha o conteúdo à esquerda */
+  align-self: flex-end; /* Alinha o conteúdo na parte inferior */
+  margin-top: 100px; /* Adiciona margem superior */
+  text-align: center; /* Centraliza o conteúdo */
+}
+
+.return-index p {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: white;
+}
+
+
+
+/*Seção da tabela do Usuário chamados*/
+
+.tabela-container {
+  margin-top: 20px;
+  overflow-x: auto; /* Adiciona barra de rolagem horizontal se necessário */
+}
+
+.tabela {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 10px;
+  overflow: hidden; /* Oculta a barra de rolagem horizontal */
+}
+
+.tabela th, .tabela td {
+  border: 1px solid #ddd;
+  padding: 12px;
+  text-align: left;
+}
+
+.tabela th {
+  background-color: var(--primeira-cor);
+  color: var(--black-cor);
+}
+
+.tabela tbody tr:nth-child(even) {
+  background-color: var(--segunda-cor);
+}
+
+.tabela tbody tr:hover {
+  background-color: var(--hover-cor);
+}
+
+/* Ajusta a largura das colunas se necessário */
+.tabela th:nth-child(1),
+.tabela td:nth-child(1) {
+  width: 15%; /* Porcentagem da largura total */
+}
+
+.tabela th:nth-child(2),
+.tabela td:nth-child(2) {
+  width: 15%; /* Porcentagem da largura total */
+}
+
+.tabela th:nth-child(3),
+.tabela td:nth-child(3) {
+  width: 25%; /* Porcentagem da largura total */
+}
+
+.tabela th:nth-child(4),
+.tabela td:nth-child(4) {
+  width: 10%; /* Porcentagem da largura total */
+}
+
+.tabela th:nth-child(5),
+.tabela td:nth-child(5),
+.tabela th:nth-child(6),
+.tabela td:nth-child(6) {
+  width: 12%; /* Porcentagem da largura total */
+}
+
+
+
+/*Seção do footer*/
+
+.footer {
+  font-family: "Orbitron", sans-serif;
+  background: radial-gradient(100% 100% at bottom center,
+      rgb(145, 32, 138),
+      rgb(11, 22, 40));
+  padding: 0.5rem;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+.footer-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.github-img {
+  margin-right: 10px;
+  height: 40px;
+  max-width: auto;
+}
+
+.footer a {
+  color: #03e9f4;
+  text-decoration: none;
+  margin-right: 10px;
+}
+
+.footer a:hover {
+  background: #03e9f4;
+  color: #f1eee6;
+  border-radius: 2px;
+  box-shadow: 0 0 50px #03e9f4;
+  padding: 5px;
+}
+
+
+/* Telas menores que 640px */
+@media screen and (max-width: 640px) {
+  .cabecalho {
+    padding: 0.5rem;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .logo img {
+    max-width: 50px;
+  }
+
+  .titulo {
+    margin-top: 0.3rem;
+    text-align: center;
+  }
+
+  .titulo h1 {
+    font-size: 18px;
+    margin-top: 3px;
+  }
+
+  .cabecalhoMenu {
+    display: none;
+  }
+
+  .container-box {
+    width: 80%; /* Utiliza toda a largura da tela */
+    height: 70%; /* Altura automática */
+    padding: 1.3em; /* Espaçamento interno menor */
+    overflow-y: auto; /* Adiciona barra de rolagem vertical se necessário */
+  }
+
+  .container-texto {
+    font-size: 20px; /* Reduz o tamanho do texto */
+    margin-top: -5%; /* Ajuste menor de margem superior */
+  }
+
+  .container-subtitulo {
+    font-size: 16px; /* Reduz o tamanho do subtitulo */
+  }
+
+  .campo-container input[type="text"],
+  .campo-container textarea,
+  .campo-container select {
+    font-size: 14px; /* Reduz o tamanho da fonte dos campos */
+  }
+
+  .salvar {
+    width: 70%; /* Ajusta a largura do botão */
+    font-size: 12px; /* Reduz o tamanho do texto do botão */
+  }
+
+  .tabela-container {
+    overflow-x: auto; /* Adiciona barra de rolagem horizontal se necessário */
+  }
+
+  .tabela th,
+  .tabela td {
+    padding: 8px; /* Reduz o espaçamento entre células */
+  }
+}
+
+.return-index {
+  margin-top: -30px; /* Adiciona margem superior */
+  text-align: center; /* Centraliza o conteúdo */
+}
+
+/* Telas de 641px até 1007px */
+@media screen and (min-width: 641px) and (max-width: 1007px) {
+
+  .cabecalho {
+    padding: 1rem;
+    height: 6rem;
+  }
+
+  .logo img {
+    max-width: 100px;
+  }
+
+  .titulo {
+    margin-top: 0.5rem;
+    text-align: center;
+  }
+
+  .titulo h1 {
+    font-size: 20px;
+    margin-top: 5px;
+  }
+
+
+  .cabecalhoMenu {
+    display: none;
+  }
+
+  body {
+    padding-bottom: 6rem;
+  }
+
+  .container-box {
+    width: 80%; /* Utiliza 80% da largura da tela */
+  }
+}
+
+
+/* Telas maiores que 1008px */
+@media screen and (min-width: 1008px) {
+  .cabecalho {
+    padding: 1rem;
+    height: 6rem;
+  }
+
+  .logo img {
+    max-width: 140px;
+  }
+
+  .titulo {
+    margin-left: 1rem;
+    flex-grow: 1;
+  }
+
+  .titulo h1 {
+    font-size: 36px;
+  }
+
+  .cabecalhoMenu {
+    display: flex;
+    margin-right: 1rem;
+  }
+
+  .cabecalhoMenu span {
+    width: 25px;
+    height: 2px;
+    background: #fff;
+    margin: 4px;
+  }
+
+  body {
+    padding-bottom: 6rem;
+  }
+}
