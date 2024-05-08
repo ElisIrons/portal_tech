@@ -1,8 +1,9 @@
-package com.portal_tech.portal_tech.controllers;
+package com.portal_tech.portal_tech.controllers.controllersREST;
 
 
 import com.portal_tech.portal_tech.models.Tipo;
 import com.portal_tech.portal_tech.repositores.TipoRepository;
+import com.portal_tech.portal_tech.swaggerDoc.TipoControllerOpenApi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-public class TipoContoller {
+public class TipoContoller implements TipoControllerOpenApi {
     @Autowired
     private TipoRepository tipoRepository;
 
