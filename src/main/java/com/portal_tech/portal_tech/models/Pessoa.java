@@ -28,7 +28,7 @@ public class Pessoa {
 
 
 //    @ManyToOne(optional = true) //opcional pois só Usuário terá setor
-    @ManyToOne(cascade=CascadeType.ALL, optional = true)
+    @ManyToOne(cascade=CascadeType.PERSIST, optional = true)
     @JoinColumn(name = "id_setor")
     private Setor setor;
 
@@ -108,9 +108,18 @@ public class Pessoa {
         this.setor = setor;
     }
 
-
-    public void setSetor(long idsetor) {
+    public long pegaSoIDTipo(Tipo tipo){
+        return tipo.getId();
     }
+
+//    public void setTipo(long tipo) {
+//        this.tipo = tipo;
+//
+//    }
+//
+//
+//    public void setSetor(long idsetor) {
+//    }
 }
 
 

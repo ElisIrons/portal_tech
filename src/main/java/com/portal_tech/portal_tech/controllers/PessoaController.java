@@ -32,8 +32,8 @@ public class PessoaController implements PessoaControllerOpenApi {
             @ApiResponse(responseCode = "400", description = "Faltam dados obrigatórios a serem passados/não foi possível salvar")
     })
     @PostMapping("/save")
-    public ResponseEntity<PessoaDTO> save(@RequestBody Map<String, Object>requestBodyMap){
-        return this.pessoaService.save(requestBodyMap);
+    public ResponseEntity<PessoaDTO> save( @RequestBody PessoaDTO pessoaDTO){
+        return this.pessoaService.save(pessoaDTO);
     }
 
     @GetMapping("/{id}")
@@ -52,10 +52,10 @@ public class PessoaController implements PessoaControllerOpenApi {
     }
 
 //    Este método ainda precisa de uns ajustes, por isso esta comentado
-//    @GetMapping
-//    public List<Pessoa> findAll(){
-//        return this.pessoaService.findAll();
-//    }
+    @GetMapping
+    public List<PessoaDTO> findAll(){
+        return this.pessoaService.findAll();
+    }
 
 
 }

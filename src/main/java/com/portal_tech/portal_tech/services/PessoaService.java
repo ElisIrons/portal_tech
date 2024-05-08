@@ -4,6 +4,7 @@ import com.portal_tech.portal_tech.models.Pessoa;
 import com.portal_tech.portal_tech.models.Setor;
 import com.portal_tech.portal_tech.models.Tipo;
 import com.portal_tech.portal_tech.models.dtos.PessoaDTO;
+import com.portal_tech.portal_tech.models.dtos.TipoDTO;
 import com.portal_tech.portal_tech.repositores.PessoaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,25 +23,46 @@ public class PessoaService {
     @Autowired
     private PessoaRepository pessoaRepository;
 
-    public ResponseEntity<PessoaDTO> save(Map<String, Object> pessoaDTO){
-        String nomeTipo = (String) pessoaDTO.get("nomeTipo");
-        String nomeSetor = (String) pessoaDTO.get("nomeSetor");
+
+//    public ResponseEntity<PessoaDTO> save(Map<String, Object> pessoaDTO){
+//        String nomeTipo = (String) pessoaDTO.get("nomeTipo");
+//        String nomeSetor = (String) pessoaDTO.get("nomeSetor");
+//        Pessoa pessoa = new Pessoa();
+//        pessoa.setNome((String) pessoaDTO.get("nome"));
+//        pessoa.setEmail((String) pessoaDTO.get("email"));
+//        pessoa.setSenha((String) pessoaDTO.get("senha"));
+//        pessoa.setTelefone((String) pessoaDTO.get("telefone"));
+//
+//        Tipo tipo = new Tipo( nomeTipo);
+//
+//        pessoa.setTipo(tipo);
+//
+//        Setor setor = new Setor(nomeSetor);
+//        pessoa.setSetor(setor);
+//
+//        this.pessoaRepository.save(pessoa);
+//        return new ResponseEntity<>(new PessoaDTO((int) pessoa.getId(),pessoa.getNome(),pessoa.getEmail(),pessoa.getTelefone(), pessoa.getSenha(), pessoa.getSetor().getId(), (int) pessoa.getTipo().getId()), HttpStatus.OK); //usei get para retornar o
+//    }
+
+     public ResponseEntity<PessoaDTO>save(PessoaDTO pessoaDTO){
         Pessoa pessoa = new Pessoa();
-        pessoa.setNome((String) pessoaDTO.get("nome"));
-        pessoa.setEmail((String) pessoaDTO.get("email"));
-        pessoa.setSenha((String) pessoaDTO.get("senha"));
-        pessoa.setTelefone((String) pessoaDTO.get("telefone"));
+        pessoa.setNome(pessoaDTO.nome());
+        pessoa.setEmail(pessoaDTO.email());
+        pessoa.setSenha(pessoaDTO.senha());
+        pessoa.setTelefone(pessoaDTO.telefone());
 
-        Tipo tipo = new Tipo( nomeTipo);
+//        Setor setor = new Setor();
+//        setor.setId(pessoaDTO.idsetor());
+//        pessoa.setSetor(setor);
 
+        Tipo tipo = new Tipo();
+        tipo.setId(pessoaDTO.idtipo());
         pessoa.setTipo(tipo);
-
-        Setor setor = new Setor(nomeSetor);
-        pessoa.setSetor(setor);
+        pessoa.pegaSoIDTipo(tipo);//retorna o id do tipo
 
         this.pessoaRepository.save(pessoa);
-        return new ResponseEntity<>(new PessoaDTO((int) pessoa.getId(),pessoa.getNome(),pessoa.getEmail(),pessoa.getTelefone(), pessoa.getSenha(), pessoa.getSetor().getId(), (int) pessoa.getTipo().getId()), HttpStatus.OK); //usei get para retornar o objeto dentro de Optional
 
+        return new ResponseEntity<>(new PessoaDTO(pessoa.getId(), pessoa.getNome(), pessoa.getEmail(), pessoa.getSenha(),pessoa.getTelefone(), pessoa.getTipo().getId(), pessoa.getSetor().getId()), HttpStatus.OK);
     }
 
     public ResponseEntity<PessoaDTO> updateInfById(long id, PessoaDTO pessoaDTO) {
@@ -54,13 +76,27 @@ public class PessoaService {
             pessoaNova.setNome(pessoaDTO.nome());
             pessoaNova.setEmail(pessoaDTO.email());
             pessoaNova.setTelefone(pessoaDTO.telefone());
-            Setor setor = new Setor(pessoa.get().getSetor().getId(), pessoa.get().getSetor().getNome());
-            pessoaNova.setSetor(setor);
+
+//            Setor setor = new Setor(pessoa.get().getSetor().getId(), pessoa.get().getSetor().getNome());
+
+//            pessoaNova.setSetor(setor);
             pessoaNova.setSenha(pessoaDTO.senha());
-            Tipo tipo = new Tipo(pessoa.get().getTipo().getId(), pessoa.get().getTipo().getNome());
+
+            Setor setor = new Setor();
+            setor.setId(pessoaDTO.idsetor());
+            pessoaNova.setSetor(setor);
+
+//            Setor setorId = pessoaDTO.idsetor();
+//            pessoaNova.setSetor(setorId);
+
+            Tipo tipo = new Tipo(pessoa.get().getTipo().getId());
             pessoaNova.setTipo(tipo);
+
+
+
+
             this.pessoaRepository.save(pessoaNova);
-            return new ResponseEntity<>(new PessoaDTO((int) pessoaNova.getId(),pessoaNova.getNome(),pessoaNova.getEmail(),pessoaNova.getTelefone(), pessoaNova.getSenha(), pessoaNova.getSetor().getId(), (int) pessoaNova.getTipo().getId()), HttpStatus.OK); //usei get para retornar o objeto dentro de Optional
+            return new ResponseEntity<>(new PessoaDTO((long) pessoaNova.getId(),pessoaNova.getNome(),pessoaNova.getEmail(),pessoaNova.getTelefone(), pessoaNova.getSenha(),tipo.getId(), setor.getId()), HttpStatus.OK); //usei get para retornar o objeto dentro de Optional
         }
 
     }
@@ -72,36 +108,41 @@ public class PessoaService {
 
     public ResponseEntity<PessoaDTO> finfInfById(long id) {
       Optional <Pessoa> pessoa = this.pessoaRepository.findById(id);
+      Setor setor = new Setor(pessoa.get().getSetor().getId());
+      Tipo tipo = new Tipo(pessoa.get().getTipo().getId());
         if (pessoa.isEmpty()){
             throw new RuntimeException("Tipo de usuário não encontrado!");
         }
         else {
-            return new ResponseEntity<>(new PessoaDTO((int) pessoa.get().getId(),pessoa.get().getNome(),pessoa.get().getEmail(),pessoa.get().getTelefone(), pessoa.get().getSenha(), pessoa.get().getSetor().getId(), (int) pessoa.get().getTipo().getId()), HttpStatus.OK); //usei get para retornar o objeto dentro de Optional
+            return new ResponseEntity<>(new PessoaDTO((long) pessoa.get().getId(),pessoa.get().getNome(),pessoa.get().getEmail(),pessoa.get().getTelefone(), pessoa.get().getSenha(),  tipo.getId(), setor.getId()), HttpStatus.OK); //usei get para retornar o objeto dentro de Optional
         }
     }
 
 //    Método a ser ajustado - findAll()
-//    public List<Pessoa> findAll() {
-//        public ResponseEntity<PessoaDTO> findAll(){
-//        List<Pessoa> listOfAll = this.pessoaRepository.findAll();
-////        Pessoa pessoa = new Pessoa();
-////        PessoaDTO pessoaDTO = new PessoaDTO((int) pessoa.getId(),pessoa.getNome(), pessoa.getEmail(), pessoa.getSenha(), pessoa.getEmail(), pessoa.getSetor().getId(), Math.toIntExact((Long) pessoa.getTipo().getId()));
-//        List<PessoaDTO> listOfPessoaDTO = new ArrayList<>();
-//        PessoaDTO pessoaDTO;
-//        for(Pessoa pessoa : listOfAll){
-//            pessoaDTO = new PessoaDTO(pessoa.getId(), pessoa.getNome(), pessoa.getSenha(), pessoa.getTelefone(),pessoa.getSenha(), pessoa.getTipo().getId(), pessoa.getSetor().getId());
-//
-//        }
-//
-////        List<PessoaDTO> ListOfUser = new ArrayList<>();
-////        List<PessoaDTO> ListOfTechnicians = new ArrayList<>();
-////        List<PessoaDTO> ListOfAdmins = new ArrayList<>();
-//
-////        return listOfAll;
-//
-////        return listOfAll.stream().map(Pessoa :: new).collect(Collectors.toList());
-//        return new ResponseEntity<>(pessoaDTO, HttpStatus.OK);
-////        return collect;
-//    }
+    public List<PessoaDTO> findAll() {
+//        public ResponseEntity<PessoaDTO> findAll() {
+            List<Pessoa> listOfAll = this.pessoaRepository.findAll();
+//        Pessoa pessoa = new Pessoa();
+//        PessoaDTO pessoaDTO = new PessoaDTO((int) pessoa.getId(),pessoa.getNome(), pessoa.getEmail(), pessoa.getSenha(), pessoa.getEmail(), pessoa.getSetor().getId(), Math.toIntExact((Long) pessoa.getTipo().getId()));
+            List<PessoaDTO> listOfPessoaDTO = new ArrayList<>();
+            PessoaDTO pessoaDTO = null;
+            for (Pessoa pessoa : listOfAll) {
+                pessoaDTO = new PessoaDTO(pessoa.getId(), pessoa.getNome(), pessoa.getSenha(), pessoa.getTelefone(), pessoa.getSenha(), pessoa.getTipo().getId(), pessoa.getSetor().getId());
+                listOfPessoaDTO.add(pessoaDTO);
+            }
 
-}
+//        List<PessoaDTO> ListOfUser = new ArrayList<>();
+//        List<PessoaDTO> ListOfTechnicians = new ArrayList<>();
+//        List<PessoaDTO> ListOfAdmins = new ArrayList<>();
+
+        return listOfPessoaDTO;
+
+//        return listOfAll.stream().map(Pessoa :: new).collect(Collectors.toList());
+
+
+//            return new ResponseEntity<>( listOfPessoaDTO<PessoaDTO>, HttpStatus.OK);
+//        return collect;
+        }
+    }
+
+

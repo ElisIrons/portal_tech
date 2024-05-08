@@ -22,6 +22,11 @@ public class Setor {
         this.nome = nome;
     }
 
+//    public Setor(long id) {
+//        this.id = id;
+//    }
+
+
     public Setor(long id) {
     }
 
@@ -29,6 +34,8 @@ public class Setor {
         this.id = id;
         this.nome = nome;
     }
+
+
 
     public long getId() {
         return id;

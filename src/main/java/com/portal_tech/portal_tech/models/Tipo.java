@@ -8,7 +8,7 @@ public class Tipo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
     @Column(length = 30, nullable = false)
     private String nome;
@@ -17,6 +17,7 @@ public class Tipo {
     }
 
     public Tipo(Long id) {
+        this.id = id;
     }
 
     public Tipo(String nome) {
