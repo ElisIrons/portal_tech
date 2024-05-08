@@ -43,7 +43,7 @@ public class PessoaService {
 //        this.pessoaRepository.save(pessoa);
 //        return new ResponseEntity<>(new PessoaDTO((int) pessoa.getId(),pessoa.getNome(),pessoa.getEmail(),pessoa.getTelefone(), pessoa.getSenha(), pessoa.getSetor().getId(), (int) pessoa.getTipo().getId()), HttpStatus.OK); //usei get para retornar o
 //    }
-
+//Falta ajustar este método
      public ResponseEntity<PessoaDTO>save(PessoaDTO pessoaDTO){
         Pessoa pessoa = new Pessoa();
         pessoa.setNome(pessoaDTO.nome());

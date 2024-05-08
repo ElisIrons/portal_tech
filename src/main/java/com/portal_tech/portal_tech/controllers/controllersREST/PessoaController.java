@@ -1,4 +1,4 @@
-package com.portal_tech.portal_tech.controllers;
+package com.portal_tech.portal_tech.controllers.controllersREST;
 
 import com.portal_tech.portal_tech.models.Pessoa;
 import com.portal_tech.portal_tech.models.Prioridade;

@@ -1,5 +1,6 @@
 package com.portal_tech.portal_tech.models;
 
+import com.portal_tech.portal_tech.models.dtos.SetorDTO;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -17,6 +18,7 @@ public class Setor {
 
     public Setor() {
     }
+
 
     public Setor(String nome) {
         this.nome = nome;
