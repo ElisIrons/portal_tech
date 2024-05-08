@@ -26,22 +26,30 @@ public class PessoaService {
 
 //    public ResponseEntity<PessoaDTO> save(Map<String, Object> pessoaDTO){
 //        String nomeTipo = (String) pessoaDTO.get("nomeTipo");
+////        Long idTipo = (Long) pessoaDTO.get("idTipo");
+//
 //        String nomeSetor = (String) pessoaDTO.get("nomeSetor");
+//        int idTipo = (int) pessoaDTO.get("idTipo");
+//        int idSetor = (int) pessoaDTO.get("idSetor");
 //        Pessoa pessoa = new Pessoa();
 //        pessoa.setNome((String) pessoaDTO.get("nome"));
 //        pessoa.setEmail((String) pessoaDTO.get("email"));
 //        pessoa.setSenha((String) pessoaDTO.get("senha"));
 //        pessoa.setTelefone((String) pessoaDTO.get("telefone"));
 //
-//        Tipo tipo = new Tipo( nomeTipo);
 //
+//        Tipo tipo = new Tipo() ;
+//        tipo.setId((long)idTipo);
+//        tipo.setNome(nomeTipo);
 //        pessoa.setTipo(tipo);
 //
-//        Setor setor = new Setor(nomeSetor);
+//        Setor setor = new Setor();
+//        setor.setNome(nomeSetor);
+//        setor.setId(idSetor);
 //        pessoa.setSetor(setor);
 //
 //        this.pessoaRepository.save(pessoa);
-//        return new ResponseEntity<>(new PessoaDTO((int) pessoa.getId(),pessoa.getNome(),pessoa.getEmail(),pessoa.getTelefone(), pessoa.getSenha(), pessoa.getSetor().getId(), (int) pessoa.getTipo().getId()), HttpStatus.OK); //usei get para retornar o
+//        return new ResponseEntity<>(new PessoaDTO((long) pessoa.getId(),pessoa.getNome(),pessoa.getEmail(),pessoa.getTelefone(), pessoa.getSenha(), pessoa.getSetor().getId(), (int) pessoa.getTipo().getId()), HttpStatus.OK); //usei get para retornar o
 //    }
 //Falta ajustar este método
      public ResponseEntity<PessoaDTO>save(PessoaDTO pessoaDTO){
@@ -51,16 +59,20 @@ public class PessoaService {
         pessoa.setSenha(pessoaDTO.senha());
         pessoa.setTelefone(pessoaDTO.telefone());
 
-//        Setor setor = new Setor();
-//        setor.setId(pessoaDTO.idsetor());
-//        pessoa.setSetor(setor);
+        Setor setor = new Setor();
+        setor.setId(pessoaDTO.idsetor());
+        setor.setNome("SUPORTE");
+        pessoa.setSetor(setor);
 
         Tipo tipo = new Tipo();
         tipo.setId(pessoaDTO.idtipo());
+        tipo.setNome("USUARIO");
         pessoa.setTipo(tipo);
+
         pessoa.pegaSoIDTipo(tipo);//retorna o id do tipo
 
         this.pessoaRepository.save(pessoa);
+
 
         return new ResponseEntity<>(new PessoaDTO(pessoa.getId(), pessoa.getNome(), pessoa.getEmail(), pessoa.getSenha(),pessoa.getTelefone(), pessoa.getTipo().getId(), pessoa.getSetor().getId()), HttpStatus.OK);
     }

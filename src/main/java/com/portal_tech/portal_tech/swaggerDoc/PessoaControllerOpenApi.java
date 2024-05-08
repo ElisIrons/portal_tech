@@ -12,7 +12,7 @@ import java.util.Map;
 @Tag(name="Pessoa")
 public interface PessoaControllerOpenApi {
     @Operation(summary = "método para salvar dados da pessoa no banco")
-    ResponseEntity<PessoaDTO> save(PessoaDTO pessoaDTO);
+    public ResponseEntity<PessoaDTO> save( @RequestBody PessoaDTO pessoaDTO);
     @Operation(summary = "método para encontrar a pessoa por ID")
     ResponseEntity<PessoaDTO>findInfById(long id);
     @Operation(summary = "método para realizar modificações de informações pessoais da pessoa")
