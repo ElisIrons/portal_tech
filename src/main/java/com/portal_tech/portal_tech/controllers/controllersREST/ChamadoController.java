@@ -1,8 +1,9 @@
-package com.portal_tech.portal_tech.controllers;
+package com.portal_tech.portal_tech.controllers.controllersREST;
 
 import com.portal_tech.portal_tech.models.dtos.ChamadoDTO;
 import com.portal_tech.portal_tech.services.ChamadoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,7 +15,9 @@ public class ChamadoController {
     @Autowired
     private ChamadoService chamadoService;
 
-    @PostMapping
+
+
+    @PostMapping()
     public ChamadoDTO save(@RequestBody ChamadoDTO dto){
         return this.chamadoService.save(dto);
     }

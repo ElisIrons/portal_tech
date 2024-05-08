@@ -1,4 +1,4 @@
-package com.portal_tech.portal_tech.controllers;
+package com.portal_tech.portal_tech.controllers.controllersREST;
 
 import com.portal_tech.portal_tech.models.dtos.SetorDTO;
 import com.portal_tech.portal_tech.services.SetorService;

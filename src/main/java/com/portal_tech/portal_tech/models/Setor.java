@@ -19,10 +19,25 @@ public class Setor {
     public Setor() {
     }
 
+
+    public Setor(String nome) {
+        this.nome = nome;
+    }
+
+//    public Setor(long id) {
+//        this.id = id;
+//    }
+
+
+    public Setor(long id) {
+    }
+
     public Setor(long id, String nome) {
         this.id = id;
         this.nome = nome;
     }
+
+
 
     public long getId() {
         return id;
