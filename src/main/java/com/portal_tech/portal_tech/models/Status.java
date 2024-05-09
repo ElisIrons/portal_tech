@@ -2,6 +2,8 @@ package com.portal_tech.portal_tech.models;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name="status")
 public class Status {
@@ -11,6 +13,9 @@ public class Status {
 
     @Column (length = 30, nullable = false)
     private String nome;
+
+    //@OneToMany(mappedBy = "id_status")
+    //private List<Chamado> chamados;
 
     public Status() {
     }

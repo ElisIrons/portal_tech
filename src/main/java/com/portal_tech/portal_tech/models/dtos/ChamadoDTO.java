@@ -3,20 +3,24 @@ import com.portal_tech.portal_tech.models.Chamado;
 import com.portal_tech.portal_tech.models.Pessoa;
 import com.portal_tech.portal_tech.models.Prioridade;
 import com.portal_tech.portal_tech.models.Status;
-import org.springframework.format.annotation.DateTimeFormat;
+import com.portal_tech.portal_tech.repositores.StatusRepository;
+import com.portal_tech.portal_tech.services.StatusService;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.security.Timestamp;
+import java.time.LocalDate;
 
 public class ChamadoDTO {
     private Long id;
 
     private String descricao;
 
-    private Timestamp dt_abertura;
 
-    private Timestamp dt_inicio;
+    private LocalDate dt_abertura;
 
-    private Timestamp dt_fim;
+    private LocalDate dt_inicio;
+
+    private LocalDate dt_fim;
 
     private Pessoa id_tecnico;
 
@@ -25,6 +29,9 @@ public class ChamadoDTO {
     private Prioridade id_prioridade;
 
     private Status id_status;
+
+    @Autowired
+    private StatusRepository statusRepository;
 
     public ChamadoDTO() {
     }
@@ -41,21 +48,24 @@ public class ChamadoDTO {
         this.id_status = chamado.getIdStatus();
     }
 
-    public static Chamado convert(ChamadoDTO chamadoDTO){ //converterá o chamadoDTO em chamado - inverso do método anterior
+    //public static Chamado convert(ChamadoDTO chamadoDTO){ //converterá o chamadoDTO em chamado - inverso do método anterior
+    public Chamado convert(ChamadoDTO chamadoDTO){ //converterá o chamadoDTO em chamado - inverso do método anterior
         Chamado chamado = new Chamado();
         chamado.setId(chamadoDTO.getId());
         chamado.setDescricao(chamadoDTO.getDescricao());
-        chamado.setDt_abertura(chamado.getDt_abertura());
-        chamado.setDt_inicio(chamado.getDt_inicio());
-        chamado.setDt_fim(chamado.getDt_fim());
+        chamado.setDt_abertura(chamadoDTO.getDt_abertura());
+        chamado.setDt_inicio(chamadoDTO.getDt_inicio());
+        chamado.setDt_fim(chamadoDTO.getDt_fim());
         chamado.setIdTecnico(chamadoDTO.getId_tecnico());
-        //chamado.setIdTecnico(new Pessoa(chamadoDTO.getId_tecnico()));
+
         chamado.setIdUsuario(chamadoDTO.getId_usuario());
-        //chamado.setIdUsuario(new Pessoa(chamadoDTO.getId_usuario()));
+
         chamado.setIdPrioridade(chamadoDTO.getId_prioridade());
-        //chamado.setIdPrioridade(new Prioridade(chamadoDTO.getId_prioridade()));
-        chamado.setIdStatus(chamadoDTO.getId_status());
-        //chamado.setIdStatus(new Status(chamadoDTO.getId_status()));
+
+        Status status = new Status();
+        status.setId(chamadoDTO.getId_status().getId());
+        chamado.setIdStatus(status);
+
         return chamado;
     }
 
@@ -75,27 +85,27 @@ public class ChamadoDTO {
         this.descricao = descricao;
     }
 
-    public Timestamp getDt_abertura() {
+    public LocalDate getDt_abertura() {
         return dt_abertura;
     }
 
-    public void setDt_abertura(Timestamp dt_abertura) {
+    public void setDt_abertura(LocalDate dt_abertura) {
         this.dt_abertura = dt_abertura;
     }
 
-    public Timestamp getDt_inicio() {
+    public LocalDate getDt_inicio() {
         return dt_inicio;
     }
 
-    public void setDt_inicio(Timestamp dt_inicio) {
+    public void setDt_inicio(LocalDate dt_inicio) {
         this.dt_inicio = dt_inicio;
     }
 
-    public Timestamp getDt_fim() {
+    public LocalDate getDt_fim() {
         return dt_fim;
     }
 
-    public void setDt_fim(Timestamp dt_fim) {
+    public void setDt_fim(LocalDate dt_fim) {
         this.dt_fim = dt_fim;
     }
 
@@ -123,8 +133,10 @@ public class ChamadoDTO {
         this.id_prioridade = id_prioridade;
     }
 
-    public Status getId_status() {
+
+    public Status getId_status(){
         return id_status;
+        //return id_status != null ? id_status.getId() : null;
     }
 
     public void setId_status(Status id_status) {
