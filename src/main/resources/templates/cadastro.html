@@ -1,33 +1,33 @@
 <!DOCTYPE html>
 <html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8"/>
     <meta
             name="viewport"
             content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
-    <link rel="stylesheet" type="text/css" href="/static/styles/cadastro.css" />
+    <link rel="stylesheet" type="text/css" href="/static/styles/cadastro.css"/>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
     <link
             href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100..700&display=swap"
             rel="stylesheet"
     />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
     <link
             href="https://fonts.googleapis.com/css2?family=Jersey+20&family=Orbitron:wght@400..900&family=Righteous&family=Roboto+Mono:wght@100..700&display=swap"
             rel="stylesheet"
     />
 
     <title>Portal Tech</title>
-    <link rel="icon" href="/static/styles/images/logo.jpeg" />
+    <link rel="icon" href="/static/styles/images/logo.jpeg"/>
 </head>
 <body>
 <header class="cabecalho">
     <div class="logo">
-        <img src="/static/styles/images/logo.jpeg" alt="logo Portal Tech" />
+        <img src="/static/styles/images/logo.jpeg" alt="logo Portal Tech"/>
     </div>
     <div class="titulo">
         <span></span>
@@ -64,6 +64,7 @@
                                         name="tipo"
                                         value="usuario"
                                         onclick="mostrarSetor()"
+
                                 />Usuário
                             </label>
                             <label>
@@ -72,6 +73,7 @@
                                         name="tipo"
                                         value="técnico"
                                         onclick="mostrarSetor()"
+
                                 />Técnico
                             </label>
                             <label>
@@ -80,6 +82,7 @@
                                         name="tipo"
                                         value="administrador"
                                         onclick="mostrarSetor()"
+
                                 />Administrador
                             </label>
                         </fieldset>
@@ -96,7 +99,7 @@
                     </div>
 
                     <div>
-                        <label for="nome">Nome completo</label>
+                        <label for="nome">Nome completo:</label>
                         <input
                                 type="text"
                                 id="nome"
@@ -107,7 +110,7 @@
                         />
                     </div>
                     <div>
-                        <label for="telefone">Telefone</label>
+                        <label for="telefone">Telefone:</label>
                         <input
                                 type="tel"
                                 id="telefone"
@@ -118,7 +121,7 @@
                         />
                     </div>
                     <div>
-                        <label for="email">E-mail</label>
+                        <label for="email">E-mail:</label>
                         <input
                                 type="email"
                                 id="email"
@@ -129,7 +132,7 @@
                         />
                     </div>
                     <div>
-                        <label for="senha">Senha</label>
+                        <label for="senha">Senha:</label>
                         <input
                                 type="password"
                                 id="senha"
@@ -186,14 +189,22 @@
 
 <script>
     function mostrarSetor() {
-      var radio = document.querySelector('input[name="tipo"]:checked');
-      var setorDiv = document.getElementById("setorDiv");
-      if (radio && radio.value === "usuario") {
-        setorDiv.style.display = "block";
-      } else {
-        setorDiv.style.display = "none";
-      }
-    }
+       let radio = document.querySelector('input[name="tipo"]:checked');
+       let setorDiv = document.getElementById("setorDiv");
+       let inputs = document.querySelectorAll('.setor, .input-nome, .input-telefone, .input-email, .input-senha');
+
+       if (radio && radio.value === "usuario") {
+           setorDiv.style.display = "block";
+           inputs.forEach(input => {
+               input.style.height = "30px";
+           });
+       } else {
+           setorDiv.style.display = "none";
+           inputs.forEach(input => {
+               input.style.height = "";
+           });
+       }
+   }
 </script>
 </body>
 </html>
