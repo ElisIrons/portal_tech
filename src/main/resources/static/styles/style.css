@@ -242,7 +242,7 @@ body {
   left: 73%;
   transform: translate(-50%, -50%);
   opacity: 0;
-  transition: opacity 0.5s ease;
+  transition: opacity 0.3s ease;
   text-wrap: nowrap;
   padding: 0.1rem;
 }

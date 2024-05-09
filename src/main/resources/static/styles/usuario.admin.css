@@ -225,7 +225,7 @@ body {
 .container-box {
   position: fixed;
   width: 750px;
-  height: 700px; /* Ajustando a altura para 400px */
+  height: 700px;
 
   backdrop-filter: blur(25px);
   box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.2);
@@ -271,25 +271,6 @@ body {
   margin-bottom: 10px;
 }
 
-.campo-container input[type="text"],
-.campo-container textarea,
-.campo-container select {
-  width: 100%;
-  height: 40px;
-  font-size: 16px;
-  padding: 10px;
-  border: 2px solid rgb(145, 32, 138);
-  border-radius: 15px;
-  outline: none;
-  margin: 0 auto;
-}
-
-.campo-container input[type="text"]:hover,
-.campo-container textarea:hover,
-.campo-container select:hover {
-  background-color: var(--hover-cor);
-  color: var(--black-cor);
-}
 
 #descricao{
   width: 100%;
@@ -320,9 +301,9 @@ body {
 
 .return-index {
   display: flex;
-  justify-content: flex-start; /* Alinha o conteúdo à esquerda */
-  align-self: flex-end; /* Alinha o conteúdo na parte inferior */
-  text-align: center; /* Centraliza o conteúdo */
+  justify-content: flex-start;
+  align-self: flex-end;
+  text-align: center;
 }
 
 .return-index p {
@@ -332,7 +313,7 @@ body {
   text-decoration: none;
   color: white;
   font-size: 12px;
-    margin-top: 40px; /* Adicione a margem superior desejada */
+    margin-top: 60px;
 
 }
 
@@ -342,20 +323,21 @@ body {
 
 .tabela-container {
   margin-top: 20px;
-  overflow-x: auto; /* Adiciona barra de rolagem horizontal se necessário */
 }
 
 .tabela {
   width: 100%;
   border-collapse: collapse;
   border-radius: 10px;
-  overflow: hidden; /* Oculta a barra de rolagem horizontal */
+  overflow: hidden;
 }
 
 .tabela th, .tabela td {
   border: 1px solid #ddd;
   padding: 12px;
   text-align: left;
+    background-color: var(--segunda-cor);
+
 }
 
 .tabela th {
@@ -364,7 +346,7 @@ body {
 }
 
 .tabela tbody tr:nth-child(even) {
-  background-color: var(--segunda-cor);
+  background-color: white;
 }
 
 .tabela tbody tr:hover {
@@ -374,29 +356,29 @@ body {
 /* Ajusta a largura das colunas se necessário */
 .tabela th:nth-child(1),
 .tabela td:nth-child(1) {
-  width: 15%; /* Porcentagem da largura total */
+  width: 15%;
 }
 
 .tabela th:nth-child(2),
 .tabela td:nth-child(2) {
-  width: 15%; /* Porcentagem da largura total */
+  width: 15%;
 }
 
 .tabela th:nth-child(3),
 .tabela td:nth-child(3) {
-  width: 25%; /* Porcentagem da largura total */
+  width: 25%;
 }
 
 .tabela th:nth-child(4),
 .tabela td:nth-child(4) {
-  width: 10%; /* Porcentagem da largura total */
+  width: 10%;
 }
 
 .tabela th:nth-child(5),
 .tabela td:nth-child(5),
 .tabela th:nth-child(6),
 .tabela td:nth-child(6) {
-  width: 12%; /* Porcentagem da largura total */
+  width: 12%;
 }
 
 
@@ -441,8 +423,9 @@ body {
 }
 
 
-/* Telas menores que 640px */
-@media screen and (max-width: 640px) {
+/*Parte responsiva*/
+
+@media screen and (max-width: 1060px) {
   .cabecalho {
     padding: 0.5rem;
     height: auto;
@@ -452,75 +435,7 @@ body {
   }
 
   .logo img {
-    max-width: 50px;
-  }
-
-  .titulo {
-    margin-top: 0.3rem;
-    text-align: center;
-  }
-
-  .titulo h1 {
-    font-size: 18px;
-    margin-top: 3px;
-  }
-
-  .cabecalhoMenu {
-    display: none;
-  }
-
-  .container-box {
-    width: 80%; /* Utiliza toda a largura da tela */
-    height: 70%; /* Altura automática */
-    padding: 1.3em; /* Espaçamento interno menor */
-    overflow-y: auto; /* Adiciona barra de rolagem vertical se necessário */
-  }
-
-  .container-texto {
-    font-size: 20px; /* Reduz o tamanho do texto */
-    margin-top: -5%; /* Ajuste menor de margem superior */
-  }
-
-  .container-subtitulo {
-    font-size: 16px; /* Reduz o tamanho do subtitulo */
-  }
-
-  .campo-container input[type="text"],
-  .campo-container textarea,
-  .campo-container select {
-    font-size: 14px; /* Reduz o tamanho da fonte dos campos */
-  }
-
-  .salvar {
-    width: 70%; /* Ajusta a largura do botão */
-    font-size: 12px; /* Reduz o tamanho do texto do botão */
-  }
-
-  .tabela-container {
-    overflow-x: auto; /* Adiciona barra de rolagem horizontal se necessário */
-  }
-
-  .tabela th,
-  .tabela td {
-    padding: 8px; /* Reduz o espaçamento entre células */
-  }
-}
-
-.return-index {
-  margin-top: -30px; /* Adiciona margem superior */
-  text-align: center; /* Centraliza o conteúdo */
-}
-
-/* Telas de 641px até 1007px */
-@media screen and (min-width: 641px) and (max-width: 1007px) {
-
-  .cabecalho {
-    padding: 1rem;
-    height: 6rem;
-  }
-
-  .logo img {
-    max-width: 100px;
+    max-width: 60px;
   }
 
   .titulo {
@@ -533,6 +448,13 @@ body {
     margin-top: 5px;
   }
 
+  .img {
+    width: 25%;
+    height: auto;
+    position: absolute;
+    top: 15px;
+    right: 10px;
+  }
 
   .cabecalhoMenu {
     display: none;
@@ -543,17 +465,141 @@ body {
   }
 
   .container-box {
-    width: 80%; /* Utiliza 80% da largura da tela */
+    width: 70%;
+    max-width: 600px;
+    height: 50%;
+    max-height: 600px;
+    padding: 1.8em;
+    overflow-y: auto;
+    margin-top: 20px;
+
+  }
+
+  .container-texto {
+    font-size: 20px;
+    margin-top: -5%;
+  }
+
+  .container-subtitulo {
+    font-size: 18px;
+  }
+
+  .salvar {
+    width: 70%;
+    font-size: 14px;
+  }
+
+  .tabela-container {
+    overflow-x: auto;
+  }
+
+  .tabela th,
+  .tabela td {
+    padding: 8px;
   }
 }
 
+.return-index {
+  margin-top: -30px;
+  text-align: center;
+}
 
-/* Telas maiores que 1008px */
-@media screen and (min-width: 1008px) {
+
+@media screen and (min-width: 1061px) {
+.cabecalho {
+    padding: 0.2rem 0;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .logo img {
+    max-width: 60px;
+  }
+
+  .titulo {
+    margin-top: 0.5rem;
+    text-align: center;
+  }
+
+  .titulo h1 {
+    font-size: 20px;
+    margin-top: 5px;
+  }
+
+  .cabecalhoMenu {
+    display: none;
+  }
+
+  body {
+    padding-bottom: 6rem;
+  }
+
+
+  .cabecalho {
+    max-width: 100%;
+  }
+
+  .container-box {
+    width: 80%;
+      max-width: 50%;
+        height: 60%;
+        padding: 5.5em;
+        overflow-y: auto;
+  }
+
+  .container-form {
+      padding: 0;
+    }
+
+    .campo-container {
+      padding: 0 1em;
+    }
+
+      h1.container-texto {
+        font-size: 30px;
+      }
+
+      h2.container-subtitulo {
+        font-size: 18px;
+      }
+
+         .container {
+              max-width: 1200px;
+              margin: 0 auto;
+          }
+          .return-index {
+              margin-top: 100px;
+               }
+          .tabela th, .tabela td {
+
+          }
+
+      .salvar {
+        width: 100%;
+    }
+}
+
+
+@media screen and (min-width: 1500px) {
   .cabecalho {
     padding: 1rem;
     height: 6rem;
   }
+
+ .container-box {
+     width: 80%;
+       max-width: 50%;
+         height: 60%;
+         padding: 5.5em;
+         overflow-y: auto;
+   }
+
+  .titulo h1 {
+    font-size: 22px;
+    }
+
 
   .logo img {
     max-width: 140px;
@@ -565,7 +611,7 @@ body {
   }
 
   .titulo h1 {
-    font-size: 36px;
+    font-size: 34px;
   }
 
   .cabecalhoMenu {

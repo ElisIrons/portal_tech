@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <link rel="stylesheet" type="text/css" href="styles-usuario/usuario.chamado.css" />
+    <link rel="stylesheet" type="text/css" href="style-adm.css" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -17,13 +17,13 @@
             rel="stylesheet" />
 
     <title>Portal Tech</title>
-    <link rel="icon" href="/static/images/logo.jpeg" />
+    <link rel="icon" href="logo.jpeg" />
 </head>
 
 <body>
 <header class="cabecalho">
     <div class="logo">
-        <img src="/static/images/logo.jpeg" alt="logo Portal Tech" />
+        <img src="logo.jpeg" alt="logo Portal Tech" />
     </div>
     <div class="titulo">
         <span></span>
@@ -42,17 +42,18 @@
         <main class="container-form">
             <section class="container-box">
                 <h1 class="container-texto" th:text="'Bem-vindo, ' + ${userName} + '!'">Bem-vindo(a)!</h1>
-                <h2 class="container-subtitulo">Chamados Criados</h2>
+                <h2 class="container-subtitulo">Painel de Chamados</h2>
                 <div class="tabela-container">
                     <table class="tabela">
                         <thead>
                         <tr>
-                            <th>Usuário</th>
+                            <th>Data de Abertura</th>
+                            <th>Id_Usuário</th>
                             <th>Setor</th>
                             <th>Descrição</th>
                             <th>Prioridade</th>
-                            <th>Data da Abertura do Chamado</th>
-                            <th>Data de Finalização do Chamado</th>
+                            <th>Responsavél</th>
+                            <th>Status</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -63,20 +64,23 @@
                             <td></td>
                             <td></td>
                             <td></td>
-                        </tr>
-                        </tbody>
-                        <tbody>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
                             <td></td>
                         </tr>
                         </tbody>
                         <tbody>
                         <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        </tbody>
+                        <tbody>
+                        <tr>
+                            <td></td>
                             <td></td>
                             <td></td>
                             <td></td>
@@ -88,7 +92,7 @@
                     </table>
                 </div>
                 <div class="return-index" style="margin-top: 250px;">
-                    <p><a href="index.usuario.html"><img class="color-image" src="imagens/voltar.png" /></a>Voltar para tela inicial</p>
+                    <p><a href="index.usuario.html"><img class="color-image" src="voltar.jpeg" /></a>Voltar para tela inicial</p>
                 </div>
             </section>
         </main>
@@ -99,14 +103,14 @@
     <div class="container">
         <div class="footer-content">
             <div class="github">
-                <img src="/static/images/github.png" alt="GitHub Logo" class="github-img" />
+                <img src="github.jpeg" alt="GitHub Logo" class="github-img" />
             </div>
             <div class="github-links">
                 <a href="https://github.com/keilaarakaki">Keila Arakaki</a>
                 <a href="https://github.com/ElisIrons">Elis Rodrigues</a>
                 <a href="https://github.com/nayarakarinearaujo">Nayara Karine</a>
                 <a href="#">Thais Abe </a>
-                <a href="#">Aline Alves </a>
+                <a href="https://github.com/alineadcosta95">Aline Alves </a>
             </div>
         </div>
     </div>
