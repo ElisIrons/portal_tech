@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8" />
     <meta
@@ -22,12 +22,12 @@
     />
 
     <title>Portal Tech</title>
-    <link rel="icon" href="imagens/logo.jpeg" />
+    <link rel="icon" href="/static/styles/images/logo.jpeg" />
 </head>
 <body>
 <header class="cabecalho">
     <div class="logo">
-        <img src="imagens/logo.jpeg" alt="logo Portal Tech" />
+        <img src="/static/styles/images/logo.jpeg" alt="logo Portal Tech" />
     </div>
     <div class="titulo">
         <span></span>
@@ -118,7 +118,7 @@
                         />
                     </div>
                     <div>
-                        <label for="email_cad">E-mail</label>
+                        <label for="email">E-mail</label>
                         <input
                                 type="email"
                                 id="email"
@@ -167,7 +167,7 @@
         <div class="footer-content">
             <div class="github">
                 <img
-                        src="imagens/github.png"
+                        src="/static/styles/images/github.png"
                         alt="GitHub Logo"
                         class="github-img"
                 />
