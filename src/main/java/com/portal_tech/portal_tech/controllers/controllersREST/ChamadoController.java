@@ -5,6 +5,7 @@ import com.portal_tech.portal_tech.models.dtos.ChamadoDTO;
 import com.portal_tech.portal_tech.models.dtos.StatusDTO;
 import com.portal_tech.portal_tech.services.ChamadoService;
 import com.portal_tech.portal_tech.services.StatusService;
+import com.portal_tech.portal_tech.swaggerDoc.ChamadoControllerOpenApi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,7 +15,7 @@ import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 
 @RestController
 @RequestMapping("/chamado")
-public class ChamadoController {
+public class ChamadoController implements ChamadoControllerOpenApi {
 
     @Autowired
     private ChamadoService chamadoService;
@@ -25,7 +26,6 @@ public class ChamadoController {
     @PostMapping
     public ChamadoDTO save(@RequestBody ChamadoDTO dto){
         return this.chamadoService.save(dto);
-
     }
 
     @GetMapping
@@ -34,7 +34,7 @@ public class ChamadoController {
     }
 
     @GetMapping("/{id}")
-    public ChamadoDTO findbyId(@PathVariable Long id){
+    public ChamadoDTO findById(@PathVariable Long id){
         return this.chamadoService.findById(id);
     }
 
