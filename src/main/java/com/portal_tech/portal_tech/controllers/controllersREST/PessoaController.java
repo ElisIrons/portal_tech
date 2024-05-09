@@ -7,6 +7,7 @@ import com.portal_tech.portal_tech.models.dtos.SetorDTO;
 import com.portal_tech.portal_tech.models.dtos.TipoDTO;
 import com.portal_tech.portal_tech.repositores.PrioridadeRepository;
 import com.portal_tech.portal_tech.services.PessoaService;
+import java.util.Map;
 
 import com.portal_tech.portal_tech.swaggerDoc.PessoaControllerOpenApi;
 import io.swagger.v3.oas.annotations.Operation;

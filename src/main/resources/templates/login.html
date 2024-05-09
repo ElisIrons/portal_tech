@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -54,29 +54,45 @@
                         <fieldset>
                             <legend class="campo-legenda"><strong>Gostaria de entrar como:</strong></legend>
                             <label>
-                                <input type="radio" name="devweb" value="frontend" checked>Usuário
+                                <input id="usuario" th:value="${usuario}" type="radio" name="devweb" value="frontend" checked>Usuário
                             </label>
                             <label>
-                                <input type="radio" name="devweb" value="backend">Técnico
+                                <input id="tecnico" th:value="${tecnico}"  type="radio" name="devweb" value="backend">Técnico
                             </label>
                             <label>
-                                <input type="radio" name="devweb" value="backend">Administrador
+                                <input id="administrador" th:value="${administrador}" type="radio" name="devweb" value="backend">Administrador
                             </label>
                         </fieldset>
                     </div>
 
                     <!-- Formulário login -->
-                    <form method="post" class="formLogin">
+                    <form method="post" class="formLogin" >
+                        <div class="campo">
+
+                            <fieldset>
+                                <legend class="campo-legenda"><strong>Gostaria de entrar como:</strong></legend>
+                                <li th:each="option : ${radioOption}">
+                                <label th:text="${option}">
+                                    <input  th:value="${usuario}" type="radio" name="devweb" value="frontend" th:name="radioOption" th:value="${option}" checked>Usuário
+                                </label>
+                                <label th:text="${option}">
+                                    <input> " th:value="${tecnico}"  type="radio" name="devweb" value="backend">Técnico
+                                </label>
+                                <label th:tex th:value="${administrador}" type="radio" name="devweb" value="backend">Administrador
+                                </label>
+                                </li>
+                            </fieldset>
+                        </div>
                         <div>
                             <label for="email">E-mail</label> <!-- Rótulo do campo de e-mail -->
-                            <input type="email" id="email" class="input-email" name="email"
+                            <input  type="email" id="email" th:value="${email}" class="input-email" name="email"
                                    placeholder="Digite seu e-mail:">
 
                         </div>
 
                         <div>
                             <label for="password">Senha</label> <!-- Rótulo do campo senha -->
-                            <input type="password" id="password" class="input-senha" name="password"
+                            <input type="password" id="password" th:value="${password}"  class="input-senha" name="password"
                                    placeholder="Digite sua senha:">
 
                         </div>
