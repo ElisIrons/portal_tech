@@ -11,7 +11,6 @@ public class UsuarioController {
     @GetMapping("/usuario/novo/chamado")
     public String novoChamado(){
         return "usuario.novo.chamado"; // Este é o nome do arquivo HTML para a rota de novo chamado
-
     }
 
     @GetMapping("/usuario/chamados")
