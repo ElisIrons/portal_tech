@@ -271,25 +271,6 @@ body {
   margin-bottom: 10px;
 }
 
-.campo-container input[type="text"],
-.campo-container textarea,
-.campo-container select {
-  width: 100%;
-  height: 40px;
-  font-size: 16px;
-  padding: 10px;
-  border: 2px solid rgb(145, 32, 138);
-  border-radius: 15px;
-  outline: none;
-  margin: 0 auto;
-}
-
-.campo-container input[type="text"]:hover,
-.campo-container textarea:hover,
-.campo-container select:hover {
-  background-color: var(--hover-cor);
-  color: var(--black-cor);
-}
 
 #descricao{
   width: 100%;
@@ -501,12 +482,6 @@ body {
 
   .container-subtitulo {
     font-size: 18px;
-  }
-
-  .campo-container input[type="text"],
-  .campo-container textarea,
-  .campo-container select {
-    font-size: 12px;
   }
 
   .salvar {

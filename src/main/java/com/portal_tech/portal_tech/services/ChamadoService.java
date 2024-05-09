@@ -1,7 +1,9 @@
 package com.portal_tech.portal_tech.services;
 
 import com.portal_tech.portal_tech.models.Chamado;
+import com.portal_tech.portal_tech.models.Status;
 import com.portal_tech.portal_tech.models.dtos.ChamadoDTO;
+import com.portal_tech.portal_tech.models.dtos.StatusDTO;
 import com.portal_tech.portal_tech.repositores.ChamadoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,8 +18,11 @@ public class ChamadoService {
     @Autowired
     private ChamadoRepository chamadoRepository;
 
+    @Autowired
+    private StatusService statusService;
+
     public ChamadoDTO save(ChamadoDTO dto) {
-        Chamado chamado = ChamadoDTO.convert(dto);
+        Chamado chamado = dto.convert(dto); // Chamar convert() usando a instância de ChamadoDTO
         chamado = this.chamadoRepository.save(chamado);
         return new ChamadoDTO(chamado);
     }
@@ -45,9 +50,15 @@ public class ChamadoService {
 
     public ChamadoDTO UpdateById(Long id, ChamadoDTO dto) {
         this.findById(id);
-        Chamado chamado = ChamadoDTO.convert(dto);
+
+        Chamado chamado = dto.convert(dto);
+
         chamado.setId(id);
         this.chamadoRepository.save(chamado);
         return new ChamadoDTO(chamado);
     }
+
+
+
+
 }

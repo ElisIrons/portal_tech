@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link rel="stylesheet" type="text/css" href="/static/styles/cadastro.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+            href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100..700&display=swap"
+            rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+            href="https://fonts.googleapis.com/css2?family=Jersey+20&family=Orbitron:wght@400..900&family=Righteous&family=Roboto+Mono:wght@100..700&display=swap"
+            rel="stylesheet"
+    />
+
+    <title>Portal Tech</title>
+    <link rel="icon" href="imagens/logo.jpeg" />
+</head>
+<body>
+<header class="cabecalho">
+    <div class="logo">
+        <img src="imagens/logo.jpeg" alt="logo Portal Tech" />
+    </div>
+    <div class="titulo">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <h1>Portal Tech</h1>
+    </div>
+    <nav class="cabecalhoMenu">
+        <a href="index.html">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            INÍCIO
+        </a>
+    </nav>
+</header>
+
+<section class="home">
+    <div class="container">
+        <div class="cadastro">
+            <h1 class="cadastro-texto">Cadastro</h1>
+            <div class="campo-cadastro">
+                <form method="post" action="rota controller" class="formCadastro">
+                    <div class="campo">
+                        <fieldset>
+                            <legend class="campo-legenda">
+                                Gostaria de se cadastrar como:
+                            </legend>
+                            <label>
+                                <input
+                                        type="radio"
+                                        name="tipo"
+                                        value="usuario"
+                                        onclick="mostrarSetor()"
+                                />Usuário
+                            </label>
+                            <label>
+                                <input
+                                        type="radio"
+                                        name="tipo"
+                                        value="técnico"
+                                        onclick="mostrarSetor()"
+                                />Técnico
+                            </label>
+                            <label>
+                                <input
+                                        type="radio"
+                                        name="tipo"
+                                        value="administrador"
+                                        onclick="mostrarSetor()"
+                                />Administrador
+                            </label>
+                        </fieldset>
+                    </div>
+
+                    <div id="setorDiv" style="display: none">
+                        <label for="setor">Setor:</label>
+                        <select name="setor" id="setor" class="setor">
+                            <option value="Administrativo">Administrativo</option>
+                            <option value="Marketing">Marketing</option>
+                            <option value="Recursos Humanos">Recursos Humanos</option>
+                            <option value="Suporte">Suporte</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="nome">Nome completo</label>
+                        <input
+                                type="text"
+                                id="nome"
+                                name="nome"
+                                class="input-nome"
+                                required="required"
+                                placeholder="Digite seu nome completo"
+                        />
+                    </div>
+                    <div>
+                        <label for="telefone">Telefone</label>
+                        <input
+                                type="tel"
+                                id="telefone"
+                                name="telefone"
+                                class="input-telefone"
+                                required="required"
+                                placeholder="(DDD) telefone"
+                        />
+                    </div>
+                    <div>
+                        <label for="email_cad">E-mail</label>
+                        <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                class="input-email"
+                                required="required"
+                                placeholder="Digite seu e-mail"
+                        />
+                    </div>
+                    <div>
+                        <label for="senha">Senha</label>
+                        <input
+                                type="password"
+                                id="senha"
+                                name="senha"
+                                class="input-senha"
+                                required="required"
+                                placeholder="Máximo 8 caracteres"
+                        />
+                    </div>
+                    <div class="container-input-cadastrar">
+                        <a href="#">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            Cadastrar
+                        </a>
+                    </div>
+
+                    <div class="login">
+                        <p>
+                            Já tem uma conta?
+                            <a href="login.html">Login</a>
+                        </p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    </div>
+</section>
+
+<footer class="footer">
+    <div class="container">
+        <div class="footer-content">
+            <div class="github">
+                <img
+                        src="imagens/github.png"
+                        alt="GitHub Logo"
+                        class="github-img"
+                />
+            </div>
+            <div class="github-links">
+                <a href="https://github.com/alineadcosta95">Aline Alves </a>
+                <a href="https://github.com/ElisIrons">Elis Rodrigues</a>
+                <a href="https://github.com/keilaarakaki">Keila Arakaki</a>
+                <a href="https://github.com/nayarakarinearaujo">Nayara Karine</a>
+                <a href="https://github.com/Thais-Abe">Thais Abe </a>
+            </div>
+        </div>
+    </div>
+    </div>
+</footer>
+
+<script>
+    function mostrarSetor() {
+      var radio = document.querySelector('input[name="tipo"]:checked');
+      var setorDiv = document.getElementById("setorDiv");
+      if (radio && radio.value === "usuario") {
+        setorDiv.style.display = "block";
+      } else {
+        setorDiv.style.display = "none";
+      }
+    }
+</script>
+</body>
+</html>
