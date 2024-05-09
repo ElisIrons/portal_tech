@@ -1,12 +1,16 @@
-package com.portal_tech.portal_tech.controllers.controllersREST;
+package com.portal_tech.portal_tech.controllers;
 
+import com.portal_tech.portal_tech.models.Status;
 import com.portal_tech.portal_tech.models.dtos.ChamadoDTO;
+import com.portal_tech.portal_tech.models.dtos.StatusDTO;
 import com.portal_tech.portal_tech.services.ChamadoService;
+import com.portal_tech.portal_tech.services.StatusService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
+import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 
 @RestController
 @RequestMapping("/chamado")
@@ -15,11 +19,13 @@ public class ChamadoController {
     @Autowired
     private ChamadoService chamadoService;
 
+    @Autowired
+    private StatusService statusService;
 
-
-    @PostMapping()
+    @PostMapping
     public ChamadoDTO save(@RequestBody ChamadoDTO dto){
         return this.chamadoService.save(dto);
+
     }
 
     @GetMapping
