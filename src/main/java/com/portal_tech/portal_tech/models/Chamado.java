@@ -3,6 +3,7 @@ package com.portal_tech.portal_tech.models;
 import jakarta.persistence.*;
 
 import java.security.Timestamp;
+import java.time.LocalDate;
 
 @Entity
 //@Table(name="chamado") -não precisa, se não tiver, assume q é o nome da classe
@@ -16,25 +17,28 @@ public class Chamado {
     private String descricao;
 
     @Column (nullable = false)
-    private Timestamp dt_abertura;
+    private LocalDate dt_abertura;
 
     @Column
-    private Timestamp dt_inicio;
+    private LocalDate dt_inicio;
 
     @Column
-    private Timestamp dt_fim;
+    private LocalDate dt_fim;
 
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     @JoinColumn(name = "id_usuario")
     private Pessoa id_usuario;
 
-    @ManyToOne(optional = true) //não obrigatório pois só terá técnico após chamado ser atribuído
-    @JoinColumn(name = "id_tecnico")
+    @ManyToOne(optional = true, fetch = FetchType.EAGER) //não obrigatório pois só terá técnico após chamado ser atribuído
+    @JoinColumn(name = "id_tecnico", referencedColumnName = "id", nullable = true)
     private Pessoa id_tecnico;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "id_status")
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_status", referencedColumnName = "id", insertable = false, updatable = false)
     private Status id_status;
+
+    /*@Column(name = "id_status")
+    private Long id_status;*/
 
     @ManyToOne(optional = true) //qdo abrir o chamado não terá prioridade, só após o adm ou técnico atribuírem
     @JoinColumn(name = "id_prioridade")
@@ -63,27 +67,27 @@ public class Chamado {
         this.descricao = descricao;
     }
 
-    public Timestamp getDt_abertura() {
+    public LocalDate getDt_abertura() {
         return dt_abertura;
     }
 
-    public void setDt_abertura(Timestamp dt_abertura) {
+    public void setDt_abertura(LocalDate dt_abertura) {
         this.dt_abertura = dt_abertura;
     }
 
-    public Timestamp getDt_inicio() {
+    public LocalDate getDt_inicio() {
         return dt_inicio;
     }
 
-    public void setDt_inicio(Timestamp dt_inicio) {
+    public void setDt_inicio(LocalDate dt_inicio) {
         this.dt_inicio = dt_inicio;
     }
 
-    public Timestamp getDt_fim() {
+    public LocalDate getDt_fim() {
         return dt_fim;
     }
 
-    public void setDt_fim(Timestamp dt_fim) {
+    public void setDt_fim(LocalDate dt_fim) {
         this.dt_fim = dt_fim;
     }
 
