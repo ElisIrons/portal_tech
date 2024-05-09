@@ -1,23 +1,29 @@
 <!DOCTYPE html>
 <html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
-
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
     <link rel="stylesheet" type="text/css" href="/styles/usuario.chamado.css" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100..700&display=swap" rel="stylesheet" />
+    <link
+            href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100..700&display=swap"
+            rel="stylesheet"
+    />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
             href="https://fonts.googleapis.com/css2?family=Jersey+20&family=Orbitron:wght@400..900&family=Righteous&family=Roboto+Mono:wght@100..700&display=swap"
-            rel="stylesheet" />
+            rel="stylesheet"
+    />
 
     <title>Portal Tech</title>
-    <link rel="icon" href="/styles/images/logo.jpeg"/>
+    <link rel="icon" href="/styles/images/logo.jpeg" />
 </head>
 
 <body>
@@ -32,42 +38,48 @@
         <span></span>
         <h1>Portal Tech</h1>
     </div>
-    <nav class="cabecalhoMenu">
-
-    </nav>
+    <nav class="cabecalhoMenu"></nav>
 </header>
 
 <section class="home">
     <div class="container">
-
-
         <main class="container-form">
-
-
             <section class="container-box">
-                <h1 class="container-texto" th:text="'Bem-vindo, ' + ${userName} + '!'">Bem-vindo(a)!</h1>
+                <h1
+                        class="container-texto"
+                        th:text="'Bem-vindo, ' + ${userName} + '!'"
+                >
+                    Bem-vindo(a)!
+                </h1>
 
                 <h2 class="container-subtitulo">Criar novo chamado</h2>
 
                 <div class="campo-container">
-
                     <form action="/salvarChamado" method="post">
-
-
-
                         <div class="descricao">
                             <div class="">
                                 <span class="input-group-text">Descrição</span>
                             </div>
-                            <textarea class="form-control" rows="1" id="descricao" name="descricao"
-                                      placeholder="Digite uma descrição"></textarea>
+                            <textarea
+                                    class="form-control"
+                                    rows="1"
+                                    id="descricao"
+                                    name="descricao"
+                                    placeholder="Digite uma descrição"
+                            ></textarea>
                         </div>
                         <div class="">
                             <div class="">
                                 <span class="input-group-text">Prioridade</span>
                             </div>
-                            <select class="form-control" id="prioridade" name="prioridade">
-                                <option value="" disabled selected>Escolha a prioridade</option>
+                            <select
+                                    class="form-control"
+                                    id="prioridade"
+                                    name="prioridade"
+                            >
+                                <option value="" disabled selected>
+                                    Escolha a prioridade
+                                </option>
                                 <option value="alta">Alta</option>
                                 <option value="media">Média</option>
                                 <option value="baixa">Baixa</option>
@@ -75,10 +87,17 @@
                         </div>
                         <div class="data">
                             <div class="data-inicio">
-                                <label for="dataInicio" class="input-group-text">Data da abertura do chamado</label>
+                                <label for="dataInicio" class="input-group-text"
+                                >Data da abertura do chamado</label
+                                >
                             </div>
-                            <input type="text" class="form-control" id="dataInicio" name="dataInicio"
-                                   placeholder="DD-MM-AAAA">
+                            <input
+                                    type="text"
+                                    class="form-control"
+                                    id="dataInicio"
+                                    name="dataInicio"
+                                    placeholder="DD-MM-AAAA"
+                            />
                         </div>
 
                         <div class="">
@@ -99,25 +118,29 @@
                             <div class="status">
                                 <span class="input-group-text">Status</span>
                             </div>
-                            <select class="form-control" id="chamadoStatus" name="chamadoStatus">
+                            <select
+                                    class="form-control"
+                                    id="chamadoStatus"
+                                    name="chamadoStatus"
+                            >
                                 <option value="Aguardando">Aguardando Atendimento</option>
-
                             </select>
                         </div>
                         <button type="submit" class="salvar">Cadastrar</button>
                     </form>
 
-
                     <div class="return-index">
-                        <p><a href="/index/usuario"><img class="color-image" src="/styles/images/voltar.png" /></a>Voltar para tela inicial</p>
+                        <p>
+                            <a href="/index/usuario"
+                            ><img
+                                    class="color-image"
+                                    src="/styles/images/voltar.png" /></a
+                            >Voltar para tela inicial
+                        </p>
                     </div>
-
                 </div>
             </section>
         </main>
-
-
-
     </div>
 </section>
 
@@ -125,7 +148,11 @@
     <div class="container">
         <div class="footer-content">
             <div class="github">
-                <img src="/styles/images/github.png" alt="GitHub Logo" class="github-img" />
+                <img
+                        src="/styles/images/github.png"
+                        alt="GitHub Logo"
+                        class="github-img"
+                />
             </div>
             <div class="github-links">
                 <a href="https://github.com/keilaarakaki">Keila Arakaki</a>
@@ -138,5 +165,4 @@
     </div>
 </footer>
 </body>
-
 </html>
