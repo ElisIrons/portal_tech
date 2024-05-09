@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class UsuarioController {
 
+
        @GetMapping("/usuario/novo/chamado")
         public String novoChamado(){
                return "usuario.novo.chamado"; // Este é o nome do arquivo HTML para a rota de novo chamado

@@ -19,7 +19,7 @@ public class AutenticacaoController {
 private PessoaRepository pessoaRepository;
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login() {
-        return "login.html";
+        return "login";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
