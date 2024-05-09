@@ -224,7 +224,7 @@ body {
 
 .container-box {
   position: fixed;
-  width: 750px;
+  width: 850px;
   height: 700px;
 
   backdrop-filter: blur(25px);
@@ -319,7 +319,7 @@ body {
 
 
 
-/*Seção da tabela do Usuário chamados*/
+/*Seção da tabela do Administrador*/
 
 .tabela-container {
   margin-top: 20px;
@@ -505,128 +505,90 @@ body {
 }
 
 
-@media screen and (min-width: 1061px) {
-.cabecalho {
-    padding: 0.2rem 0;
+/* Adicione as regras de estilo abaixo de 700px */
+
+@media only screen and (max-width: 700px) {
+  .cabecalho {
     height: auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    padding: 0.5rem;
   }
 
   .logo img {
-    max-width: 60px;
+    max-width: 4rem;
   }
 
   .titulo {
-    margin-top: 0.5rem;
-    text-align: center;
+    font-size: 30px;
   }
 
-  .titulo h1 {
-    font-size: 20px;
-    margin-top: 5px;
+  .cabecalhoMenu a,
+  .titulo {
+    padding: 8px 15px;
+    font-size: 14px;
+    letter-spacing: 2px;
   }
 
-  .cabecalhoMenu {
-    display: none;
-  }
-
-  body {
-    padding-bottom: 6rem;
-  }
-
-
-  .cabecalho {
-    max-width: 100%;
+  .home .texto h1 {
+    font-size: 40px;
+    margin-bottom: 60px;
   }
 
   .container-box {
-    width: 80%;
-      max-width: 50%;
-        height: 60%;
-        padding: 5.5em;
-        overflow-y: auto;
+    width: 90%;
+    height: auto;
+    max-width: 400px;
+    padding: 4em 1.5em 1em 1.5em;
   }
 
-  .container-form {
-      padding: 0;
+  .container-texto {
+    font-size: 24px;
+    margin-top: -10%;
+    margin-bottom: 10px;
+  }
+
+  .container-subtitulo {
+    font-size: 20px;
+  }
+
+  .campo-container input[type="text"],
+  .campo-container textarea,
+  .campo-container select {
+    font-size: 14px;
+    height: 35px;
+  }
+
+  #descricao {
+    height: 80px;
+  }
+
+  .salvar {
+    height: 35px;
+    font-size: 14px;
+  }
+
+  .return-index p {
+    margin-top: 30px;
+    font-size: 10px;
+  }
+
+.tabela-container {
+  overflow-x: auto; /* Adiciona uma barra de rolagem horizontal quando necessário */
     }
 
-    .campo-container {
-      padding: 0 1em;
+.tabela {
+  width: 100%; /* Garante que a tabela ocupe todo o espaço disponível */
     }
 
-      h1.container-texto {
-        font-size: 30px;
-      }
-
-      h2.container-subtitulo {
-        font-size: 18px;
-      }
-
-         .container {
-              max-width: 1200px;
-              margin: 0 auto;
-          }
-          .return-index {
-              margin-top: 100px;
-               }
-          .tabela th, .tabela td {
-
-          }
-
-      .salvar {
-        width: 100%;
-    }
-}
-
-
-@media screen and (min-width: 1500px) {
-  .cabecalho {
-    padding: 1rem;
-    height: 6rem;
-  }
-
- .container-box {
-     width: 80%;
-       max-width: 50%;
-         height: 60%;
-         padding: 5.5em;
-         overflow-y: auto;
-   }
-
-  .titulo h1 {
-    font-size: 22px;
+.tabela th,
+.tabela td {
+  padding: 6px;
+  font-size: 12px; /* Reduz o tamanho da fonte para melhor ajuste */
     }
 
+.tabela th:nth-child(3),
+.tabela td:nth-child(3) {
+  width: 100%; /* Ajusta a largura da coluna principal para ocupar toda a largura disponível */
+  text-align: center; /* Centraliza o conteúdo da coluna principal */
+    }
 
-  .logo img {
-    max-width: 140px;
-  }
-
-  .titulo {
-    margin-left: 1rem;
-    flex-grow: 1;
-  }
-
-  .titulo h1 {
-    font-size: 34px;
-  }
-
-  .cabecalhoMenu {
-    display: flex;
-    margin-right: 1rem;
-  }
-
-  .cabecalhoMenu span {
-    width: 25px;
-    height: 2px;
-    background: #fff;
-    margin: 4px;
-  }
-
-  body {
-    padding-bottom: 6rem;
-  }
 }
