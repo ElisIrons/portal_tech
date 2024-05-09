@@ -31,11 +31,28 @@ private PessoaRepository pessoaRepository;
 
         //Encontrar os usuários pelo email
 //        comparar os tipos desse usuário com o resultado do radio-button e redirecionar p/pags
-
+//chamar o metodo de verificação aqui
 
 
         return "redirect:/index.usuario.html" ;
     }
+
+    public String verifyEmailIfAlreadyExists(){
+//        Buscar todos os emails já existentes e salva-los numa lista
+//        percorrer a lista e comparar com o email inserido
+//        se já existir, mandar mensagem q já existe
+//        caso contrário. fazer o login
+        return "";
+    }
+
+    public String verifyIfPasswordsAlredyExists(){
+//        //        Buscar todos as senhas já existentes e salva-los numa lista
+////        percorrer a lista e comparar com o email inserido
+////        se já existir, mandar mensagem q já existe
+////        caso contrário. fazer o login
+        return "";
+    }
+
 
 
 

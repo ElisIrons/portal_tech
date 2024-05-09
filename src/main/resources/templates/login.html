@@ -72,13 +72,12 @@
                                 <legend class="campo-legenda"><strong>Gostaria de entrar como:</strong></legend>
                                 <li th:each="option : ${radioOption}">
                                 <label th:text="${option}">
-                                    <input id="usuario" th:value="${usuario}" type="radio" name="devweb" value="frontend" th:name="radioOption" th:value="${option}" checked>Usuário
+                                    <input  th:value="${usuario}" type="radio" name="devweb" value="frontend" th:name="radioOption" th:value="${option}" checked>Usuário
                                 </label>
                                 <label th:text="${option}">
-                                    <input id="tecnico" th:value="${tecnico}"  type="radio" name="devweb" value="backend">Técnico
+                                    <input> " th:value="${tecnico}"  type="radio" name="devweb" value="backend">Técnico
                                 </label>
-                                <label th:text="${option}">
-                                    <input id="administrador" th:value="${administrador}" type="radio" name="devweb" value="backend">Administrador
+                                <label th:tex th:value="${administrador}" type="radio" name="devweb" value="backend">Administrador
                                 </label>
                                 </li>
                             </fieldset>
