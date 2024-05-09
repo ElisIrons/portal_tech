@@ -11,13 +11,14 @@ body {
   background-position: center;
   background-attachment: fixed;
   font-family: "Roboto Mono", sans-serif;
+  opacity: 95%;
 }
 
 .cabecalho {
   background: radial-gradient(
     50% 100% at bottom center,
     rgb(145, 32, 138),
-    rgb(9, 26, 79)
+    rgb(11, 22, 40)
   );
   display: flex;
   align-items: center;
@@ -46,6 +47,7 @@ body {
   flex-grow: 1;
   text-align: center;
 }
+
 .cabecalhoMenu a,
 .titulo {
   position: relative;
@@ -261,7 +263,7 @@ a {
 .input-telefone,
 .setor {
   width: 100%;
-  height: 35px;
+  height: 40px;
   font-size: 16px;
   padding-inline: 20px 50px;
   border: 2px solid rgb(145, 32, 138);
@@ -274,7 +276,7 @@ a {
 .input-email:hover,
 .input-nome:hover,
 .input-telefone:hover {
-  background-color: var(--hover-cor);
+  background-color:  rgb(245, 207, 242);
   color: black;
   font-style: italic;
 }
@@ -297,7 +299,8 @@ a {
   justify-content: center;
   width: 100%;
   text-align: center;
-  margin-bottom: 15px;
+  margin-top:10px;
+  margin-bottom: 1px;
 }
 
 .container-input-cadastrar a {
@@ -404,6 +407,11 @@ a {
   100% {
     bottom: 100%;
   }
+}
+
+.login {
+    text-align: center;
+    margin-top: 5px;
 }
 
 .footer {
