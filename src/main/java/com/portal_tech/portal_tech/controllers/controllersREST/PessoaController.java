@@ -1,25 +1,18 @@
 package com.portal_tech.portal_tech.controllers.controllersREST;
 
-import com.portal_tech.portal_tech.models.Pessoa;
-import com.portal_tech.portal_tech.models.Prioridade;
 import com.portal_tech.portal_tech.models.dtos.PessoaDTO;
-import com.portal_tech.portal_tech.models.dtos.SetorDTO;
-import com.portal_tech.portal_tech.models.dtos.TipoDTO;
-import com.portal_tech.portal_tech.repositores.PrioridadeRepository;
+
 import com.portal_tech.portal_tech.services.PessoaService;
 import java.util.Map;
 
 import com.portal_tech.portal_tech.swaggerDoc.PessoaControllerOpenApi;
-import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("user")
@@ -33,18 +26,18 @@ public class PessoaController implements PessoaControllerOpenApi {
             @ApiResponse(responseCode = "400", description = "Faltam dados obrigatórios a serem passados/não foi possível salvar")
     })
     @PostMapping("/save")
-    public ResponseEntity<PessoaDTO> save( @RequestBody PessoaDTO pessoaDTO){
+    public ResponseEntity<PessoaDTO> save( @RequestBody Map<String, Object> pessoaDTO){
         return this.pessoaService.save(pessoaDTO);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<PessoaDTO>findInfById(@PathVariable long id){
-        return this.pessoaService.finfInfById(id);
+    public ResponseEntity<PessoaDTO>findById(@PathVariable long id){
+        return this.pessoaService.findById(id);
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<PessoaDTO> updateInfById(@PathVariable long id,@RequestBody PessoaDTO pessoaDTO ){
-        return this.pessoaService.updateInfById(id,pessoaDTO);
+    public ResponseEntity<PessoaDTO> updateInfById(@PathVariable long id, @RequestBody Map<String, Object>pessoaDTO ){
+        return this.pessoaService.updateInfById(id, pessoaDTO);
     }
 
     @RequestMapping(value = "delete/{id}", method = RequestMethod.DELETE)
@@ -52,9 +45,8 @@ public class PessoaController implements PessoaControllerOpenApi {
         return this.pessoaService.deleteById(id);
     }
 
-//    Este método ainda precisa de uns ajustes, por isso esta comentado
     @GetMapping
-    public List<PessoaDTO> findAll(){
+    public ResponseEntity<List<PessoaDTO>> findAll(){
         return this.pessoaService.findAll();
     }
 

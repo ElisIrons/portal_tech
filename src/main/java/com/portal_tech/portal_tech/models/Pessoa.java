@@ -35,8 +35,7 @@ public class Pessoa {
     public Pessoa() {
     }
 
-    public Pessoa(Long id, String nome, String email, String senha, String telefone, Tipo tipo, Setor setor) {
-        this.id = id;
+    public Pessoa(String nome, String email, String senha, String telefone, Tipo tipo, Setor setor) {
         this.nome = nome;
         this.email = email;
         this.senha = senha;
