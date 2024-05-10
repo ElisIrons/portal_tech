@@ -57,14 +57,14 @@ public class ChamadoDTO {
         chamado.setDt_inicio(chamadoDTO.getDt_inicio());
         chamado.setDt_fim(chamadoDTO.getDt_fim());
         chamado.setIdTecnico(chamadoDTO.getId_tecnico());
-
         chamado.setIdUsuario(chamadoDTO.getId_usuario());
-
         chamado.setIdPrioridade(chamadoDTO.getId_prioridade());
 
-        Status status = new Status();
-        status.setId(chamadoDTO.getId_status().getId());
-        chamado.setIdStatus(status);
+        if(chamadoDTO.getId_status() != null) {
+            Status status = new Status();
+            status.setId(chamadoDTO.getId_status().getId());
+            chamado.setIdStatus(status);
+        }
 
         return chamado;
     }
