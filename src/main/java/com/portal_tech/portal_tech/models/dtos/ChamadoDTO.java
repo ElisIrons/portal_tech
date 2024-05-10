@@ -1,8 +1,5 @@
 package com.portal_tech.portal_tech.models.dtos;
-import com.portal_tech.portal_tech.models.Chamado;
-import com.portal_tech.portal_tech.models.Pessoa;
-import com.portal_tech.portal_tech.models.Prioridade;
-import com.portal_tech.portal_tech.models.Status;
+import com.portal_tech.portal_tech.models.*;
 import com.portal_tech.portal_tech.repositores.StatusRepository;
 import com.portal_tech.portal_tech.services.StatusService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +11,6 @@ public class ChamadoDTO {
     private Long id;
 
     private String descricao;
-
 
     private LocalDate dt_abertura;
 
@@ -29,6 +25,8 @@ public class ChamadoDTO {
     private Prioridade id_prioridade;
 
     private Status id_status;
+
+    private Setor id_setor;
 
     @Autowired
     private StatusRepository statusRepository;
@@ -142,6 +140,7 @@ public class ChamadoDTO {
     public void setId_status(Status id_status) {
         this.id_status = id_status;
     }
+
 }
 
 

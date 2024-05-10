@@ -27,7 +27,7 @@ public class ChamadoService {
         return new ChamadoDTO(chamado);
     }
 
-    public List<ChamadoDTO> findAll() {
+    public List<ChamadoDTO> findAllChamados() {
         List<Chamado> chamados = this.chamadoRepository.findAll();
         return chamados.stream().map(ChamadoDTO::new).collect(Collectors.toList());
     }
@@ -58,7 +58,12 @@ public class ChamadoService {
         return new ChamadoDTO(chamado);
     }
 
+    public List<Chamado> buscarChamados() {
+        return chamadoRepository.findAll();
+    }
 
-
-
+    public List<ChamadoDTO> findAll() {
+        List<Chamado> chamados = this.chamadoRepository.findAll();
+        return chamados.stream().map(ChamadoDTO::new).collect(Collectors.toList());
+    }
 }
