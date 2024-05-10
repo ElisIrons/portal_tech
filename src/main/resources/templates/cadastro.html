@@ -6,7 +6,7 @@
             name="viewport"
             content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
-    <link rel="stylesheet" type="text/css" href="/static/styles/cadastro.css"/>
+    <link rel="stylesheet" type="text/css" href="./styles/cadastro.css"/>
 
     <link rel="preconnect" href="https://fonts.googleapis.com"/>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
@@ -49,56 +49,62 @@
             <h1 class="cadastro-texto">Cadastro</h1>
             <div class="campo-cadastro">
 
-                <form method="post" action="/login" class="formCadastro" >
+                <form method="post" action="/cadastro" class="formCadastro" >
                     <div class="campo">
                         <fieldset>
                             <legend class="campo-legenda">
                                 Gostaria de se cadastrar como:
                             </legend>
+                            <ul>
+                                <li th:each="optionTipo : ${radioOptions}">
+                                    <label>
+                                        <input
+                                                th:value="${optionTipo}" th:checked="${optionTipo == 'Usuário'}"
+                                                type="radio"
+                                                name="tipo"
+                                                value="usuario"
+                                                onclick="mostrarSetor()"
 
-                            <label>
-                                <input
+                                        />Usuário
+                                    </label>
+                                </li>
+                                <li>
+                                    <label>
+                                        <input
+                                                th:value="${optionTipo}" th:checked="${optionTipo == 'Técnico'}"
+                                                type="radio"
+                                                name="tipo"
+                                                value="técnico"
+                                                onclick="mostrarSetor()"
 
-                                        type="radio"
-                                        name="tipo"
-                                        value="usuario"
-                                        onclick="mostrarSetor()"
-
-                                />Usuário
-                            </label>
-                            <label>
-                                <input
-
-                                        type="radio"
-                                        name="tipo"
-                                        value="técnico"
-                                        onclick="mostrarSetor()"
-
-                                />Técnico
-                            </label>
-                            <label>
-                                <input
-
-                                        type="radio"
-                                        name="tipo"
-                                        value="administrador"
-                                        onclick="mostrarSetor()"
-
-                                />Administrador
-                            </label>
-
+                                        />Técnico
+                                    </label>
+                                </li>
+                                <li>
+                                    <label>
+                                        <input
+                                                th:value="${optionTipo}" th:checked="${optionTipo == 'Administrador'}"
+                                                type="radio"
+                                                name="tipo"
+                                                value="administrador"
+                                                onclick="mostrarSetor()"
+                                        />Administrador
+                                    </label>
+                                </li>
+                            </ul>
                         </fieldset>
+                                  
                     </div>
 
                     <div id="setorDiv" style="display: none">
-<!--                        <ul>-->
-<!--                            <li th:each="option : ${selectOptions}">-->
+                        <ul>
+                            <li th:each="optionSetor : ${selectOptions}">
                         <label for="setor">Setor:</label>
                         <select name="setor" id="setor" class="setor">
-                            <option value="Administrativo"  name="setor" ></option>
-                            <option value="Marketing" name="setor" >Marketing</option>
-                            <option value="Recursos Humanos" name="setor">Recursos Humanos</option>
-                            <option value="Suporte" name="setor" >Suporte</option>
+                            <option value="Administrativo"  name="setor"  th:value="${optionSetor}" th:checked="${optionSetor == 'Administrativo' }" ></option>
+                            <option value="Marketing" name="setor" th:value="${optionSetor}" th:checked="${optionSetor == 'Marketing'}">Marketing</option>
+                            <option value="Recursos Humanos" name="setor"  th:value="${optionSetor}" th:checked="${optionSetor == 'Recursos Humanos'}">Recursos Humanos</option>
+                            <option value="Suporte" name="setor" th:value="${optionSetor}" th:checked="${optionSetor == 'Suporte'}" >Suporte</option>
                         </select>
                             </li>
                         </ul>
@@ -107,7 +113,7 @@
                     <div>
                         <label for="nome">Nome completo:</label>
                         <input
-
+                                th:value="${nome}"
                                 type="text"
                                 id="nome"
                                 name="nome"
@@ -119,7 +125,7 @@
                     <div>
                         <label for="telefone">Telefone:</label>
                         <input
-
+                                th:value="${telefone}"
                                 type="tel"
                                 id="telefone"
                                 name="telefone"
@@ -131,7 +137,7 @@
                     <div>
                         <label for="email">E-mail:</label>
                         <input
-
+                                th:value="${email}"
                                 type="email"
                                 id="email"
                                 name="email"
@@ -154,6 +160,7 @@
                     </div>
                     <div class="container-input-cadastrar">
                         <a href="#">
+                            <input class="input" type="submit"  />
                             Cadastrar
                             <span></span>
                             <span></span>
