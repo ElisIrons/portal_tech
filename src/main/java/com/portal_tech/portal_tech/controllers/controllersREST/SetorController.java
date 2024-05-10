@@ -1,6 +1,9 @@
 package com.portal_tech.portal_tech.controllers.controllersREST;
 
+import com.portal_tech.portal_tech.models.Setor;
+import com.portal_tech.portal_tech.models.Status;
 import com.portal_tech.portal_tech.models.dtos.SetorDTO;
+import com.portal_tech.portal_tech.repositores.SetorRepository;
 import com.portal_tech.portal_tech.services.SetorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,10 +21,13 @@ public class SetorController {
     @Autowired
     private SetorService setorService;
 
+    @Autowired
+    private SetorRepository setorRepository;
+
+
     @PostMapping("/cadastrar")
-    public List<SetorDTO> save(){
-        List<SetorDTO> setor = new ArrayList<>();
-        return setor;
+    public Setor save(@RequestBody Setor setor){
+        return setorRepository.save(setor);
     }
 
     @GetMapping("/mostrar/{id}")

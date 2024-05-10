@@ -31,18 +31,18 @@ public class Chamado {
     private Pessoa id_usuario;
 
     @ManyToOne(optional = true, fetch = FetchType.EAGER) //não obrigatório pois só terá técnico após chamado ser atribuído
-    @JoinColumn(name = "id_tecnico", referencedColumnName = "id", nullable = true)
+    @JoinColumn(name = "id_tecnico", referencedColumnName = "id", nullable = true, columnDefinition = "BIGINT DEFAULT 1")
     private Pessoa id_tecnico;
 
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
-    @JoinColumn(name = "id_status", referencedColumnName = "id", insertable = false, updatable = false)
+    @ManyToOne(optional = true, fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_status", referencedColumnName = "id", nullable = true, columnDefinition = "BIGINT DEFAULT 1") //insertable = false, updatable = false,
     private Status id_status;
 
     /*@Column(name = "id_status")
     private Long id_status;*/
 
     @ManyToOne(optional = true) //qdo abrir o chamado não terá prioridade, só após o adm ou técnico atribuírem
-    @JoinColumn(name = "id_prioridade")
+    @JoinColumn(name = "id_prioridade", columnDefinition = "BIGINT DEFAULT 1")
     private Prioridade id_prioridade;
 
     public Chamado() {

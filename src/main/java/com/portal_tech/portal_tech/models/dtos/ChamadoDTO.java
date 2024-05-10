@@ -3,6 +3,8 @@ import com.portal_tech.portal_tech.models.Chamado;
 import com.portal_tech.portal_tech.models.Pessoa;
 import com.portal_tech.portal_tech.models.Prioridade;
 import com.portal_tech.portal_tech.models.Status;
+import com.portal_tech.portal_tech.repositores.ChamadoRepository;
+import com.portal_tech.portal_tech.repositores.PessoaRepository;
 import com.portal_tech.portal_tech.repositores.StatusRepository;
 import com.portal_tech.portal_tech.services.StatusService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +35,9 @@ public class ChamadoDTO {
     @Autowired
     private StatusRepository statusRepository;
 
+    @Autowired
+    private PessoaRepository pessoaRepository;
+
     public ChamadoDTO() {
     }
 
@@ -42,32 +47,33 @@ public class ChamadoDTO {
         this.dt_abertura = chamado.getDt_abertura();
         this.dt_inicio = chamado.getDt_inicio();
         this.dt_fim = chamado.getDt_fim();
-        this.id_tecnico = chamado.getIdTecnico();
         this.id_usuario = chamado.getIdUsuario();
+        this.id_tecnico = chamado.getIdTecnico();
         this.id_prioridade = chamado.getIdPrioridade();
         this.id_status = chamado.getIdStatus();
     }
 
-    //public static Chamado convert(ChamadoDTO chamadoDTO){ //converterá o chamadoDTO em chamado - inverso do método anterior
-    public Chamado convert(ChamadoDTO chamadoDTO){ //converterá o chamadoDTO em chamado - inverso do método anterior
+    public static Chamado convert(ChamadoDTO chamadoDTO) { //converterá o chamadoDTO em chamado - inverso do método anterior
         Chamado chamado = new Chamado();
         chamado.setId(chamadoDTO.getId());
         chamado.setDescricao(chamadoDTO.getDescricao());
         chamado.setDt_abertura(chamadoDTO.getDt_abertura());
         chamado.setDt_inicio(chamadoDTO.getDt_inicio());
         chamado.setDt_fim(chamadoDTO.getDt_fim());
-        chamado.setIdTecnico(chamadoDTO.getId_tecnico());
 
         chamado.setIdUsuario(chamadoDTO.getId_usuario());
 
+        chamado.setIdTecnico(chamadoDTO.getId_tecnico());
+
         chamado.setIdPrioridade(chamadoDTO.getId_prioridade());
 
-        Status status = new Status();
-        status.setId(chamadoDTO.getId_status().getId());
-        chamado.setIdStatus(status);
+        chamado.setIdStatus(chamadoDTO.getId_status());
 
         return chamado;
     }
+
+
+
 
     public Long getId() {
         return id;

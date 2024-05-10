@@ -1,4 +1,4 @@
-package com.portal_tech.portal_tech.controllers;
+package com.portal_tech.portal_tech.controllers.controllersREST;
 
 import com.portal_tech.portal_tech.models.Status;
 import com.portal_tech.portal_tech.repositores.StatusRepository;
