@@ -26,7 +26,7 @@ public String senha(){
 public String telefone(){
     return this.telefone;
     }
-    public long tipo(){
+public long tipo(){
     return this.tipo;
     }
 

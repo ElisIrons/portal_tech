@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<html  xmlns:th="http://www.thymeleaf.org">  lang="pt-br">
 <head>
     <meta charset="utf-8" />
     <meta
@@ -52,14 +52,17 @@
         <div class="cadastro">
             <h1 class="cadastro-texto">Cadastro</h1>
             <div class="campo-cadastro">
-                <form method="post" action="rota controller" class="formCadastro">
+
+                <form method="post" action="/login" class="formCadastro" >
                     <div class="campo">
                         <fieldset>
                             <legend class="campo-legenda">
                                 Gostaria de se cadastrar como:
                             </legend>
+
                             <label>
                                 <input
+
                                         type="radio"
                                         name="tipo"
                                         value="usuario"
@@ -68,6 +71,7 @@
                             </label>
                             <label>
                                 <input
+
                                         type="radio"
                                         name="tipo"
                                         value="técnico"
@@ -76,28 +80,35 @@
                             </label>
                             <label>
                                 <input
+
                                         type="radio"
                                         name="tipo"
                                         value="administrador"
                                         onclick="mostrarSetor()"
                                 />Administrador
                             </label>
+
                         </fieldset>
                     </div>
 
                     <div id="setorDiv" style="display: none">
+<!--                        <ul>-->
+<!--                            <li th:each="option : ${selectOptions}">-->
                         <label for="setor">Setor:</label>
                         <select name="setor" id="setor" class="setor">
-                            <option value="Administrativo">Administrativo</option>
-                            <option value="Marketing">Marketing</option>
-                            <option value="Recursos Humanos">Recursos Humanos</option>
-                            <option value="Suporte">Suporte</option>
+                            <option value="Administrativo"  name="setor" ></option>
+                            <option value="Marketing" name="setor" >Marketing</option>
+                            <option value="Recursos Humanos" name="setor">Recursos Humanos</option>
+                            <option value="Suporte" name="setor" >Suporte</option>
                         </select>
+                            </li>
+                        </ul>
                     </div>
 
                     <div>
                         <label for="nome">Nome completo</label>
                         <input
+
                                 type="text"
                                 id="nome"
                                 name="nome"
@@ -109,6 +120,7 @@
                     <div>
                         <label for="telefone">Telefone</label>
                         <input
+
                                 type="tel"
                                 id="telefone"
                                 name="telefone"
@@ -120,6 +132,7 @@
                     <div>
                         <label for="email">E-mail</label>
                         <input
+
                                 type="email"
                                 id="email"
                                 name="email"
@@ -131,7 +144,8 @@
                     <div>
                         <label for="senha">Senha</label>
                         <input
-                                type="password"
+                                th:value="${senha}"
+                               type="password"
                                 id="senha"
                                 name="senha"
                                 class="input-senha"
@@ -141,18 +155,19 @@
                     </div>
                     <div class="container-input-cadastrar">
                         <a href="#">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                            <span></span>
                             Cadastrar
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+
                         </a>
                     </div>
 
                     <div class="login">
                         <p>
                             Já tem uma conta?
-                            <a href="login.html">Login</a>
+                            <a href="#">Login</a>
                         </p>
                     </div>
                 </form>

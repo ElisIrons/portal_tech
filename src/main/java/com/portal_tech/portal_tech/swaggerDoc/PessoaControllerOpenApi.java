@@ -15,7 +15,7 @@ public interface PessoaControllerOpenApi {
     @Operation(summary = "método para salvar dados da pessoa no banco")
     public ResponseEntity<PessoaDTO> save( Map<String, Object> pessoaDTO);
     @Operation(summary = "método para encontrar a pessoa por ID")
-    ResponseEntity<PessoaDTO>findInfById(long id);
+    ResponseEntity<PessoaDTO>findById(long id);
     @Operation(summary = "método para realizar modificações de informações pessoais da pessoa")
     ResponseEntity<PessoaDTO>updateInfById( long id, Map<String, Object>pessoaDTO );
     @Operation(summary = "método para deletar os dados da pessoa localizado pelo id")

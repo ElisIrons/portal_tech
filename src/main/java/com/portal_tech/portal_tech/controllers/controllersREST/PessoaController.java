@@ -31,8 +31,8 @@ public class PessoaController implements PessoaControllerOpenApi {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<PessoaDTO>findInfById(@PathVariable long id){
-        return this.pessoaService.finfInfById(id);
+    public ResponseEntity<PessoaDTO>findById(@PathVariable long id){
+        return this.pessoaService.findById(id);
     }
 
     @PutMapping("/update/{id}")
