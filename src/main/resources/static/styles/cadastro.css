@@ -281,19 +281,6 @@ a {
   font-style: italic;
 }
 
-.submit-input {
-  color: var(--black-cor);
-  width: 50%;
-  height: 40px;
-  font-size: 16px;
-  font-weight: 500;
-  border: 2px solid rgb(145, 32, 138);
-  border-radius: 30px;
-  cursor: pointer;
-  transition: 0.3s;
-  background-color: var(--segunda-cor);
-}
-
 .container-input-cadastrar {
   display: flex;
   justify-content: center;

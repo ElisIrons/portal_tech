@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="utf-8" />
@@ -23,14 +23,9 @@
 <body>
 <header class="cabecalho">
     <div class="logo">
-        <!-- ALTERAR CAMINHO QUANDO FAZER A ROTA -->
-        <img src="/static/styles/images/logo.jpeg" alt="logo Portal Tech" />
+        <img src="/styles/images/logo.jpeg" alt="logo Portal Tech" />
     </div>
     <div class="titulo">
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
         <h1>Portal Tech</h1>
     </div>
     <nav class="cabecalhoMenu">
@@ -41,7 +36,6 @@
             <span></span>
             HOME
         </a>
-    </nav>
 </header>
 
 <section class="home">
@@ -49,18 +43,18 @@
         <main class="container-form">
             <section class="container-box">
                 <h1 class="container-texto" th:text="'Bem-vindo, ' + ${userName} + '!'">Bem-vindo(a)!</h1>
-                <h2 class="container-subtitulo">Painel de Chamados</h2>
+                <h2 class="container-subtitulo">Chamados</h2>
                 <div class="tabela-container">
                     <table class="tabela">
                         <thead>
                         <tr>
                             <th>Data de Abertura</th>
-                            <th>Id_Usuário</th>
+                            <th>Usuário</th>
                             <th>Setor</th>
-                            <th>Descrição</th>
                             <th>Prioridade</th>
-                            <th>Responsavél</th>
+                            <th>Descrição</th>
                             <th>Status</th>
+                            <th>Data da Finalização </th>
                         </tr>
                         </thead>
                         <tbody>
@@ -69,16 +63,23 @@
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td></td>
-                            <td></td>
+                            <td>
+                            </td>
+                            <td>   <label for="status">Status:</label><br>
+                                <select id="status" name="status" required>
+                                    <option value="em-analise">Em análise</option>
+                                    <option value="aguardando">Aguardando técnico</option>
+                                    <option value="em-atendimento">Em atendimento</option>
+                                    <option value="outro-setor">Escalado para outro setor</option>
+                                    <option value="finalizado">Finalizado</option>
+                                </select></td>
                             <td></td>
                         </tr>
                         </tbody>
-                        <tbody>
                     </table>
                 </div>
                 <div class="return-index" style="margin-top: 250px;">
-                    <p><a href="index.usuario.html"><img class="color-image" src="voltar.jpeg" /></a>Voltar para tela inicial</p>
+                    <p><a href="/index/usuario"><img class="color-image" src="/styles/images/voltar.png" /></a>Voltar para tela inicial</p>
                 </div>
             </section>
         </main>
@@ -89,7 +90,7 @@
     <div class="container">
         <div class="footer-content">
             <div class="github">
-                <img src="github.jpeg" alt="GitHub Logo" class="github-img" />
+                <img src="/styles/images/github.png" alt="GitHub Logo" class="github-img" />
             </div>
             <div class="github-links">
                 <a href="https://github.com/alineadcosta95">Aline Alves </a>
@@ -102,7 +103,5 @@
     </div>
 </footer>
 </body>
-
-</html>
 
 </html>
