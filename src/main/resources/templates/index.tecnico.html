@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <link rel="stylesheet" type="text/css" href="/styles/usuario.chamado.css" />
+    <link rel="stylesheet" type="text/css" href="/static/styles/usuario.chamado.css" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -43,7 +43,7 @@
         <main class="container-form">
             <section class="container-box">
                 <h1 class="container-texto" th:text="'Bem-vindo, ' + ${userName} + '!'">Bem-vindo(a)!</h1>
-                <h2 class="container-subtitulo">Chamados Criados</h2>
+                <h2 class="container-subtitulo">Chamados</h2>
                 <div class="tabela-container">
                     <table class="tabela">
                         <thead>
@@ -53,20 +53,28 @@
                             <th>Setor</th>
                             <th>Prioridade</th>
                             <th>Descrição</th>
-                            <th>Data da Finalização</th>
+                            <th>Status</th>
+                            <th>Data da Finalização </th>
                         </tr>
                         </thead>
                         <tbody>
-  
-
-                        <tr th:each="chamado : ${chamados}">
-                            <td th:text="${chamado.dt_abertura}">Data Abertura</td>
-                            <td th:text="${chamado.id_usuario.nome}">Usuario</td>
-                            <td th:text="${chamado.id_setor.nome}">Setor</td>
-                            <td th:text="${chamado.id_prioridade.nome}">Prioridade</td>
-                            <td th:text="${chamado.descricao}">Descrição</td>
-                            <td th:text="${chamado.dt_fim}">Data Fim</td>
-          </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                            </td>
+                            <td>   <label for="status">Status:</label><br>
+                                <select id="status" name="status" required>
+                                    <option value="em-analise">Em análise</option>
+                                    <option value="aguardando">Aguardando técnico</option>
+                                    <option value="em-atendimento">Em atendimento</option>
+                                    <option value="outro-setor">Escalado para outro setor</option>
+                                    <option value="finalizado">Finalizado</option>
+                                </select></td>
+                            <td></td>
+                        </tr>
                         </tbody>
                     </table>
                 </div>
