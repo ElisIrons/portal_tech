@@ -30,7 +30,7 @@ public class ChamadoService {
         return new ChamadoDTO(chamado);
     }
 
-    public List<ChamadoDTO> findAll() {
+    public List<ChamadoDTO> findAllChamados() {
         List<Chamado> chamados = this.chamadoRepository.findAll();
         if (chamados.isEmpty()){
             throw new RuntimeException("Não há chamados cadastrados!");
@@ -67,7 +67,7 @@ public class ChamadoService {
         return dto;
     }
 
-    public ChamadoDTO UpdateById(Long id, ChamadoDTO dto) {
+    public ChamadoDTO updateById(Long id, ChamadoDTO dto) {
         this.findById(id);
 
         Chamado chamado = dto.convert(dto);
@@ -77,7 +77,12 @@ public class ChamadoService {
         return new ChamadoDTO(chamado);
     }
 
+    public List<Chamado> buscarChamados() {
+        return chamadoRepository.findAll();
+    }
 
-
-
+    public List<ChamadoDTO> findAll() {
+        List<Chamado> chamados = this.chamadoRepository.findAll();
+        return chamados.stream().map(ChamadoDTO::new).collect(Collectors.toList());
+    }
 }

@@ -4,96 +4,89 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <link rel="stylesheet" type="text/css" href="static/styles/login.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100..700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="/styles/login.css"/>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100..700&display=swap" rel="stylesheet"/>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
     <link
             href="https://fonts.googleapis.com/css2?family=Jersey+20&family=Orbitron:wght@400..900&family=Righteous&family=Roboto+Mono:wght@100..700&display=swap"
-            rel="stylesheet" />
+            rel="stylesheet"/>
 
     <title>Portal Tech</title>
-    <link rel="icon" href="../static/styles/images/logo.jpeg" />
-
+    <link rel="icon" href="/styles/images/logo.jpeg"/>
 </head>
+
 <body>
 <header class="cabecalho">
     <div class="logo">
-        <img src="../static/styles/images/logo.jpeg" alt="logo Portal Tech" />
+        <img src="/styles/images/logo.jpeg" alt="logo Portal Tech"/>
     </div>
     <div class="titulo">
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
         <h1>Portal Tech</h1>
     </div>
     <nav class="cabecalhoMenu">
-
+        <a href="index.html">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            HOME
+        </a>
     </nav>
 </header>
 
 <section class="home">
     <div class="container">
-
-
         <main class="login">
-
             <section class="login-box">
                 <h1 class="login-texto">Login</h1>
-
                 <div class="campo-login">
-
-                    <div class="campo">
-
-                        <fieldset>
-                            <legend class="campo-legenda"><strong>Gostaria de entrar como:</strong></legend>
-                            <label>
-                                <input id="usuario" th:value="${usuario}" type="radio" name="devweb" value="frontend" checked>Usuário
-                            </label>
-                            <label>
-                                <input id="tecnico" th:value="${tecnico}"  type="radio" name="devweb" value="backend">Técnico
-                            </label>
-                            <label>
-                                <input id="administrador" th:value="${administrador}" type="radio" name="devweb" value="backend">Administrador
-                            </label>
-                        </fieldset>
-                    </div>
-
-                    <!-- Formulário login -->
-                    <form method="post" class="formLogin" >
+                    <form method="post" class="formLogin">
                         <div class="campo">
-
                             <fieldset>
                                 <legend class="campo-legenda"><strong>Gostaria de entrar como:</strong></legend>
-                                <li th:each="option : ${radioOption}">
-                                <label th:text="${option}">
-                                    <input  th:value="${usuario}" type="radio" name="devweb" value="frontend" th:name="radioOption" th:value="${option}" checked>Usuário
-                                </label>
-                                <label th:text="${option}">
-                                    <input> " th:value="${tecnico}"  type="radio" name="devweb" value="backend">Técnico
-                                </label>
-                                <label th:tex th:value="${administrador}" type="radio" name="devweb" value="backend">Administrador
-                                </label>
-                                </li>
+                                <ul>
+                                    <li>
+                                        <label>
+                                            <input id="usuario" th:value="${usuario}" type="radio" name="devweb"
+                                                   value="frontend"
+                                                   checked>Usuário
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label>
+                                            <input id="tecnico" th:value="${tecnico}" type="radio" name="devweb"
+                                                   value="backend">Técnico
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label>
+                                            <input id="administrador" th:value="${administrador}" type="radio"
+                                                   name="devweb"
+                                                   value="backend">Administrador
+                                        </label>
+                                    </li>
+                                </ul>
                             </fieldset>
                         </div>
-                        <div>
-                            <label for="email">E-mail</label> <!-- Rótulo do campo de e-mail -->
-                            <input  type="email" id="email" th:value="${email}" class="input-email" name="email"
-                                   placeholder="Digite seu e-mail:">
 
+                        <div>
+                            <label for="email">E-mail</label>
+                            <input type="email" id="email" th:value="${email}" class="input-email" name="email"
+                                   placeholder="Digite seu e-mail:"/>
                         </div>
 
                         <div>
                             <label for="password">Senha</label> <!-- Rótulo do campo senha -->
-                            <input type="password" id="password" th:value="${password}"  class="input-senha" name="password"
-                                   placeholder="Digite sua senha:">
+                            <input type="password" id="password" th:value="${password}" class="input-senha"
+                                   name="password"
+                                   placeholder="Digite sua senha:"/>
 
                         </div>
                         <div class="lembrar-esqueceu">
@@ -107,26 +100,21 @@
                         </div>
 
                         <div class="container-input-login">
-                            <input type="submit" class="submit-input" value="Login">
+                            <button type="submit">Entrar</button>
                         </div>
 
                         <div class="registrar">
                             <p>Ainda não tem uma conta?
-                                <a href="#">Registrar</a>
+                                <a href="cadastro.html">Registrar</a>
                             </p>
-                        </div>
-                        <div class="return-index" style="margin-top: 30px;">
-                            <p><a href="/static/index.html"><img class="color-image" src="/static/styles/images/voltar.png" /></a>Voltar para tela inicial</p>
                         </div>
                     </form>
                 </div>
-
-
             </section>
         </main>
 
 
-        <img src="/static/styles/images/persona.jpeg" class="img" />
+        <img src="/styles/images/persona2.jpeg" class="img"/>
     </div>
 </section>
 
@@ -134,14 +122,14 @@
     <div class="container">
         <div class="footer-content">
             <div class="github">
-                <img src="../static/styles/images/github.png" alt="GitHub Logo" class="github-img" />
+                <img src="/styles/images/github.png" alt="GitHub Logo" class="github-img"/>
             </div>
             <div class="github-links">
-                <a href="https://github.com/keilaarakaki">Keila Arakaki</a>
+                <a href="https://github.com/alineadcosta95">Aline Alves </a>
                 <a href="https://github.com/ElisIrons">Elis Rodrigues</a>
+                <a href="https://github.com/keilaarakaki">Keila Arakaki</a>
                 <a href="https://github.com/nayarakarinearaujo">Nayara Karine</a>
-                <a href="#">Thais Abe </a>
-                <a href="#">Aline Alves </a>
+                <a href="https://github.com/Thais-Abe">Thais Abe </a>
             </div>
         </div>
     </div>

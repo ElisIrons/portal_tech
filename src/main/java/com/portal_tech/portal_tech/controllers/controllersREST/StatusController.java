@@ -2,6 +2,7 @@ package com.portal_tech.portal_tech.controllers.controllersREST;
 
 import com.portal_tech.portal_tech.models.Status;
 import com.portal_tech.portal_tech.repositores.StatusRepository;
+import com.portal_tech.portal_tech.swaggerDoc.StatusControllerOpenApi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 @RestController
 
-public class StatusController {
+public class StatusController implements StatusControllerOpenApi {
 
     @Autowired
     private StatusRepository statusRepository;
@@ -32,7 +33,7 @@ public class StatusController {
 
     @RequestMapping(value="status/{id}", method = RequestMethod.GET)
     public Status findById(@PathVariable Long id){
-        Optional<Status> resultado = this.statusRepository.findById(id);
+        Optional<Status > resultado = this.statusRepository.findById(id);
         if (resultado.isEmpty()){
             throw new RuntimeException("Status não encontrado!");
         }
@@ -55,7 +56,6 @@ public class StatusController {
         status = this.statusRepository.save(status);
         return status;
     }
-
 
 }
 

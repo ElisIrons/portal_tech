@@ -1,7 +1,9 @@
 package com.portal_tech.portal_tech.controllers.controllersREST;
 
+import com.portal_tech.portal_tech.models.Prioridade;
 import com.portal_tech.portal_tech.models.dtos.PrioridadeDTO;
 import com.portal_tech.portal_tech.services.PrioridadeService;
+import com.portal_tech.portal_tech.swaggerDoc.PrioridadeControllerOpenApi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,11 +12,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/prioridade")
-public class PrioridadeController {
+public class PrioridadeController implements PrioridadeControllerOpenApi {
 
     @Autowired
     private PrioridadeService prioridadeService;
-
 
 
     @RequestMapping(value = "/criar", method = RequestMethod.POST)
@@ -42,7 +43,7 @@ public class PrioridadeController {
 
 
     @RequestMapping(value = "/excluir/{id}", method = RequestMethod.DELETE)
-    public PrioridadeDTO deletebyId(@PathVariable Long id) {
+    public PrioridadeDTO deleteById(@PathVariable Long id) {
         return this.prioridadeService.deleteById(id);
     }
 
@@ -53,4 +54,3 @@ public class PrioridadeController {
     }
 
 }
-

@@ -12,6 +12,7 @@ import java.util.Optional;
 
 @RestController
 public class TipoContoller implements TipoControllerOpenApi {
+
     @Autowired
     private TipoRepository tipoRepository;
 
