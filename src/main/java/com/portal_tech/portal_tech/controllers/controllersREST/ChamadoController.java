@@ -45,7 +45,7 @@ public class ChamadoController implements ChamadoControllerOpenApi {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT )
     public ChamadoDTO updateById(@PathVariable Long id, @RequestBody ChamadoDTO dto){
-        return this.chamadoService.UpdateById(id, dto);
+        return this.chamadoService.updateById(id, dto);
     }
 }
 

@@ -52,37 +52,17 @@
                             <th>Setor</th>
                             <th>Prioridade</th>
                             <th>Descrição</th>
-                            <th>Data da Finalização </th>
+                            <th>Data da Finalização</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        </tbody>
-                        <tbody>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        </tbody>
-                        <tbody>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                        <tr th:each="chamado : ${chamados}">
+                            <td th:text="${chamado.dt_abertura}">Data Abertura</td>
+                            <td th:text="${chamado.id_usuario.nome}">Usuario</td>
+                            <td th:text="${chamado.id_setor.nome}">Setor</td>
+                            <td th:text="${chamado.id_prioridade.nome}">Prioridade</td>
+                            <td th:text="${chamado.descricao}">Descrição</td>
+                            <td th:text="${chamado.dt_fim}">Data Fim</td>
                         </tr>
                         </tbody>
                     </table>
@@ -112,7 +92,5 @@
     </div>
 </footer>
 </body>
-
-</html>
 
 </html>
