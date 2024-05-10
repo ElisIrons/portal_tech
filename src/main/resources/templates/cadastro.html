@@ -38,7 +38,7 @@
             <span></span>
             <span></span>
             <span></span>
-            HOME
+            Entrar
         </a>
     </nav>
 </header>
@@ -48,45 +48,54 @@
         <div class="cadastro">
             <h1 class="cadastro-texto">Cadastro</h1>
             <div class="campo-cadastro">
-                <form method="post" action="rota controller" class="formCadastro">
+                <form method="post" action="rotaController" th:object="${pessoa}" class="formCadastro">
                     <div class="campo">
                         <fieldset>
                             <legend class="campo-legenda">
                                 Gostaria de se cadastrar como:
                             </legend>
-                            <label>
-                                <input
-                                        type="radio"
-                                        name="tipo"
-                                        value="usuario"
-                                        onclick="mostrarSetor()"
+                            <ul>
+                                <li>
+                                    <label>
+                                        <input
+                                                type="radio"
+                                                name="tipo"
+                                                th:field="{tipo}"
+                                                value="usuario"
+                                                onclick="mostrarSetor()"
 
-                                />Usuário
-                            </label>
-                            <label>
-                                <input
-                                        type="radio"
-                                        name="tipo"
-                                        value="técnico"
-                                        onclick="mostrarSetor()"
+                                        />Usuário
+                                    </label>
+                                </li>
+                                <li>
+                                    <label>
+                                        <input
+                                                type="radio"
+                                                name="tipo"
+                                                th:field="{tipo}"
+                                                value="técnico"
+                                                onclick="mostrarSetor()"
 
-                                />Técnico
-                            </label>
-                            <label>
-                                <input
-                                        type="radio"
-                                        name="tipo"
-                                        value="administrador"
-                                        onclick="mostrarSetor()"
-
-                                />Administrador
-                            </label>
+                                        />Técnico
+                                    </label>
+                                </li>
+                                <li>
+                                    <label>
+                                        <input
+                                                type="radio"
+                                                name="tipo"th:field="{tipo}"
+                                                value="administrador"
+                                                onclick="mostrarSetor()"
+                                        />Administrador
+                                    </label>
+                                </li>
+                            </ul>
                         </fieldset>
                     </div>
 
                     <div id="setorDiv" style="display: none">
                         <label for="setor">Setor:</label>
-                        <select name="setor" id="setor" class="setor">
+                        <select name="setor"th:field="{setor}" id="setor" class="setor">
                             <option value="Administrativo">Administrativo</option>
                             <option value="Marketing">Marketing</option>
                             <option value="Recursos Humanos">Recursos Humanos</option>
@@ -100,6 +109,7 @@
                                 type="text"
                                 id="nome"
                                 name="nome"
+                                th:field="{nome}"
                                 class="input-nome"
                                 required="required"
                                 placeholder="Digite seu nome completo"
@@ -111,6 +121,7 @@
                                 type="tel"
                                 id="telefone"
                                 name="telefone"
+                                th:field="{telefone}"
                                 class="input-telefone"
                                 required="required"
                                 placeholder="(DDD) telefone"
@@ -122,6 +133,7 @@
                                 type="email"
                                 id="email"
                                 name="email"
+                                th:field="{email}"
                                 class="input-email"
                                 required="required"
                                 placeholder="Digite seu e-mail"
@@ -133,19 +145,14 @@
                                 type="password"
                                 id="senha"
                                 name="senha"
+                                th:field="{senha}"
                                 class="input-senha"
                                 required="required"
                                 placeholder="Máximo 8 caracteres"
                         />
                     </div>
                     <div class="container-input-cadastrar">
-                        <a href="#">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                            Cadastrar
-                        </a>
+                        <button type="submit">Cadastrar</button>
                     </div>
 
                     <div class="login">
