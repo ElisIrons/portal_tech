@@ -22,7 +22,7 @@ public class SetorService {
         List<SetorDTO> setor = new ArrayList<>();
 
         SetorDTO setor1 = new SetorDTO();
-        setor1.setNome("SUPORTE");
+        setor1.setNome("Financeiro");
         setorRepository.save(SetorDTO.convert(setor1));
 
         return setor;
