@@ -28,10 +28,6 @@
         <img src="/styles/images/logo.jpeg" alt="logo Portal Tech"/>
     </div>
     <div class="titulo">
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
         <h1>Portal Tech</h1>
     </div>
     <nav class="cabecalhoMenu">
@@ -55,19 +51,28 @@
                         <div class="campo">
                             <fieldset>
                                 <legend class="campo-legenda"><strong>Gostaria de entrar como:</strong></legend>
-                                <label>
-                                    <input id="usuario" th:value="${usuario}" type="radio" name="devweb"
-                                           value="frontend"
-                                           checked>Usuário
-                                </label>
-                                <label>
-                                    <input id="tecnico" th:value="${tecnico}" type="radio" name="devweb"
-                                           value="backend">Técnico
-                                </label>
-                                <label>
-                                    <input id="administrador" th:value="${administrador}" type="radio" name="devweb"
-                                           value="backend">Administrador
-                                </label>
+                                <ul>
+                                    <li>
+                                        <label>
+                                            <input id="usuario" th:value="${usuario}" type="radio" name="devweb"
+                                                   value="frontend"
+                                                   checked>Usuário
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label>
+                                            <input id="tecnico" th:value="${tecnico}" type="radio" name="devweb"
+                                                   value="backend">Técnico
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label>
+                                            <input id="administrador" th:value="${administrador}" type="radio"
+                                                   name="devweb"
+                                                   value="backend">Administrador
+                                        </label>
+                                    </li>
+                                </ul>
                             </fieldset>
                         </div>
 
@@ -95,13 +100,7 @@
                         </div>
 
                         <div class="container-input-login">
-                            <a href="controller">
-                                <span></span>
-                                <span></span>
-                                <span></span>
-                                <span></span>
-                                Entrar
-                            </a>
+                            <button type="submit">Entrar</button>
                         </div>
 
                         <div class="registrar">
