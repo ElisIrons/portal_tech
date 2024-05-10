@@ -19,6 +19,10 @@ public class Prioridade {
 
     }
 
+    public Prioridade(Long id) {
+        this.id = id;
+    }
+
     // Construtor com argumento
     public Prioridade(String nome) {
         this.nome = nome;
