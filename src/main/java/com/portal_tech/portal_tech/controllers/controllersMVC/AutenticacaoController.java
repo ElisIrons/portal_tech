@@ -27,8 +27,8 @@ public class AutenticacaoController {
     public String loginSalvar(Model model, HttpServletRequest request, HttpServletResponse response, @RequestParam("email") String email, Pessoa pessoaParam, @RequestParam("senha") String senha) {
 
         Pessoa pessoa = this.pessoaRepository.verifyLogin(pessoaParam.getEmail(), pessoaParam.getSenha());//inf vindas do banco
-        if(pessoa != null){
-            Cookie cookie = new Cookie()
+        if(pessoa != null){ //o usuário esta cadastrado no banco
+
         }
 
         if(pessoa.getTipo().getNome().equals("Usuário")){
