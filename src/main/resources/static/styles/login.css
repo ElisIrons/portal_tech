@@ -42,10 +42,6 @@ body {
         0 0 550px #03e9f4;
 }
 
-.cabecalhoMenu {
-    display: flex;
-}
-
 .titulo {
     font-family: "Orbitron", sans-serif;
     letter-spacing: 5rem;
@@ -53,6 +49,10 @@ body {
     text-shadow: 0 0 29px #03e9f4;
     flex-grow:1;
     text-align: center;
+}
+
+.cabecalhoMenu {
+    display: flex;
 }
 
 .cabecalhoMenu a,
@@ -171,8 +171,8 @@ box-shadow: 0 0 10px #03e9f4, 0 0 50px #03e9f4, 0 0 100px #03e9f4, 0 0 200px #03
     align-items: center;
     margin-left: 8rem;
     height: 100px;
-    padding:1rem;
-    margin-top:265px;
+    padding:0.5rem;
+    margin-top:230px;
 }
 
 .img {
@@ -211,7 +211,7 @@ box-shadow: 0 0 10px #03e9f4, 0 0 50px #03e9f4, 0 0 100px #03e9f4, 0 0 200px #03
     -webkit-text-stroke: 0.5px #03e9f4;
     text-stroke: 0.5px #03e9f4;
     text-align: center;
-    margin-top: -10%;
+    margin-top: -20%;
     margin-bottom: 25px;
     padding-top: 0.5rem;
 }
@@ -298,21 +298,6 @@ a {
     color: var(--black-cor);
     font-style: italic;
 }
-
-
-.submit-input {
-    color: var(--black-cor);
-    width: 50%;
-    height: 40px;
-    font-size: 16px;
-    font-weight: 500;
-    border: 2px solid rgb(145, 32, 138);
-    border-radius: 30px;
-    cursor: pointer;
-    transition: 0.3s;
-    background-color: var(--segunda-cor);
-}
-
 
 .container-input-login {
     display:flex;
@@ -459,15 +444,16 @@ label[for="password"] {
 }
 
 .footer {
-    font-family: "Orbitron", sans-serif;
-    background: radial-gradient(100% 100% at bottom center,
-            rgb(145, 32, 138),
-            rgb(11, 22, 40));
-    padding: 0.1rem;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    margin-top:auto;
+  font-family: "Orbitron", sans-serif;
+  background: radial-gradient(
+    100% 100% at top center,
+    rgb(145, 32, 138),
+    rgb(9, 26, 79)
+  );
+  padding: 0.1rem;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
 }
 
 .footer-content {
@@ -497,3 +483,19 @@ label[for="password"] {
     padding: 5px;
 }
 
+@media screen and (min-width: 1728px){
+.home .container {
+    height: 100px;
+    padding:0.5rem;
+    margin-top:300px;
+}
+
+.img {
+    height: 51rem;
+    position: absolute;
+    top: 6rem;
+    margin-left:60rem;
+    border-radius:1rem;
+    opacity:50%;
+}
+}

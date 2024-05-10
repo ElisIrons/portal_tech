@@ -48,7 +48,7 @@ public class ChamadoService {
         return dto;
     }
 
-    public ChamadoDTO UpdateById(Long id, ChamadoDTO dto) {
+    public ChamadoDTO updateById(Long id, ChamadoDTO dto) {
         this.findById(id);
 
         Chamado chamado = dto.convert(dto);
