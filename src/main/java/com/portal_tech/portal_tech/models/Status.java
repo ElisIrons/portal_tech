@@ -14,10 +14,11 @@ public class Status {
     @Column (length = 30, nullable = false)
     private String nome;
 
-    //@OneToMany(mappedBy = "id_status")
-    //private List<Chamado> chamados;
-
     public Status() {
+    }
+
+    public Status(Long id) {
+        this.id = id;
     }
 
     public Long getId() {

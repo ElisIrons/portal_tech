@@ -26,15 +26,16 @@
         <img src="/styles/images/logo.jpeg" alt="logo Portal Tech" />
     </div>
     <div class="titulo">
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
         <h1>Portal Tech</h1>
     </div>
     <nav class="cabecalhoMenu">
-
-    </nav>
+        <a href="index.html">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            HOME
+        </a>
 </header>
 
 <section class="home">
@@ -56,6 +57,8 @@
                         </tr>
                         </thead>
                         <tbody>
+  
+
                         <tr th:each="chamado : ${chamados}">
                             <td th:text="${chamado.dt_abertura}">Data Abertura</td>
                             <td th:text="${chamado.id_usuario.nome}">Usuario</td>
@@ -63,7 +66,11 @@
                             <td th:text="${chamado.id_prioridade.nome}">Prioridade</td>
                             <td th:text="${chamado.descricao}">Descrição</td>
                             <td th:text="${chamado.dt_fim}">Data Fim</td>
+
+                            <td><a th:href="@{/usuario/chamado/{id}(id=${chamado.id})}">Detalhes</a></td>
+
                         </tr>
+
                         </tbody>
                     </table>
                 </div>
@@ -82,11 +89,11 @@
                 <img src="/styles/images/github.png" alt="GitHub Logo" class="github-img" />
             </div>
             <div class="github-links">
-                <a href="https://github.com/keilaarakaki">Keila Arakaki</a>
+                <a href="https://github.com/alineadcosta95">Aline Alves </a>
                 <a href="https://github.com/ElisIrons">Elis Rodrigues</a>
+                <a href="https://github.com/keilaarakaki">Keila Arakaki</a>
                 <a href="https://github.com/nayarakarinearaujo">Nayara Karine</a>
-                <a href="#">Thais Abe </a>
-                <a href="#">Aline Alves </a>
+                <a href="https://github.com/Thais-Abe">Thais Abe </a>
             </div>
         </div>
     </div>

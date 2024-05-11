@@ -1,6 +1,9 @@
 package com.portal_tech.portal_tech.controllers.controllersREST;
 
+import com.portal_tech.portal_tech.models.Setor;
+import com.portal_tech.portal_tech.models.Status;
 import com.portal_tech.portal_tech.models.dtos.SetorDTO;
+import com.portal_tech.portal_tech.repositores.SetorRepository;
 import com.portal_tech.portal_tech.services.SetorService;
 import com.portal_tech.portal_tech.swaggerDoc.SetorControllerOpenApi;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,16 +17,19 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/setor")
-public class SetorController implements SetorControllerOpenApi {
+public class SetorController{ //} implements SetorControllerOpenApi {
 
     @Autowired
     private SetorService setorService;
 
 
+    @Autowired
+    private SetorRepository setorRepository;
+
+
     @PostMapping("/cadastrar")
-    public List<SetorDTO> save(){
-        List<SetorDTO> setor = new ArrayList<>();
-        return setor;
+    public Setor save(@RequestBody Setor setor){
+        return setorRepository.save(setor);
     }
 
     @GetMapping("/mostrar/{id}")
