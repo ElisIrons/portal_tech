@@ -56,6 +56,9 @@
                             </legend>
                             <ul>
                                 <li th:each="optionTipo : ${radioTipoOptions}">
+                                    <p></p>
+                                </li>
+                                <li>
                                     <label>
                                         <input
                                                 th:checked="${optionTipo == 'Usuário'}"
@@ -91,12 +94,10 @@
                                     </label>
                                 </li>
                             </ul>
-                        </fieldset>
-                    </div>
+<!--                        </fieldset>-->
+<!--                    </div>-->
 
                     <div id="setorDiv" style="display: none">
-<!--                        <ul>-->
-<!--                            <li th:each="optionSetor : ${selectSetorOptions}">-->
                                 <label for="setor">Setor:</label>
                                 <select name="setor" id="setor" class="setor" th:each="optionSetor : ${selectSetorOptions}">
                                     <option value="Administrativo"  name="setor"  th:value="${optionSetor}" th:checked="${optionSetor == 'Administrativo' }" ></option>
@@ -104,14 +105,15 @@
                                     <option value="Recursos Humanos" name="setor"  th:value="${optionSetor}" th:checked="${optionSetor == 'Recursos Humanos'}">Recursos Humanos</option>
                                     <option value="Suporte" name="setor" th:value="${optionSetor}" th:checked="${optionSetor == 'Suporte'}" >Suporte</option>
                                 </select>
-<!--                            </li>-->
-<!--                        </ul>-->
                     </div>
+                    </fieldset>
+            </div>
+
 
                     <div>
                         <label for="nome">Nome completo:</label>
                         <input
-                                th:value="${nome}"
+                                th:text="${nome}"
                                 type="text"
                                 id="nome"
                                 name="nome"

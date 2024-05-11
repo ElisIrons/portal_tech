@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org" xmlns:divth="http://www.w3.org/1999/html">
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -47,6 +47,7 @@
             <section class="login-box">
                 <h1 class="login-texto">Login</h1>
                 <div class="campo-login">
+
                     <form method="post" class="formLogin">
                         <div class="campo">
                             <fieldset>
@@ -84,8 +85,8 @@
 
                         <div>
                             <label for="password">Senha</label> <!-- Rótulo do campo senha -->
-                            <input type="password" id="password" th:value="${password}" class="input-senha"
-                                   name="password"
+                            <input type="password" id="password" th:value="${senha}" class="input-senha"
+                                   name="senha"
                                    placeholder="Digite sua senha:"/>
 
                         </div>
@@ -100,6 +101,7 @@
                         </div>
 
                         <div class="container-input-login">
+                            <div th:if="${erro != null}" th:text="${erro}"  class="alert alert-danger" role="alert" style="color: white;"></div>
                             <button type="submit">Entrar</button>
                         </div>
 

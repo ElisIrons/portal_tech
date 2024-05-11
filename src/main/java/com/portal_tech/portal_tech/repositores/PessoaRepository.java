@@ -10,4 +10,5 @@ public interface PessoaRepository extends JpaRepository<Pessoa, Long> {
     //Método para fazer a validação de email no banco de dados
     @Query(value = "select * from pessoa where email = :email and senha = :senha", nativeQuery = true)
     public Pessoa verifyLogin(String email, String senha);
+
 }
