@@ -52,7 +52,6 @@ public String loginSalvar(Model model, HttpServletRequest request, HttpServletRe
 }
 
 
-
 //Falta arrumar este código para deixar mais enxuto nos parametros
 @RequestMapping(value = "/cadastro", method = RequestMethod.POST)
 public String cadastrar(Model model, HttpServletRequest request, @RequestParam("nome") String nome, @RequestParam("telefone") String telefone, @RequestParam("email") String email, @RequestParam("senha") String senha) {

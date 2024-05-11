@@ -38,9 +38,11 @@ public class AutenticacaoService {
 
         List<Setor> listOfSetor = this.setorRepository.findAll();
 
+
         model.addAttribute("optionTipo", listOfTypes);
 
         model.addAttribute("radioSetorOptions", listOfSetor );
+
 
         String tipoSelected = request.getParameter("tipo");
 
@@ -74,6 +76,30 @@ public class AutenticacaoService {
         String pessoaName = pessoa.getNome();
         long pessoaTipoID = (long) pessoa.getTipo().getId();//tenho o id da pessoa
 
+        String tipoPessoa = getTipoName(pessoaTipoID);
+        
+        // cria uma sessão e define o usuário como logado, armazenando as informações do usuário logado em cache
+        createSession(request, pessoa);
+
+        if (pessoa != null && tipoPessoa.equals("Usuário")) { //o usuário esta cadastrado no banco
+            return "redirect:/index/usuario/" + pessoaID + pessoaName;
+        } else if(pessoa != null && tipoPessoa.equals("Técnico")) {
+            return "redirect:/index/tecnico/" + pessoaID + pessoaName;
+
+        } else if(pessoa != null && equals("Administrador")){
+            return "redirect:/index/tecnico/" + pessoaID + pessoaName;
+        }else{
+            model.addAttribute("erro", "Usuário ou senhas inválidos");//mensagem de erro na tela de login
+            return "/login";
+        }
+    }
+
+    private static void createSession(HttpServletRequest request, Pessoa pessoa) {
+        HttpSession session = request.getSession();
+        session.setAttribute("cache", pessoa);
+    }
+
+    private String getTipoName(long pessoaTipoID) {
         List<Tipo> listTipo = this.tipoRepository.findAll();
         long tipoPessoaID = 0;
         String tipoPessoa = "";
@@ -84,20 +110,6 @@ public class AutenticacaoService {
             }
 
         }
-        // cria uma sessão e define o usuário como logado, armazenando as informações do usuário logado em cache
-        HttpSession session = request.getSession();
-        session.setAttribute("cache", pessoa);
-
-        if (pessoa != null && tipoPessoa.equals("Usuário")) { //o usuário esta cadastrado no banco
-            return "redirect:/index/usuario/" + pessoaID;
-        } else if(pessoa != null && tipoPessoa.equals("Técnico")) {
-            return "redirect:/index/tecnico/" + pessoaID;
-
-        } else if(pessoa != null && equals("Administrador")){
-            return "redirect:/index/tecnico/" + pessoaID;
-        }else{
-            model.addAttribute("erro", "Usuário ou senhas inválidos");//mensagem de erro na tela de login
-            return "/login";
-        }
+        return tipoPessoa;
     }
 }
