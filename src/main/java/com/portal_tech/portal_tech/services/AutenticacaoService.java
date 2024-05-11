@@ -8,9 +8,12 @@ import com.portal_tech.portal_tech.repositores.PessoaRepository;
 import com.portal_tech.portal_tech.repositores.SetorRepository;
 import com.portal_tech.portal_tech.repositores.TipoRepository;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
@@ -37,12 +40,9 @@ public class AutenticacaoService {
 
         model.addAttribute("optionTipo", listOfTypes);
 
-//        List<String> radioSetorOptions = Arrays.asList("Administrativo", "Marketing", "Recursos Humanos", "Suporte");
         model.addAttribute("radioSetorOptions", listOfSetor );
 
         String tipoSelected = request.getParameter("tipo");
-
-
 
         Pessoa pessoa = getPessoa(nome, telefone, email, senha, tipoSelected);
         this.pessoaRepository.save(pessoa);
@@ -63,5 +63,41 @@ public class AutenticacaoService {
         pessoa.setEmail(email);
         pessoa.setSenha(senha);
         return pessoa;
+    }
+
+
+    public String loginSalvar(Model model, HttpServletRequest request, HttpServletResponse response,  String email, Pessoa pessoaParam,String senha) {
+        Pessoa pessoa = pessoaRepository.verifyLogin(email, senha);//inf vindas do banco, valida se o email e a senha existem no banco
+
+//        Pessoa pessoa = pessoaRepository.verifyLogin(pessoaParam.getEmail(), pessoaParam.getSenha());//inf vindas do banco, valida se o email e a senha existem no banco
+        long pessoaID = pessoa.getId();
+        String pessoaName = pessoa.getNome();
+        long pessoaTipoID = (long) pessoa.getTipo().getId();//tenho o id da pessoa
+
+        List<Tipo> listTipo = this.tipoRepository.findAll();
+        long tipoPessoaID = 0;
+        String tipoPessoa = "";
+        for(Tipo tipo : listTipo){
+            tipoPessoaID = tipo.getId();
+            if(tipoPessoaID == pessoaTipoID){
+                tipoPessoa = tipo.getNome();
+            }
+
+        }
+        // cria uma sessão e define o usuário como logado, armazenando as informações do usuário logado em cache
+        HttpSession session = request.getSession();
+        session.setAttribute("cache", pessoa);
+
+        if (pessoa != null && tipoPessoa.equals("Usuário")) { //o usuário esta cadastrado no banco
+            return "redirect:/index/usuario/" + pessoaID;
+        } else if(pessoa != null && tipoPessoa.equals("Técnico")) {
+            return "redirect:/index/tecnico/" + pessoaID;
+
+        } else if(pessoa != null && equals("Administrador")){
+            return "redirect:/index/tecnico/" + pessoaID;
+        }else{
+            model.addAttribute("erro", "Usuário ou senhas inválidos");//mensagem de erro na tela de login
+            return "/login";
+        }
     }
 }
