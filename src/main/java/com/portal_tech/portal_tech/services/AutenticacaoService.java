@@ -3,6 +3,7 @@ package com.portal_tech.portal_tech.services;
 import com.portal_tech.portal_tech.models.Pessoa;
 import com.portal_tech.portal_tech.models.Setor;
 import com.portal_tech.portal_tech.models.Tipo;
+import com.portal_tech.portal_tech.models.dtos.PessoaDTO;
 import com.portal_tech.portal_tech.repositores.PessoaRepository;
 import com.portal_tech.portal_tech.repositores.SetorRepository;
 import com.portal_tech.portal_tech.repositores.TipoRepository;
@@ -41,9 +42,11 @@ public class AutenticacaoService {
 
         String tipoSelected = request.getParameter("tipo");
 
+
+
         Pessoa pessoa = getPessoa(nome, telefone, email, senha, tipoSelected);
         this.pessoaRepository.save(pessoa);
-        return "/login";
+        return "redirect:/login";
 }
 
     private static Pessoa getPessoa(String nome, String telefone, String email, String senha, String tipoSelected) {

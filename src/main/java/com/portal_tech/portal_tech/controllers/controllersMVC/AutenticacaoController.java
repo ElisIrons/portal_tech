@@ -34,7 +34,6 @@ public class AutenticacaoController {
     public String login() {
         return "/login";
     }
-
     @RequestMapping(value = "/cadastro", method = RequestMethod.GET)
     public String cadastrar() {
         return "/cadastro";
