@@ -36,6 +36,7 @@
             <span></span>
             HOME
         </a>
+    </nav>
 </header>
 
 <section class="home">
@@ -60,14 +61,15 @@
   
 
                         <tr th:each="chamado : ${chamados}">
-                            <td th:text="${chamado.dt_abertura}">Data Abertura</td>
+<!--                            <td th:text="${chamado.dt_abertura}">Data Abertura</td>-->
+                            <td th:text="${dtFormatada}">Data Abertura</td>
                             <td th:text="${chamado.id_usuario.nome}">Usuario</td>
-                            <td th:text="${chamado.id_setor.nome}">Setor</td>
+                            <td th:text="${chamado.id_usuario.setor.nome}">Setor</td>-->
                             <td th:text="${chamado.id_prioridade.nome}">Prioridade</td>
                             <td th:text="${chamado.descricao}">Descrição</td>
                             <td th:text="${chamado.dt_fim}">Data Fim</td>
 
-                            <td><a th:href="@{/usuario/chamado/{id}(id=${chamado.id})}">Detalhes</a></td>
+                            <td><a th:href="@{'/usuario/chamado/' + ${chamado.id}}">Detalhes</a></td>
 
                         </tr>
 

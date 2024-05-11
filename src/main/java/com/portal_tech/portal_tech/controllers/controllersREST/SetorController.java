@@ -17,7 +17,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/setor")
-public class SetorController{ //} implements SetorControllerOpenApi {
+public class SetorController { //implements SetorControllerOpenApi {
 
     @Autowired
     private SetorService setorService;
