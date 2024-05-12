@@ -46,10 +46,19 @@ public class AutenticacaoController {
     }
 
 //Falta implementar lógica para redirecionar os usuarios para pags certas. Se tiver, add as exceções
-@RequestMapping(value = "/login", method = RequestMethod.POST)
-public String loginSalvar(Model model, HttpServletRequest request, HttpServletResponse response, @RequestParam("email") String email, Pessoa pessoaParam, @RequestParam("senha") String senha) {
-    return this.autenticacaoService.loginSalvar(model, request, response, email, pessoaParam, senha);
-}
+
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public String loginSalvar(Model model, HttpServletRequest request, HttpServletResponse response, @RequestParam("email") String email, Pessoa pessoaParam, @RequestParam("senha") String senha) {
+
+
+        Pessoa pessoa = pessoaRepository.verifyLogin(pessoaParam.getEmail(), pessoaParam.getSenha());//inf vindas do banco
+        if (pessoa != null) { //o usuário esta cadastrado no banco
+            return "redirect:/tela-usuario";
+        } else {
+            model.addAttribute("erro", "Usuário ou senhas inválidos");//mensagem de erro na tela de login
+            return "/login";
+        }
+    }
 
 
 //Falta arrumar este código para deixar mais enxuto nos parametros

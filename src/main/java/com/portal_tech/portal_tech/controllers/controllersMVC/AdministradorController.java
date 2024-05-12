@@ -6,62 +6,50 @@ import com.portal_tech.portal_tech.models.Prioridade;
 import com.portal_tech.portal_tech.models.Setor;
 import com.portal_tech.portal_tech.models.Status;
 import com.portal_tech.portal_tech.models.Tipo;
+import com.portal_tech.portal_tech.models.dtos.ChamadoDTO;
+import com.portal_tech.portal_tech.models.dtos.PessoaDTO;
 import com.portal_tech.portal_tech.repositores.ChamadoRepository;
 import com.portal_tech.portal_tech.repositores.PessoaRepository;
 import com.portal_tech.portal_tech.repositores.PrioridadeRepository;
 import com.portal_tech.portal_tech.repositores.SetorRepository;
 import com.portal_tech.portal_tech.repositores.StatusRepository;
 import com.portal_tech.portal_tech.repositores.TipoRepository;
+import com.portal_tech.portal_tech.services.ChamadoService;
+import com.portal_tech.portal_tech.services.PessoaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
 public class AdministradorController {
 
-    private final ChamadoRepository chamadoRepository;
-    private final PessoaRepository pessoaRepository;
-    private final PrioridadeRepository prioridadeRepository;
-    private final SetorRepository setorRepository;
-    private final StatusRepository statusRepository;
-    private final TipoRepository tipoRepository;
+@Autowired
+    private PessoaService pessoaService;
+@Autowired
+    private ChamadoService chamadoService;
 
-    @Autowired
-    public AdministradorController
-        (ChamadoRepository chamadoRepository,
-         PessoaRepository pessoaRepository,
-         PrioridadeRepository prioridadeRepository,
-         SetorRepository setorRepository,
-         StatusRepository statusRepository,
-         TipoRepository tipoRepository) {
-        this.chamadoRepository = chamadoRepository;
-        this.pessoaRepository = pessoaRepository;
-        this.prioridadeRepository = prioridadeRepository;
-        this.setorRepository = setorRepository;
-        this.statusRepository = statusRepository;
-        this.tipoRepository = tipoRepository;
+@GetMapping("/adminpainel")
+    public String adminPainel(Model model){
+    List<ChamadoDTO> chamadoDTO = chamadoService.findAllChamados();
+    model.addAttribute("chamados", chamadoDTO);
+
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    List<String> dataFormatada = new ArrayList<>();
+    for (ChamadoDTO chamado : chamadoDTO){
+        LocalDate dtAbertura = chamado.getDt_abertura();
+        String dtFormatada = dtAbertura.format(formatter);
+        dataFormatada.add(dtFormatada);
     }
+    model.addAttribute("dtFormata", dataFormatada);
+    return "usuario.admin";
 
-    @GetMapping("/adminpanel")
-    public String adminPanel(Model model) {
-        List<Chamado> chamados = chamadoRepository.findAll();
-        List<Pessoa> pessoas = pessoaRepository.findAll();
-        List<Prioridade> prioridades = prioridadeRepository.findAll();
-        List<Setor> setores = setorRepository.findAll();
-        List<Status> status = statusRepository.findAll();
-        List<Tipo> tipos = tipoRepository.findAll();
-
-        model.addAttribute("chamados", chamados);
-        model.addAttribute("pessoas", pessoas);
-        model.addAttribute("prioridades", prioridades);
-        model.addAttribute("setores", setores);
-        model.addAttribute("status", status);
-        model.addAttribute("tipos", tipos);
-
-        return "adminpanel";
-
-            }
 }
+
+}
+

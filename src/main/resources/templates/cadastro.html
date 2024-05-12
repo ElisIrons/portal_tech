@@ -22,23 +22,23 @@
     />
 
     <title>Portal Tech</title>
-    <link rel="icon" href="/static/styles/images/logo.jpeg"/>
+    <link rel="icon" href="/styles/images/logo.jpeg"/>
 </head>
 <body>
 <header class="cabecalho">
     <div class="logo">
-        <img src="/static/styles/images/logo.jpeg" alt="logo Portal Tech"/>
+        <img src="/styles/images/logo.jpeg" alt="logo Portal Tech"/>
     </div>
     <div class="titulo">
         <h1>Portal Tech</h1>
     </div>
     <nav class="cabecalhoMenu">
-        <a href="index.html">
+        <a href="/">
             <span></span>
             <span></span>
             <span></span>
             <span></span>
-            Entrar
+            HOME
         </a>
     </nav>
 </header>
@@ -56,17 +56,16 @@
                             </legend>
                             <ul>
                                 <li th:each="optionTipo : ${radioTipoOptions}">
-                                    <p></p>
                                 </li>
-                                <li>
+                              <li>
                                     <label>
                                         <input
-                                                th:checked="${optionTipo == 'Usuário'}"
+                                                th:checked="${optionTipo == Usuário}"
                                                 type="radio"
                                                 name="tipo"
                                                 value="Usuário"
                                                 onclick="mostrarSetor()"
-                                                required
+                                               
 
                                         />Usuário
                                     </label>
@@ -74,46 +73,42 @@
                                 <li>
                                     <label>
                                         <input
-                                               th:checked="${optionTipo == 'Técnico'}"
+                                               th:checked="${optionTipo == Técnico}"
                                                 type="radio"
                                                 name="tipo"
                                                 value="Técnico"
                                                 onclick="mostrarSetor()"
-                                               required
-
+                                            
                                         />Técnico
                                     </label>
                                 </li>
                                 <li>
                                     <label>
                                         <input
-                                                th:checked="${optionTipo == 'Administrador'}"
+                                                th:checked="${optionTipo == Administrador}"
                                                 type="radio"
                                                 name="tipo"
                                                 value="Administrador"
                                                 onclick="mostrarSetor()"
-                                                required
+                                          
                                         />Administrador
                                     </label>
                                 </li>
                             </ul>
-<!--                        </fieldset>-->
-<!--                    </div>-->
+                       </fieldset>
+                  </div>
 
                     <div id="setorDiv" style="display: none">
-                                <label for="setor">Setor:</label>
-                                <label name="setor" id="setor" class="setor" th:each="optionSetor : ${selectSetorOptions}">  </label>
-                                <select>
-                                    <option value="Administrativo"  name="setor"  th:value="${optionSetor}" th:checked="${optionSetor == 'Administrativo' }"  ></option>
-                                    <option value="Marketing" name="setor" th:value="${optionSetor}" th:checked="${optionSetor == 'Marketing'}" >Marketing</option>
+
+                        <label th:each="optionSetor : ${selectSetorOptions}"></label>
+                                <label for="setor" >Setor:</label>
+                                <select name="setor" id="setor" class="setor">
+                                    <option value="Administrativo"  name="setor"  th:value="${optionSetor}" th:checked="${optionSetor == 'Administrativo' }" >Administrativo</option>
+                                    <option value="Marketing" name="setor" th:value="${optionSetor}" th:checked="${optionSetor == 'Marketing'}">Marketing</option>
                                     <option value="Recursos Humanos" name="setor"  th:value="${optionSetor}" th:checked="${optionSetor == 'Recursos Humanos'}">Recursos Humanos</option>
                                     <option value="Suporte" name="setor" th:value="${optionSetor}" th:checked="${optionSetor == 'Suporte'}" >Suporte</option>
                                 </select>
                     </div>
-                    </fieldset>
-            </div>
-
-
                     <div>
                         <label for="nome">Nome completo:</label>
                         <input
@@ -170,7 +165,7 @@
                     <div class="login">
                         <p>
                             Já tem uma conta?
-                            <a href="login.html">Login</a>
+                            <a href="/login">Login</a>
                         </p>
                     </div>
                 </form>
@@ -185,7 +180,7 @@
         <div class="footer-content">
             <div class="github">
                 <img
-                        src="/static/styles/images/github.png"
+                        src="styles/images/github.png"
                         alt="GitHub Logo"
                         class="github-img"
                 />

@@ -33,7 +33,7 @@ public class UsuarioController {
     }
 
 
-    @GetMapping("/index/usuario")
+    @GetMapping("/tela-usuario")
     public String indexUsuario() {
         return "index.usuario";
     }
