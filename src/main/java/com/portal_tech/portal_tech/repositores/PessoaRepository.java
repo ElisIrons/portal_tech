@@ -11,4 +11,6 @@ public interface PessoaRepository extends JpaRepository<Pessoa, Long> {
     @Query(value = "select * from pessoa where email = :email and senha = :senha", nativeQuery = true)
     public Pessoa verifyLogin(String email, String senha);
 
+    @Query(value = "select * from pessoa where email = :email")
+    public Pessoa findEmail(String email);
 }
