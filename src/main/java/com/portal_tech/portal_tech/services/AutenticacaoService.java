@@ -88,12 +88,12 @@ public class AutenticacaoService {
         createSession(request, pessoa);
 
         if (pessoa != null && tipoPessoa.equals("Usuário")) { //o usuário esta cadastrado no banco
-            return "redirect:/index/usuario/" + pessoaID + pessoaName;
+            return "redirect:/index/usuario/" + pessoaID;
         } else if(pessoa != null && tipoPessoa.equals("Técnico")) {
-            return "redirect:/index/tecnico/" + pessoaID + pessoaName;
+            return "redirect:/index/tecnico/" + pessoaID;
 
         } else if(pessoa != null && equals("Administrador")){
-            return "redirect:/index/tecnico/" + pessoaID + pessoaName;
+            return "redirect:/index/tecnico/" + pessoaID;
         }else{
             model.addAttribute("erro", "Usuário ou senhas inválidos");//mensagem de erro na tela de login
             return "/login";
