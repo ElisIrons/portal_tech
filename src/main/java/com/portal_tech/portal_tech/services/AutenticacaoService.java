@@ -13,11 +13,7 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -46,9 +42,19 @@ public class AutenticacaoService {
 
         String tipoSelected = request.getParameter("tipo");
 
-        Pessoa pessoa = getPessoa(nome, telefone, email, senha, tipoSelected);
-        this.pessoaRepository.save(pessoa);
-        return "redirect:/login";
+        Pessoa pessoaEmail = this.pessoaRepository.findEmail(email);
+
+        if (pessoaEmail == null) {
+            Pessoa pessoa = getPessoa(nome, telefone, email, senha, tipoSelected);
+            this.pessoaRepository.save(pessoa);
+            return "redirect:/login";
+        }else {
+            model.addAttribute("erro", "Email já cadastrado!");
+            return "/cadastro";
+        }
+
+
+
 }
 
     private static Pessoa getPessoa(String nome, String telefone, String email, String senha, String tipoSelected) {
