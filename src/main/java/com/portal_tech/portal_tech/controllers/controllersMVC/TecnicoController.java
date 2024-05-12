@@ -1,6 +1,5 @@
 package com.portal_tech.portal_tech.controllers.controllersMVC;
 
-import com.portal_tech.portal_tech.models.Chamado;
 import com.portal_tech.portal_tech.models.dtos.ChamadoDTO;
 import com.portal_tech.portal_tech.services.ChamadoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,14 +18,14 @@ public class TecnicoController {
     @Autowired
     private ChamadoService chamadoService;
 
-    @GetMapping ("index/tecnico")
+    @GetMapping ("/tecnico")
     public String indexUsuario(Model model){
         List<ChamadoDTO> chamadoDTO =  chamadoService.findAllChamados();                                      //this.chamadoService.findAllChamados();
         model.addAttribute("chamados", chamadoDTO);
         return "index.tecnico";//"index.tecnico";
     }
 
-    @GetMapping ("usuario.chamados")
+    @GetMapping ("tecnico/chamados")
     public String findAllChamados(Model model){
         List<ChamadoDTO> chamadoDTO =  chamadoService.findAllChamados();
         model.addAttribute("chamados", chamadoDTO);
@@ -54,7 +53,7 @@ public class TecnicoController {
         return "usuario.chamados";
     }
 
-    @PostMapping("/{id}")
+    @PostMapping("/usuario/{id}")
     public String updateById(@PathVariable Long id, @ModelAttribute("chamadoDTO") ChamadoDTO chamadoDTO){
         chamadoService.updateById(id, chamadoDTO);
         return "usuario/chamados"; //pra voltar pra tela de chamados - VER SE SERÁ MES TELA USUARIO

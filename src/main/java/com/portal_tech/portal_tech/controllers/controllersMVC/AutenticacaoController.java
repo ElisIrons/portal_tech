@@ -47,7 +47,7 @@ public class AutenticacaoController {
 
         Pessoa pessoa = pessoaRepository.verifyLogin(pessoaParam.getEmail(), pessoaParam.getSenha());//inf vindas do banco
         if (pessoa != null) { //o usuário esta cadastrado no banco
-            return "redirect:/index/usuario";
+            return "redirect:/tela-usuario";
         } else {
             model.addAttribute("erro", "Usuário ou senhas inválidos");//mensagem de erro na tela de login
             return "/login";
