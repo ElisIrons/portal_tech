@@ -42,12 +42,19 @@ public class AutenticacaoService {
 
         String tipoSelected = request.getParameter("tipo");
 
-        Pessoa pessoa = this.pessoaRepository.findEmail(email);
+        Pessoa pessoaEmail = this.pessoaRepository.findEmail(email);
+
+        if (pessoaEmail == null) {
+            Pessoa pessoa = getPessoa(nome, telefone, email, senha, tipoSelected);
+            this.pessoaRepository.save(pessoa);
+            return "redirect:/login";
+        }else {
+            model.addAttribute("erro", "Email já cadastrado!");
+            return "/cadastro";
+        }
 
 
-        Pessoa pessoa = getPessoa(nome, telefone, email, senha, tipoSelected);
-        this.pessoaRepository.save(pessoa);
-        return "redirect:/login";
+
 }
 
     private static Pessoa getPessoa(String nome, String telefone, String email, String senha, String tipoSelected) {
