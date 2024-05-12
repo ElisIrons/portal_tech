@@ -55,8 +55,9 @@
                                 Gostaria de se cadastrar como:
                             </legend>
                             <ul>
-                                <li th:each="optionTipo : ${radioTipoOptions}"></li>
-                                <li>
+                                <li th:each="optionTipo : ${radioTipoOptions}">
+                                </li>
+                              <li>
                                     <label>
                                         <input
                                                 th:checked="${optionTipo == Usuário}"
@@ -64,6 +65,7 @@
                                                 name="tipo"
                                                 value="Usuário"
                                                 onclick="mostrarSetor()"
+                                               
 
                                         />Usuário
                                     </label>
@@ -76,7 +78,7 @@
                                                 name="tipo"
                                                 value="Técnico"
                                                 onclick="mostrarSetor()"
-
+                                            
                                         />Técnico
                                     </label>
                                 </li>
@@ -88,14 +90,16 @@
                                                 name="tipo"
                                                 value="Administrador"
                                                 onclick="mostrarSetor()"
+                                          
                                         />Administrador
                                     </label>
                                 </li>
                             </ul>
-                        </fieldset>
-                    </div>
+                       </fieldset>
+                  </div>
 
                     <div id="setorDiv" style="display: none">
+
                         <label th:each="optionSetor : ${selectSetorOptions}"></label>
                                 <label for="setor" >Setor:</label>
                                 <select name="setor" id="setor" class="setor">
@@ -105,11 +109,10 @@
                                     <option value="Suporte" name="setor" th:value="${optionSetor}" th:checked="${optionSetor == 'Suporte'}" >Suporte</option>
                                 </select>
                     </div>
-
                     <div>
                         <label for="nome">Nome completo:</label>
                         <input
-                                th:value="${nome}"
+                                th:text="${nome}"
                                 type="text"
                                 id="nome"
                                 name="nome"
@@ -142,6 +145,7 @@
                                 placeholder="Digite seu e-mail"
                         />
                     </div>
+                    <div th:if="${erro != null}" th:text="${erro}"  class="alert alert-danger" role="alert"></div>
                     <div>
                         <label for="senha">Senha:</label>
                         <input
