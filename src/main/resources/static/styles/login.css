@@ -5,11 +5,14 @@
 }
 
 :root {
-
-    --primeira-cor: #c6c3c3;
-    --segunda-cor: #ffffff;
-    --black-cor: #000000;
+    --primeira-cor:#03e9f4;
+    --segunda-cor: #fff;
+    --black-cor: #000;
     --hover-cor: rgb(245, 207, 242);
+    --fonte-secundaria: "Orbitron", sans-serif;
+    --background-container: radial-gradient(100% 100% at bottom center,
+                                        rgb(145, 32, 138),
+                                        rgb(18, 28, 90), rgb(145, 32, 138));
 }
 
 
@@ -38,15 +41,15 @@ body {
     max-width: 5rem;
     height: auto;
     border-radius: 100px;
-    box-shadow: 1px 0 1px #03e9f4, 0 0 5px #03e9f4, 0 0 10px #03e9f4,
-        0 0 550px #03e9f4;
+    box-shadow: 1px 0 1px var(--primeira-cor), 0 0 5px var(--primeira-cor), 0 0 10px var(--primeira-cor),
+        0 0 550pxvar(--primeira-cor);
 }
 
 .titulo {
-    font-family: "Orbitron", sans-serif;
+    font-family: var(--fonte-secundaria);
     letter-spacing: 5rem;
-    color: #03e9f4;
-    text-shadow: 0 0 29px #03e9f4;
+    color: var(--primeira-cor);
+    text-shadow: 0 0 29px var(--primeira-cor);
     flex-grow:1;
     text-align: center;
 }
@@ -60,7 +63,7 @@ body {
     position: relative;
     display: inline-block;
     padding: 10px 20px;
-    color: #03e9f4;
+    color: var(--primeira-cor);
     font-size: 16px;
     text-decoration: none;
     text-transform: uppercase;
@@ -71,10 +74,10 @@ body {
 }
 
 .cabecalhoMenu a:hover {
-background: #03e9f4;
+background: var(--primeira-cor);
 color: #f1eee6;
 border-radius:5px;
-box-shadow: 0 0 10px #03e9f4, 0 0 50px #03e9f4, 0 0 100px #03e9f4, 0 0 200px #03e9f4;
+box-shadow: 0 0 10px var(--primeira-cor), 0 0 50px var(--primeira-cor), 0 0 100px var(--primeira-cor), 0 0 200px var(--primeira-cor);
 }
 
 .cabecalhoMenu a span {
@@ -87,7 +90,7 @@ box-shadow: 0 0 10px #03e9f4, 0 0 50px #03e9f4, 0 0 100px #03e9f4, 0 0 200px #03
   left: -100%;
   width: 100%;
   height: 2px;
-  background: linear-gradient(90deg, transparent, #03e9f4);
+  background: linear-gradient(90deg, transparent, var(--primeira-cor));
   animation: btn-anim1 1s linear infinite;
 }
 
@@ -95,9 +98,7 @@ box-shadow: 0 0 10px #03e9f4, 0 0 50px #03e9f4, 0 0 100px #03e9f4, 0 0 200px #03
     0% {
         left: -100%;
     }
-
-    50%,
-    100% {
+    50%, 100% {
         left: 100%;
     }
 }
@@ -107,7 +108,7 @@ box-shadow: 0 0 10px #03e9f4, 0 0 50px #03e9f4, 0 0 100px #03e9f4, 0 0 200px #03
     right: 0;
     width: 2px;
     height: 100%;
-    background: linear-gradient(180deg, transparent, #03e9f4);
+    background: linear-gradient(180deg, transparent, var(--primeira-cor));
     animation: btn-anim2 1s linear infinite;
     animation-delay: 0.25s;
 }
@@ -116,9 +117,7 @@ box-shadow: 0 0 10px #03e9f4, 0 0 50px #03e9f4, 0 0 100px #03e9f4, 0 0 200px #03
     0% {
         top: -100%;
     }
-
-    50%,
-    100% {
+    50%, 100% {
         top: 100%;
     }
 }
@@ -128,7 +127,7 @@ box-shadow: 0 0 10px #03e9f4, 0 0 50px #03e9f4, 0 0 100px #03e9f4, 0 0 200px #03
     tight: -100%;
     width: 100%;
     height: 2px;
-    background: linear-gradient(270deg, transparent, #03e9f4);
+    background: linear-gradient(270deg, transparent, var(--primeira-cor));
     animation: btn-anim3 1s linear infinite;
     animation-delay: 0.5s;
 }
@@ -137,9 +136,7 @@ box-shadow: 0 0 10px #03e9f4, 0 0 50px #03e9f4, 0 0 100px #03e9f4, 0 0 200px #03
     0% {
         right: -100%;
     }
-
-    50%,
-    100% {
+    50%, 100% {
         right: 100%;
     }
 }
@@ -149,7 +146,7 @@ box-shadow: 0 0 10px #03e9f4, 0 0 50px #03e9f4, 0 0 100px #03e9f4, 0 0 200px #03
     left: 0;
     width: 2px;
     height: 100%;
-    background: linear-gradient(360deg, transparent, #30e9f4);
+    background: linear-gradient(360deg, transparent, var(--primeira-cor));
     animation: btn-anim4 1s linear infinite;
     animation-dealy: 0.75s;
 }
@@ -158,9 +155,7 @@ box-shadow: 0 0 10px #03e9f4, 0 0 50px #03e9f4, 0 0 100px #03e9f4, 0 0 200px #03
     0% {
         bottom: -100%;
     }
-
-    50%,
-    100% {
+    50%, 100% {
         bottom: 100%;
     }
 }
@@ -198,18 +193,15 @@ box-shadow: 0 0 10px #03e9f4, 0 0 50px #03e9f4, 0 0 100px #03e9f4, 0 0 200px #03
     border-radius: 1rem;
     padding: 7.5em 2.5em 2em 2.5em;
     color: var(--segunda-cor);
-    background: radial-gradient(100% 100% at bottom center,
-            rgb(145, 32, 138),
-            rgb(18, 28, 90), rgb(145, 32, 138));
-
+    background: var(--background-container);
 }
 
 .login-texto {
-    font-family: "Orbitron", sans-serif;
+    font-family: var(--fonte-secundaria);
     font-size: 3rem;
     color: rgb(9, 26, 79);
-    -webkit-text-stroke: 0.5px #03e9f4;
-    text-stroke: 0.5px #03e9f4;
+    -webkit-text-stroke: 0.5px var(--primeira-cor);
+    text-stroke: 0.5px var(--primeira-cor);
     text-align: center;
     margin-top: -20%;
     margin-bottom: 25px;
@@ -331,11 +323,11 @@ a {
 }
 
 .container-input-login button:hover {
-  background: #03e9f4;
+  background: var(--primeira-cor);
   color: #f1eee6;
   border-radius: 5px;
-  box-shadow: 0 0 10px #03e9f4, 0 0 50px #03e9f4, 0 0 100px #03e9f4,
-    0 0 200px #03e9f4;
+  box-shadow: 0 0 10px var(--primeira-cor), 0 0 50px var(--primeira-cor), 0 0 100px var(--primeira-cor),
+    0 0 200px var(--primeira-cor);
 }
 
 .container-input-login #password #email {
@@ -368,7 +360,7 @@ label[for="password"] {
 }
 
 .footer {
-  font-family: "Orbitron", sans-serif;
+  font-family: var(--fonte-secundaria);
   background: radial-gradient(
     100% 100% at top center,
     rgb(145, 32, 138),
@@ -400,10 +392,10 @@ label[for="password"] {
 }
 
 .footer a:hover {
-    background: #03e9f4;
-    color: #f1eee6;
+    background:var(--primeira-cor);
+    color: var(--segunda-cor);
     border-radius: 2px;
-    box-shadow: 0 0 50px #03e9f4;
+    box-shadow: 0 0 50px var(--primeira-cor);
     padding: 5px;
 }
 

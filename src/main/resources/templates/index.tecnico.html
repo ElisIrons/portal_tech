@@ -75,6 +75,7 @@
                             <td>
                             </td>
                             <td>
+                                <label th:each="optionPrioridade : ${selectPrioridadeOptions}"></label>
                                 <select id="status" name="status">
                                     <option value="em-analise">Em análise</option>
                                     <option value="aguardando">Aguardando técnico</option>
