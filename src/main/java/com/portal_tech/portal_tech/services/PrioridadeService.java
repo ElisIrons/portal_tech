@@ -4,6 +4,8 @@ import com.portal_tech.portal_tech.models.Prioridade;
 import com.portal_tech.portal_tech.models.dtos.PrioridadeDTO;
 import com.portal_tech.portal_tech.repositores.PrioridadeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -39,33 +41,34 @@ public class PrioridadeService {
     }*/
 
 
-    public List<PrioridadeDTO> findAll(){
+    public ResponseEntity<List<PrioridadeDTO>> findAll(){
         List<Prioridade> prioridades = this.prioridadeRepository.findAll();
-        return prioridades.stream().map(PrioridadeDTO::new).collect(Collectors.toList());
+        List<PrioridadeDTO>listOfPrioridades = prioridades.stream().map(PrioridadeDTO::new).collect(Collectors.toList());
+        return new ResponseEntity<>(listOfPrioridades, HttpStatus.OK);
     }
 
 
-    public PrioridadeDTO findById(Long id) {
+    public ResponseEntity<PrioridadeDTO> findById(Long id) {
         Optional<Prioridade> resultado = this.prioridadeRepository.findById(id);
         if (resultado.isEmpty()) {
             throw new RuntimeException("Prioridade não encontrada.");
         } else {
-            return new PrioridadeDTO(resultado.get());
+            return new ResponseEntity<>( new PrioridadeDTO(resultado.get()), HttpStatus.OK);
         }
     }
 
-    public PrioridadeDTO deleteById(Long id) {
+    public ResponseEntity<String> deleteById(Long id) {
         PrioridadeDTO prioridade = findById(id);
         this.prioridadeRepository.deleteById(id);
-        return prioridade;
+        return new ResponseEntity<>("elemento deletado com sucesso", HttpStatus.OK)
     }
 
-    public PrioridadeDTO updateById(Long id, PrioridadeDTO dto) {
+    public ResponseEntity<PrioridadeDTO> updateById(Long id, PrioridadeDTO dto) {
         this.findById(id);
         Prioridade prioridade = PrioridadeDTO.convert(dto);
         prioridade.setId(id);
         prioridade= this.prioridadeRepository.save(prioridade);
-        return new PrioridadeDTO(prioridade);
+        return new ResponseEntity<>(new PrioridadeDTO(prioridade), HttpStatus.CREATED);
     }
 
 }

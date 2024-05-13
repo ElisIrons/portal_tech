@@ -9,28 +9,28 @@ import jakarta.persistence.ManyToOne;
 
 public record PessoaDTO( Long id, String nome, String email, String senha, String telefone, long tipo, long setor) {
 
-public Long id(){
-    return this.id;
-}
-public String nome(){
-    return this.nome;
+    public Long id(){
+        return this.id;
     }
-public String email(){
-    return this.email;
-}
-
-public String senha(){
-    return this.senha;
-}
-
-public String telefone(){
-    return this.telefone;
+    public String nome(){
+        return this.nome;
     }
-public long tipo(){
-    return this.tipo;
+    public String email(){
+        return this.email;
+    }
+
+    public String senha(){
+        return this.senha;
+    }
+
+    public String telefone(){
+        return this.telefone;
+    }
+    public long tipo(){
+        return this.tipo;
     }
 
     public long setor(){
-    return this.setor;
+        return this.setor;
     }
 }

@@ -3,7 +3,6 @@ package com.portal_tech.portal_tech.services;
 import com.portal_tech.portal_tech.models.Pessoa;
 import com.portal_tech.portal_tech.models.Setor;
 import com.portal_tech.portal_tech.models.Tipo;
-import com.portal_tech.portal_tech.models.dtos.PessoaDTO;
 import com.portal_tech.portal_tech.repositores.PessoaRepository;
 import com.portal_tech.portal_tech.repositores.SetorRepository;
 import com.portal_tech.portal_tech.repositores.TipoRepository;
@@ -37,15 +36,17 @@ public class AutenticacaoService {
 
         model.addAttribute("optionTipo", listOfTypes);
 
-        model.addAttribute("radioSetorOptions", listOfSetor );
+//        model.addAttribute("listSetorOptions", listOfSetor );
 
 
         String tipoSelected = request.getParameter("tipo");
 
+        String setorSelected = request.getParameter("setor");
+
         Pessoa pessoaEmail = this.pessoaRepository.findEmail(email);
 
         if (pessoaEmail == null) {
-            Pessoa pessoa = getPessoa(nome, telefone, email, senha, tipoSelected);
+            Pessoa pessoa = getPessoa(nome, telefone, email, senha, tipoSelected, setorSelected);
             this.pessoaRepository.save(pessoa);
             return "redirect:/login";
         }else {
@@ -57,14 +58,15 @@ public class AutenticacaoService {
 
 }
 
-    private static Pessoa getPessoa(String nome, String telefone, String email, String senha, String tipoSelected) {
+    private static Pessoa getPessoa(String nome, String telefone, String email, String senha, String tipoSelected, String setorSelected) {
         Pessoa pessoa = new Pessoa();
         Tipo tipo = new Tipo();
         tipo.setNome(tipoSelected);
-        pessoa.setTipo(tipo);
-
+        pessoa.setId(tipo.getId());
+        System.out.println(setorSelected);
         Setor setor = new Setor();
-        setor.setNome("Marketing");
+        setor.setNome(" ");
+        pessoa.setId(setor.getId());
 
         pessoa.setNome(nome);
         pessoa.setTelefone(telefone);
@@ -74,7 +76,7 @@ public class AutenticacaoService {
     }
 
 
-    public String loginSalvar(Model model, HttpServletRequest request, HttpServletResponse response,  String email, Pessoa pessoaParam,String senha) {
+    public String loginAuth(Model model, HttpServletRequest request, HttpServletResponse response,  String email, Pessoa pessoaParam,String senha) {
         Pessoa pessoa = pessoaRepository.verifyLogin(email, senha);//inf vindas do banco, valida se o email e a senha existem no banco
 
 //        Pessoa pessoa = pessoaRepository.verifyLogin(pessoaParam.getEmail(), pessoaParam.getSenha());//inf vindas do banco, valida se o email e a senha existem no banco
@@ -88,12 +90,12 @@ public class AutenticacaoService {
         createSession(request, pessoa);
 
         if (pessoa != null && tipoPessoa.equals("Usuário")) { //o usuário esta cadastrado no banco
-            return "redirect:/index/usuario/" + pessoaID + pessoaName;
+            return "redirect:/index/usuario/" + pessoaID;
         } else if(pessoa != null && tipoPessoa.equals("Técnico")) {
-            return "redirect:/index/tecnico/" + pessoaID + pessoaName;
+            return "redirect:/index/tecnico/" + pessoaID;
 
         } else if(pessoa != null && equals("Administrador")){
-            return "redirect:/index/tecnico/" + pessoaID + pessoaName;
+            return "redirect:/index/tecnico/" + pessoaID;
         }else{
             model.addAttribute("erro", "Usuário ou senhas inválidos");//mensagem de erro na tela de login
             return "/login";
