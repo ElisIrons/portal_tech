@@ -42,10 +42,23 @@ public class Chamado {
     private Long id_status;*/
 
     @ManyToOne(optional = true) //qdo abrir o chamado não terá prioridade, só após o adm ou técnico atribuírem
-    @JoinColumn(name = "id_prioridade", columnDefinition = "BIGINT DEFAULT 1")
+    @JoinColumn(name = "id_prioridade", referencedColumnName = "id", nullable = true, columnDefinition = "BIGINT DEFAULT 1")
     private Prioridade id_prioridade;
-
     public Chamado() {
+    }
+
+    @PrePersist
+    protected void prePersist(){
+        if(id_status == null){
+            id_status = new Status();
+            id_status.setId(1L);
+        }
+
+        if(id_prioridade == null){
+            id_prioridade = new Prioridade();
+            id_prioridade.setId(1L);
+        }
+
     }
 
     public Chamado(Long id) {

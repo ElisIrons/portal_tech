@@ -60,6 +60,17 @@
                         </tr>
                         </thead>
                         <tbody>
+                        <tr th:each="chamado, i : ${chamados}">
+                            <!-- <td th:text="${chamado.dt_abertura}">Data Abertura</td>-->
+                            <td th:text="${dtFormatada[i.index]}">Data Abertura</td>
+                            <td th:text="${chamado.id_usuario.nome}">Usuario</td>
+                            <td th:text="${chamado.id_usuario.setor.nome}">Setor</td>
+                            <td th:text="${chamado.id_prioridade.nome}">Prioridade</td>
+                            <td th:text="${chamado.descricao}">Descrição</td>
+<!--                            <td th:text="${chamado.id_status.nome}">TESTEEE</td>-->
+
+                            <td>   <label for="status">Status:</label><br>
+<!--                                <select id="status" name="status" required>
                         <tr>
                             <td></td>
                             <td></td>
@@ -82,9 +93,25 @@
                                     <option value="em-atendimento">Em atendimento</option>
                                     <option value="outro-setor">Escalado para outro setor</option>
                                     <option value="finalizado">Finalizado</option>
+                                </select></td>  -->
+
+
+                                <select id="status" name="status" required>
+                                    <option value="em-analise"  name="status" th:value="${optionStatus}" th:checked="${optionStatus == 'Em Amálise'}">Em análise</option>
+                                    <option value="aguardando" th:selected="${chamado.id_status.nome} == 'aguardando'">Aguardando técnico</option>
+                                    <option value="em-atendimento" th:selected="${chamado.id_status.nome == 'em-atendimento'}">Em atendimento</option>
+                                    <option value="outro-setor" th:selected="${chamado.id_status.nome == 'outro-setor'}">Escalado para outro setor</option>
+                                    <option value="em-analise" th:selected="${chamado.id_status.nome == 'em-analise'}">Em análise</option>
+                                    <option value="finalizado" th:selected="${chamado.id_status.nome == 'finalizado'}">Finalizado</option>
+                                    <option value="finalizado"  name="status" th:value="${optionStatus}" th:checked="${optionStatus == 'Finalizado'}">Finalizado</option>
+<!--                                    <option value="5" th:selected="${chamado.id_status == 5}">Finalizado</option>-->
                                 </select></td>
                             <td></td>
                             <td><button type="submit" class="botao-salvar">Salvar</button> </td>
+
+
+                            <td th:text="${chamado.dt_fim}">Data Fim</td>
+
                         </tr>
                         </tbody>
                     </table>
