@@ -36,7 +36,7 @@ public class AdministradorController {
 
 @GetMapping("/adminpainel")
     public String adminPainel(Model model){
-    List<ChamadoDTO> chamadoDTO = chamadoService.findAllChamados();
+    List<ChamadoDTO> chamadoDTO = (List<ChamadoDTO>) chamadoService.findAllChamados();
     model.addAttribute("chamados", chamadoDTO);
 
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -47,7 +47,7 @@ public class AdministradorController {
         dataFormatada.add(dtFormatada);
     }
     model.addAttribute("dtFormata", dataFormatada);
-    return "usuario.admin";
+    return "index.admin";
 
 }
 

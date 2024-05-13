@@ -1,7 +1,8 @@
 package com.portal_tech.portal_tech.controllers.controllersMVC;
 
 import com.portal_tech.portal_tech.models.dtos.ChamadoDTO;
-import com.portal_tech.portal_tech.services.ChamadoService;
+import com.portal_tech.portal_tech.services.ChamadoServiceFront;
+import com.portal_tech.portal_tech.swaggerDoc.TecnicoControllerOpenApi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,20 +15,21 @@ import java.util.List;
 
 @Controller
 
-public class TecnicoController {
+public class TecnicoController implements TecnicoControllerOpenApi {
+
     @Autowired
-    private ChamadoService chamadoService;
+    private ChamadoServiceFront chamadoServiceFront;
 
     @GetMapping ("/tecnico")
     public String indexUsuario(Model model){
-        List<ChamadoDTO> chamadoDTO =  chamadoService.findAllChamados();                                      //this.chamadoService.findAllChamados();
+        List<ChamadoDTO> chamadoDTO = chamadoServiceFront.findAllChamados().getBody();                                      //this.chamadoService.findAllChamados();
         model.addAttribute("chamados", chamadoDTO);
         return "index.tecnico";//"index.tecnico";
     }
 
     @GetMapping ("tecnico/chamados")
     public String findAllChamados(Model model){
-        List<ChamadoDTO> chamadoDTO =  chamadoService.findAllChamados();
+        List<ChamadoDTO> chamadoDTO = chamadoServiceFront.findAllChamados().getBody();
         model.addAttribute("chamados", chamadoDTO);
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -45,7 +47,7 @@ public class TecnicoController {
 
     @GetMapping ("/usuario/chamado/{id}")
     public String findById(@PathVariable("id") Long id, Model model){
-        ChamadoDTO chamadoDTO = chamadoService.findById(id);
+        ChamadoDTO chamadoDTO = chamadoServiceFront.findById(id).getBody();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         String dtFormatada = chamadoDTO.getDt_abertura().format(formatter);
         model.addAttribute("chamados", chamadoDTO);
@@ -55,7 +57,7 @@ public class TecnicoController {
 
     @PostMapping("/usuario/{id}")
     public String updateById(@PathVariable Long id, @ModelAttribute("chamadoDTO") ChamadoDTO chamadoDTO){
-        chamadoService.updateById(id, chamadoDTO);
+        chamadoServiceFront.updateById(id, chamadoDTO);
         return "usuario/chamados"; //pra voltar pra tela de chamados - VER SE SERÁ MES TELA USUARIO
     }
 

@@ -89,4 +89,5 @@ public class ChamadoService {
         List<Chamado> chamados = this.chamadoRepository.findAll();
         return chamados.stream().map(ChamadoDTO::new).collect(Collectors.toList());
     }
+
 }
