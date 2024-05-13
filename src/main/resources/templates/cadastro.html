@@ -101,14 +101,16 @@
 <!--                    </div>-->
 
                     <div id="setorDiv" style="display: none">
-                                <label for="setor">Setor:</label>
-                                <label name="setor" id="setor" class="setor" th:each="optionSetor : ${selectSetorOptions}">  </label>
-                                <select>
-                                    <option value="Administrativo"  name="setor"  th:value="${optionSetor}" th:checked="${optionSetor == 'Administrativo' }"  ></option>
-                                    <option value="Marketing" name="setor" th:value="${optionSetor}" th:checked="${optionSetor == 'Marketing'}" >Marketing</option>
-                                    <option value="Recursos Humanos" name="setor"  th:value="${optionSetor}" th:checked="${optionSetor == 'Recursos Humanos'}">Recursos Humanos</option>
-                                    <option value="Suporte" name="setor" th:value="${optionSetor}" th:checked="${optionSetor == 'Suporte'}" >Suporte</option>
-                                </select>
+<!--                                <label for="setor"  name="setor" id="setor" class="setor">Setor:</label>-->
+<!--                        <label for="setor" name="setor" id="setor" class="setor">Setor:</label>-->
+<!--                        <select  th:each="optionSetor : ${listOfOptions}"></select>-->
+<!--                        <select name="setor" >-->
+<!--                            <option th:value="${optionSetor}" th:text="${optionSetor}" th:checked="${optionSetor == 'Administrativo'}"></option>-->
+<!--                            <option value="Marketing" th:value="${Marketing}" th:checked="${optionSetor == 'Marketing'}">Marketing</option>-->
+<!--                            <option value="Recursos Humanos" th:value="${Recursos Humanos}" th:checked="${optionSetor == 'Recursos Humanos'}">Recursos Humanos</option>-->
+<!--                            <option value="Suporte" th:value="${Suporte" th:checked="${optionSetor == 'Suporte'}">Suporte</option>-->
+<!--                        </select>-->
+
                     </div>
                     </fieldset>
             </div>
