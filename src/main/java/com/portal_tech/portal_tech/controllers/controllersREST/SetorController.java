@@ -28,7 +28,7 @@ public class SetorController { //implements SetorControllerOpenApi {
 
 
     @PostMapping("/cadastrar")
-    public Setor save(@RequestBody Setor setor){
+    public ResponseEntity<Setor> save(@RequestBody Setor setor){
         return setorRepository.save(setor);
     }
 
