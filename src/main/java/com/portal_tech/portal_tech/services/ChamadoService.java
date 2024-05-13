@@ -8,6 +8,8 @@ import com.portal_tech.portal_tech.models.dtos.ChamadoDTO;
 import com.portal_tech.portal_tech.models.dtos.StatusDTO;
 import com.portal_tech.portal_tech.repositores.ChamadoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.format.DateTimeFormatter;
@@ -24,39 +26,34 @@ public class ChamadoService {
     @Autowired
     private StatusService statusService;
 
-    public ChamadoDTO save(ChamadoDTO dto) {
+    public ResponseEntity<ChamadoDTO> save(ChamadoDTO dto) {
         Chamado chamado =  ChamadoDTO.convert(dto);   //dto.convert(dto); // Chamar convert() usando a instância de ChamadoDTO
         System.out.println("chamado.getIdStatus() " + chamado.getIdStatus());
-        chamado = this.chamadoRepository.save(chamado);
-        return new ChamadoDTO(chamado);
+        //chamado = this.chamadoRepository.save(chamado);
+        return new ResponseEntity<>((new ChamadoDTO(chamado)), HttpStatus.CREATED);
     }
 
-    public List<ChamadoDTO> findAllChamados() {
+    public ResponseEntity<List<ChamadoDTO>> findAllChamados() {
         List<Chamado> chamados = this.chamadoRepository.findAll();
         if (chamados.isEmpty()){
             throw new RuntimeException("Não há chamados cadastrados!");
         }
         else {
+            List<ChamadoDTO>  listChamadoDTO= chamados.stream().map(ChamadoDTO::new).collect(Collectors.toList());
             //DateTimeFormatter dtFormatada = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-            return chamados.stream().map(ChamadoDTO::new).collect(Collectors.toList());//converte lst chamados em lst de chamados dto
+            return new ResponseEntity<>(listChamadoDTO, HttpStatus.OK);//converte lst chamados em lst de chamados dto
         }
     }
-    public ChamadoDTO findById(Long id) {
+
+
+    public ResponseEntity<ChamadoDTO> findById(Long id) {
         Optional<Chamado> optionalChamado = this.chamadoRepository.findById(id);
         if (optionalChamado.isPresent()) {
             Chamado chamado = optionalChamado.get();
-            return new ChamadoDTO(chamado);
-        }
-        else{
+            return new ResponseEntity<>(new ChamadoDTO(chamado), HttpStatus.OK);
+        } else {
             throw new RuntimeException("O chamado não foi encontrado! ID: " + id);
         }
-/*        if(chamado.isEmpty()){
-            throw new RuntimeException("O chamado não foi encontrado! ID: " + id);
-        }
-        else {
-            return new ChamadoDTO(chamado.get());
-        }*/
-
     }
 
     public List<ChamadoDTO> findById_Tecnico(Long id_tecnico) {
@@ -114,20 +111,20 @@ public class ChamadoService {
         }
     }
 
-    public ChamadoDTO deleteById(Long id) {
-        ChamadoDTO dto = findById(id);
+    public ResponseEntity<String> deleteById(Long id) {
         this.chamadoRepository.deleteById(id);
-        return dto;
+        return new ResponseEntity<>("chamado deletado com sucesso", HttpStatus.OK);
     }
 
-    public ChamadoDTO updateById(Long id, ChamadoDTO dto) {
+
+    public ResponseEntity<ChamadoDTO> updateById(Long id, ChamadoDTO dto) {
         this.findById(id);
 
         Chamado chamado = dto.convert(dto);
 
         chamado.setId(id);
         this.chamadoRepository.save(chamado);
-        return new ChamadoDTO(chamado);
+        return new ResponseEntity<>(new ChamadoDTO(chamado), HttpStatus.CREATED);
     }
 
     public List<Chamado> buscarChamados() {
