@@ -22,8 +22,21 @@ public class TecnicoController implements TecnicoControllerOpenApi {
 
     @GetMapping ("index/tecnico")
     public String findAllChamados(Model model){
-        List<ChamadoDTO> chamadoDTO =  chamadoService.findAllChamados();                                      //this.chamadoService.findAllChamados();
-    @GetMapping ("/tecnico")
+        List<ChamadoDTO> chamadoDTO =  chamadoServiceFront.findAllChamados().getBody();                                      //this.chamadoService.findAllChamados();
+        model.addAttribute("chamados", chamadoDTO);
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        List<String> dataFormatada = new ArrayList<>();
+        for (ChamadoDTO chamado : chamadoDTO){
+            LocalDate dtAbertura = chamado.getDt_abertura();
+            String dtFormatada = dtAbertura.format(formatter);
+            dataFormatada.add(dtFormatada);
+        }
+        model.addAttribute("dtFormatada", dataFormatada);
+
+        return "index.tecnico";
+    }
+     @GetMapping ("/tecnico")
     public String indexUsuario(Model model){
         List<ChamadoDTO> chamadoDTO = chamadoServiceFront.findAllChamados().getBody();                                      //this.chamadoService.findAllChamados();
         model.addAttribute("chamados", chamadoDTO);
@@ -62,7 +75,7 @@ public class TecnicoController implements TecnicoControllerOpenApi {
 
     @GetMapping ("/usuario/chamado/{id}")
     public String findById(@PathVariable("id") Long id, Model model){
-        ChamadoDTO chamadoDTO = chamadoService.findById(id);
+        ChamadoDTO chamadoDTO = chamadoServiceFront.findById(id).getBody();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         String dtFormatada = chamadoDTO.getDt_abertura().format(formatter);
         model.addAttribute("chamados", chamadoDTO);
@@ -72,7 +85,7 @@ public class TecnicoController implements TecnicoControllerOpenApi {
 
     @PostMapping("/{id}")
     public String updateById(@PathVariable Long id, @ModelAttribute("chamadoDTO") ChamadoDTO chamadoDTO){
-        chamadoService.updateById(id, chamadoDTO);
+        chamadoServiceFront.updateById(id, chamadoDTO);
         return "usuario/chamados"; //pra voltar pra tela de chamados - VER SE SERÁ MES TELA USUARIO
     }
 
