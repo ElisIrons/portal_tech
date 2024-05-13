@@ -56,6 +56,9 @@
                             </legend>
                             <ul>
                                 <li th:each="optionTipo : ${radioTipoOptions}">
+                                    <p></p>
+                                </li>
+                                <li>
                                     <label>
                                         <input
                                                 th:checked="${optionTipo == 'Usuário'}"
@@ -63,6 +66,7 @@
                                                 name="tipo"
                                                 value="Usuário"
                                                 onclick="mostrarSetor()"
+                                                required
 
                                         />Usuário
                                     </label>
@@ -75,6 +79,7 @@
                                                 name="tipo"
                                                 value="Técnico"
                                                 onclick="mostrarSetor()"
+                                               required
 
                                         />Técnico
                                     </label>
@@ -87,31 +92,34 @@
                                                 name="tipo"
                                                 value="Administrador"
                                                 onclick="mostrarSetor()"
+                                                required
                                         />Administrador
                                     </label>
                                 </li>
                             </ul>
-                        </fieldset>
-                    </div>
+<!--                        </fieldset>-->
+<!--                    </div>-->
 
                     <div id="setorDiv" style="display: none">
-<!--                        <ul>-->
-<!--                            <li th:each="optionSetor : ${selectSetorOptions}">-->
-                                <label for="setor">Setor:</label>
-                                <select name="setor" id="setor" class="setor" th:each="optionSetor : ${selectSetorOptions}">
-                                    <option value="Administrativo"  name="setor"  th:value="${optionSetor}" th:checked="${optionSetor == 'Administrativo' }" ></option>
-                                    <option value="Marketing" name="setor" th:value="${optionSetor}" th:checked="${optionSetor == 'Marketing'}">Marketing</option>
-                                    <option value="Recursos Humanos" name="setor"  th:value="${optionSetor}" th:checked="${optionSetor == 'Recursos Humanos'}">Recursos Humanos</option>
-                                    <option value="Suporte" name="setor" th:value="${optionSetor}" th:checked="${optionSetor == 'Suporte'}" >Suporte</option>
-                                </select>
-<!--                            </li>-->
-<!--                        </ul>-->
+<!--                                <label for="setor"  name="setor" id="setor" class="setor">Setor:</label>-->
+<!--                        <label for="setor" name="setor" id="setor" class="setor">Setor:</label>-->
+<!--                        <select  th:each="optionSetor : ${listOfOptions}"></select>-->
+<!--                        <select name="setor" >-->
+<!--                            <option th:value="${optionSetor}" th:text="${optionSetor}" th:checked="${optionSetor == 'Administrativo'}"></option>-->
+<!--                            <option value="Marketing" th:value="${Marketing}" th:checked="${optionSetor == 'Marketing'}">Marketing</option>-->
+<!--                            <option value="Recursos Humanos" th:value="${Recursos Humanos}" th:checked="${optionSetor == 'Recursos Humanos'}">Recursos Humanos</option>-->
+<!--                            <option value="Suporte" th:value="${Suporte" th:checked="${optionSetor == 'Suporte'}">Suporte</option>-->
+<!--                        </select>-->
+
                     </div>
+                    </fieldset>
+            </div>
+
 
                     <div>
                         <label for="nome">Nome completo:</label>
                         <input
-                                th:value="${nome}"
+                                th:text="${nome}"
                                 type="text"
                                 id="nome"
                                 name="nome"
@@ -144,6 +152,7 @@
                                 placeholder="Digite seu e-mail"
                         />
                     </div>
+                    <div th:if="${erro != null}" th:text="${erro}"  class="alert alert-danger" role="alert"></div>
                     <div>
                         <label for="senha">Senha:</label>
                         <input
@@ -163,7 +172,7 @@
                     <div class="login">
                         <p>
                             Já tem uma conta?
-                            <a href="login.html">Login</a>
+                            <a href="/login">Login</a>
                         </p>
                     </div>
                 </form>
@@ -201,7 +210,7 @@
        let setorDiv = document.getElementById("setorDiv");
        let inputs = document.querySelectorAll('.setor, .input-nome, .input-telefone, .input-email, .input-senha');
 
-       if (radio && radio.value === "usuario") {
+       if (radio && radio.value === "Usuário") {
            setorDiv.style.display = "block";
            inputs.forEach(input => {
                input.style.height = "30px";

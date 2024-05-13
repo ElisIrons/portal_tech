@@ -31,7 +31,7 @@
         <h1>Portal Tech</h1>
     </div>
     <nav class="cabecalhoMenu">
-        <a href="index.html">
+        <a href="/">
             <span></span>
             <span></span>
             <span></span>
@@ -47,6 +47,7 @@
             <section class="login-box">
                 <h1 class="login-texto">Login</h1>
                 <div class="campo-login">
+
                     <form method="post" class="formLogin">
                         <div class="campo">
                             <fieldset>
@@ -79,13 +80,15 @@
                         <div>
                             <label for="email">E-mail</label>
                             <input type="email" id="email" th:value="${email}" class="input-email" name="email"
+                                   required
                                    placeholder="Digite seu e-mail:"/>
                         </div>
 
                         <div>
                             <label for="password">Senha</label> <!-- Rótulo do campo senha -->
-                            <input type="password" id="password" th:value="${password}" class="input-senha"
-                                   name="password"
+                            <input type="password" id="password" th:value="${senha}" class="input-senha"
+                                   name="senha"
+                                   required
                                    placeholder="Digite sua senha:"/>
 
                         </div>
@@ -100,12 +103,13 @@
                         </div>
 
                         <div class="container-input-login">
+                            <div th:if="${erro != null}" th:text="${erro}"  class="alert alert-danger" role="alert" style="color: white;"></div>
                             <button type="submit">Entrar</button>
                         </div>
 
                         <div class="registrar">
                             <p>Ainda não tem uma conta?
-                                <a href="cadastro.html">Registrar</a>
+                                <a href="/cadastro">Registrar</a>
                             </p>
                         </div>
                     </form>

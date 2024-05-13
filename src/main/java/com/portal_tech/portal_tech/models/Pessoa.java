@@ -27,7 +27,7 @@ public class Pessoa {
     private Tipo tipo;
 
 
-//    @ManyToOne(optional = true) //opcional pois só Usuário terá setor
+    //    @ManyToOne(optional = true) //opcional pois só Usuário terá setor
     @ManyToOne(cascade=CascadeType.PERSIST, optional = true)
     @JoinColumn(name = "id_setor")
     private Setor setor;
@@ -120,5 +120,3 @@ public class Pessoa {
 //    public void setSetor(long idsetor) {
 //    }
 }
-
-

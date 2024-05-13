@@ -2,34 +2,33 @@
 <html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <link rel="stylesheet" type="text/css" href="/styles/usuario.chamado.css" />
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <link rel="stylesheet" type="text/css" href="/styles/usuario.chamado.css"/>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100..700&display=swap" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100..700&display=swap" rel="stylesheet"/>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
     <link
             href="https://fonts.googleapis.com/css2?family=Jersey+20&family=Orbitron:wght@400..900&family=Righteous&family=Roboto+Mono:wght@100..700&display=swap"
-            rel="stylesheet" />
+            rel="stylesheet"/>
 
     <title>Portal Tech</title>
-    <link rel="icon" href="styles/images/logo.jpeg" />
+    <link rel="icon" href="styles/images/logo.jpeg"/>
 </head>
 
 <body>
 <header class="cabecalho">
     <div class="logo">
-        <img src="/styles/images/logo.jpeg" alt="logo Portal Tech" />
+        <img src="styles/images/logo.jpeg" alt="logo Portal Tech"/>
     </div>
     <div class="titulo">
         <h1>Portal Tech</h1>
     </div>
     <nav class="cabecalhoMenu">
-        <!--<a href="/index.html">-->
         <a href="/">
             <span></span>
             <span></span>
@@ -56,7 +55,8 @@
                             <th>Prioridade</th>
                             <th>Descrição</th>
                             <th>Status</th>
-                            <th>Data da Finalização </th>
+                            <th>Data da Finalização</th>
+                            <th>Salvar</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -71,6 +71,23 @@
 
                             <td>   <label for="status">Status:</label><br>
 <!--                                <select id="status" name="status" required>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <label th:each="optionPrioridade : ${selectPrioridadeOptions}"></label>
+                                <select id="prioridade" name="prioridade">
+                                    <option value="baixa" name="prioridade" th:value="${optionPrioridade}" th:checked="${optionPrioridade == 'baixa' }"> Baixa</option>
+                                    <option value="media" name="prioridade" th:value="${optionPrioridade}" th:checked="${optionPrioridade == 'media' }">Média</option>
+                                    <option value="alta" name="prioridade" th:value="${optionPrioridade}" th:checked="${optionPrioridade == 'alta' }">Alta</option>
+                                </select>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                                <label th:each="optionPrioridade : ${selectPrioridadeOptions}"></label>
+                                <select id="status" name="status">
                                     <option value="em-analise">Em análise</option>
                                     <option value="aguardando">Aguardando técnico</option>
                                     <option value="em-atendimento">Em atendimento</option>
@@ -89,6 +106,8 @@
                                     <option value="finalizado"  name="status" th:value="${optionStatus}" th:checked="${optionStatus == 'Finalizado'}">Finalizado</option>
 <!--                                    <option value="5" th:selected="${chamado.id_status == 5}">Finalizado</option>-->
                                 </select></td>
+                            <td></td>
+                            <td><button type="submit" class="botao-salvar">Salvar</button> </td>
 
 
                             <td th:text="${chamado.dt_fim}">Data Fim</td>
@@ -97,9 +116,6 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="return-index" style="margin-top: 250px;">
-                    <!--index/usuario-->
-                    <p><a href="/"><img class="color-image" src="/styles/images/voltar.png" /></a>Voltar para tela inicial</p>
                 </div>
             </section>
         </main>
@@ -110,7 +126,7 @@
     <div class="container">
         <div class="footer-content">
             <div class="github">
-                <img src="/styles/images/github.png" alt="GitHub Logo" class="github-img" />
+                <img src="styles/images/github.png" alt="GitHub Logo" class="github-img"/>
             </div>
             <div class="github-links">
                 <a href="https://github.com/alineadcosta95">Aline Alves </a>
@@ -123,5 +139,4 @@
     </div>
 </footer>
 </body>
-
 </html>
