@@ -20,13 +20,24 @@ public class TecnicoController {
     private ChamadoService chamadoService;
 
     @GetMapping ("index/tecnico")
-    public String indexUsuario(Model model){
+    public String findAllChamados(Model model){
         List<ChamadoDTO> chamadoDTO =  chamadoService.findAllChamados();                                      //this.chamadoService.findAllChamados();
         model.addAttribute("chamados", chamadoDTO);
-        return "index.tecnico";//"index.tecnico";
-    }
 
-    @GetMapping ("usuario.chamados")
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        List<String> dataFormatada = new ArrayList<>();
+        for (ChamadoDTO chamado : chamadoDTO){
+            LocalDate dtAbertura = chamado.getDt_abertura();
+            String dtFormatada = dtAbertura.format(formatter);
+            dataFormatada.add(dtFormatada);
+        }
+        model.addAttribute("dtFormatada", dataFormatada);
+
+        return "index.tecnico";
+    }
+    // TECNICO NÃO EXCLUIRÁ NEM CRIARÁ NOVO CHAMADO
+
+/*    @GetMapping ("usuario.chamados")
     public String findAllChamados(Model model){
         List<ChamadoDTO> chamadoDTO =  chamadoService.findAllChamados();
         model.addAttribute("chamados", chamadoDTO);
@@ -40,7 +51,7 @@ public class TecnicoController {
         }
         model.addAttribute("dtFormatada", dataFormatada);
         return "usuario.chamados"; // PRECISA DO ID DO TECNICO PARA FILTRAR CHAMADOS DELE
-    }
+    }*/
     // TECNICO NÃO EXCLUIRÁ NEM CRIARÁ NOVO CHAMADO
 
 

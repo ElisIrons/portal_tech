@@ -10,15 +10,16 @@ insert into setor(nome) Select 'Marketing' where not exists (select 1 from setor
 insert into setor(nome) Select 'Suporte' where not exists (select 1 from setor where nome = 'Suporte');
 insert into setor(nome) Select ' ' where not exists (select 1 from setor where nome = ' ');
 
-insert into status(nome) Select 'Chamado Aberto' where not exists (select 1 from status where nome = 'Chamado Aberto');
-insert into status(nome) Select 'Em atendimento' where not exists (select 1 from status where nome = 'Em atendimento');
-insert into status(nome) Select 'Finalizado' where not exists (select 1 from status where nome = 'Finalizado');
-insert into status(nome) Select 'Cancelado' where not exists (select 1 from status where nome = 'Cancelado');
+insert into status(nome) Select 'Em análise' where not exists (select 1 from status where nome = 'Em análise');
 insert into status(nome) Select 'Aguardando técnico' where not exists (select 1 from status where nome = 'Aguardando técnico');
+insert into status(nome) Select 'Em atendimento' where not exists (select 1 from status where nome = 'Em atendimento');
+insert into status(nome) Select 'Escalado para outro setor' where not exists (select 1 from status where nome = 'Escalado para outro setor');
+insert into status(nome) Select 'Finalizado' where not exists (select 1 from status where nome = 'Finalizado');
+--insert into status(nome) Select 'Cancelado' where not exists (select 1 from status where nome = 'Cancelado');
 
-insert into prioridade(nome) Select 'Prioridade a definir' where not exists (select 1 from prioridade where nome = 'Prioridade a definir');
-
---insert into pessoa(nome,email,senha,id_setor,id_tipo) Select ('Técnico a definir','email','senha',5,2) where not exists (select 1 from pessoa where nome = 'Técnico a definir');
+insert into prioridade(nome) Select 'Baixa' where not exists (select 1 from prioridade where nome = 'Baixa');
+insert into prioridade(nome) Select 'Média' where not exists (select 1 from prioridade where nome = 'Média');
+insert into prioridade(nome) Select 'Alta' where not exists (select 1 from prioridade where nome = 'Alta');
 
 
 
