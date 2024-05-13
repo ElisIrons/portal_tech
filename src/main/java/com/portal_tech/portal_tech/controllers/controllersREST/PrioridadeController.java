@@ -1,10 +1,12 @@
 package com.portal_tech.portal_tech.controllers.controllersREST;
 
-import com.portal_tech.portal_tech.models.Prioridade;
 import com.portal_tech.portal_tech.models.dtos.PrioridadeDTO;
 import com.portal_tech.portal_tech.services.PrioridadeService;
 import com.portal_tech.portal_tech.swaggerDoc.PrioridadeControllerOpenApi;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -17,7 +19,10 @@ public class PrioridadeController implements PrioridadeControllerOpenApi {
     @Autowired
     private PrioridadeService prioridadeService;
 
-
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "os dados foram salvos com sucesso"),
+            @ApiResponse(responseCode = "400", description = "Faltam dados obrigatórios a serem passados/não foi possível salvar")
+    })
     @RequestMapping(value = "/criar", method = RequestMethod.POST)
     public void criarPrioridades() {
         this.prioridadeService.CriaPrioridade();
@@ -29,27 +34,33 @@ public class PrioridadeController implements PrioridadeControllerOpenApi {
         return this.prioridadeService.save(prioridade);
     }*/
 
-
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "OK"),
+            @ApiResponse(responseCode = "404", description = "Erro interno")
+    })
     @RequestMapping(value = "/mostrar", method = RequestMethod.GET)
-    public List<PrioridadeDTO> findAll(){
+    public ResponseEntity<List<PrioridadeDTO>> findAll(){
         return this.prioridadeService.findAll();
     }
 
 
     @RequestMapping(value = "/mostrar/{id}", method = RequestMethod.GET)
-    public PrioridadeDTO findById(@PathVariable Long id) {
+    public ResponseEntity<PrioridadeDTO> findById(@PathVariable Long id) {
         return this.prioridadeService.findById(id);
     }
 
-
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "O elemento foi deletado com sucesso"),
+            @ApiResponse(responseCode = "404", description = "O ID requisitado não existe/foi encontrado no sistema")
+    })
     @RequestMapping(value = "/excluir/{id}", method = RequestMethod.DELETE)
-    public PrioridadeDTO deleteById(@PathVariable Long id) {
+    public ResponseEntity<String> deleteById(@PathVariable Long id) {
         return this.prioridadeService.deleteById(id);
     }
 
 
     @RequestMapping(value = "/editar/{id}", method = RequestMethod.PUT)
-    public PrioridadeDTO updateById(@PathVariable Long id, @RequestBody PrioridadeDTO prioridade) {
+    public ResponseEntity<PrioridadeDTO> updateById(@PathVariable Long id, @RequestBody PrioridadeDTO prioridade) {
         return this.prioridadeService.updateById(id, prioridade);
     }
 
