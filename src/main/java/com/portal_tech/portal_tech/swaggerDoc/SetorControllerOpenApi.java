@@ -4,6 +4,7 @@ import com.portal_tech.portal_tech.models.Setor;
 import com.portal_tech.portal_tech.models.dtos.SetorDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
@@ -11,18 +12,18 @@ import java.util.List;
 public interface SetorControllerOpenApi {
 
     @Operation(summary = "Método para cadastrar um novo setor.")
-    List<SetorDTO> save();
+    ResponseEntity<String> save();
 
     @Operation(summary = "Método que retorna todas os setores cadastrados na api.")
-    List<SetorDTO> getAllSetorDTO();
+    ResponseEntity<List<SetorDTO>> getAllSetorDTO();
 
     @Operation(summary = "Método que busca um setor por id.")
-    SetorDTO findById(Long id);
+    ResponseEntity<SetorDTO> findById(Long id);
 
     @Operation(summary = "Método para modificar o setor localizado pelo id.")
-    SetorDTO updateById(Long id, SetorDTO setorDTO);
+    ResponseEntity<SetorDTO> updateById(Long id, SetorDTO setorDTO);
 
     @Operation(summary = "Método para deletar o setor localizado pelo id.")
-    SetorDTO deleteById(Long id);
+     ResponseEntity<String> deleteById(Long id);
 
 }

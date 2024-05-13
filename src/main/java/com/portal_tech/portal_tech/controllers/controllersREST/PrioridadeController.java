@@ -1,10 +1,10 @@
 package com.portal_tech.portal_tech.controllers.controllersREST;
 
-import com.portal_tech.portal_tech.models.Prioridade;
 import com.portal_tech.portal_tech.models.dtos.PrioridadeDTO;
 import com.portal_tech.portal_tech.services.PrioridadeService;
 import com.portal_tech.portal_tech.swaggerDoc.PrioridadeControllerOpenApi;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -31,25 +31,25 @@ public class PrioridadeController implements PrioridadeControllerOpenApi {
 
 
     @RequestMapping(value = "/mostrar", method = RequestMethod.GET)
-    public List<PrioridadeDTO> findAll(){
+    public ResponseEntity<List<PrioridadeDTO>> findAll(){
         return this.prioridadeService.findAll();
     }
 
 
     @RequestMapping(value = "/mostrar/{id}", method = RequestMethod.GET)
-    public PrioridadeDTO findById(@PathVariable Long id) {
+    public ResponseEntity<PrioridadeDTO> findById(@PathVariable Long id) {
         return this.prioridadeService.findById(id);
     }
 
 
     @RequestMapping(value = "/excluir/{id}", method = RequestMethod.DELETE)
-    public PrioridadeDTO deleteById(@PathVariable Long id) {
+    public ResponseEntity<String> deleteById(@PathVariable Long id) {
         return this.prioridadeService.deleteById(id);
     }
 
 
     @RequestMapping(value = "/editar/{id}", method = RequestMethod.PUT)
-    public PrioridadeDTO updateById(@PathVariable Long id, @RequestBody PrioridadeDTO prioridade) {
+    public ResponseEntity<PrioridadeDTO> updateById(@PathVariable Long id, @RequestBody PrioridadeDTO prioridade) {
         return this.prioridadeService.updateById(id, prioridade);
     }
 
