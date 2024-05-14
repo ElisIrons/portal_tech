@@ -29,7 +29,7 @@ public class ChamadoService {
     public ResponseEntity<ChamadoDTO> save(ChamadoDTO dto) {
         Chamado chamado =  ChamadoDTO.convert(dto);   //dto.convert(dto); // Chamar convert() usando a instância de ChamadoDTO
         System.out.println("chamado.getIdStatus() " + chamado.getIdStatus());
-        //chamado = this.chamadoRepository.save(chamado);
+        chamado = this.chamadoRepository.save(chamado);
         return new ResponseEntity<>((new ChamadoDTO(chamado)), HttpStatus.CREATED);
     }
 
@@ -41,7 +41,7 @@ public class ChamadoService {
         else {
             List<ChamadoDTO>  listChamadoDTO= chamados.stream().map(ChamadoDTO::new).collect(Collectors.toList());
             //DateTimeFormatter dtFormatada = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-            return new ResponseEntity<>(listChamadoDTO, HttpStatus.OK);//converte lst chamados em lst de chamados dto
+            return new ResponseEntity<>( listChamadoDTO, HttpStatus.OK);//converte lst chamados em lst de chamados dto
         }
     }
 
