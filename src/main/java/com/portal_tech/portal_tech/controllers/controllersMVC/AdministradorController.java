@@ -34,7 +34,7 @@ public class AdministradorController {
 @Autowired
     private ChamadoService chamadoService;
 
-@GetMapping("/adminpainel")
+@GetMapping("/adminpainel/{id}")
     public String adminPainel(Model model){
     List<ChamadoDTO> chamadoDTO = (List<ChamadoDTO>) chamadoService.findAllChamados();
     model.addAttribute("chamados", chamadoDTO);

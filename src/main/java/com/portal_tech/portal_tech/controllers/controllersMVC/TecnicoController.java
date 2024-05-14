@@ -1,17 +1,25 @@
 package com.portal_tech.portal_tech.controllers.controllersMVC;
 
+import com.portal_tech.portal_tech.models.Chamado;
+import com.portal_tech.portal_tech.models.Pessoa;
+import com.portal_tech.portal_tech.models.Status;
 import com.portal_tech.portal_tech.models.dtos.ChamadoDTO;
+import com.portal_tech.portal_tech.repositores.ChamadoRepository;
+import com.portal_tech.portal_tech.repositores.StatusRepository;
 import com.portal_tech.portal_tech.services.ChamadoServiceFront;
 import com.portal_tech.portal_tech.swaggerDoc.TecnicoControllerOpenApi;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 
@@ -19,7 +27,11 @@ public class TecnicoController { //implements TecnicoControllerOpenApi {
 
     @Autowired
     private ChamadoServiceFront chamadoServiceFront;
+    @Autowired
+    private ChamadoRepository chamadoRepository;
 
+    @Autowired
+    private StatusRepository statusRepository;
     @GetMapping ("/tecnico")
     public String findAllChamados(Model model){
         List<ChamadoDTO> chamadoDTO =  chamadoServiceFront.findAllChamados().getBody();                                      //this.chamadoService.findAllChamados();
@@ -45,7 +57,7 @@ public class TecnicoController { //implements TecnicoControllerOpenApi {
         model.addAttribute("dtFormatada", dataFormatada);
         model.addAttribute("dtFimFormatada", dataFimFormatada);
 
-        return "index.tecnico";
+        return "/index.tecnico";
     }
     /*@GetMapping ("/tecnico")
     public String indexUsuario(Model model){
@@ -107,8 +119,50 @@ public class TecnicoController { //implements TecnicoControllerOpenApi {
 
         return "index.tecnico";
     }
+    @PostMapping("/tecnico")
+    public String chamados(@RequestParam("status") long status, @RequestParam int id, HttpSession session, String algo){
+//        ModelAndView modelAndView = new ModelAndView("/tecnico");
+//        List<ChamadoDTO> chamadoDTO =  chamadoServiceFront.findAllChamados().getBody();
+        Chamado chamado = this.FindIDChamado(id);
+        Status statusmodified = null;
+        Pessoa pessoa =(Pessoa) session.getAttribute("cache");
+        session.setAttribute("cache", pessoa.getNome() );
 
 
+
+        switch ((int) status){
+            case 1:
+                statusmodified = this.statusRepository.findById(1L).orElse(null);
+                break;
+            case  2 :
+                statusmodified  =this.statusRepository.findById(2L).orElse(null);
+                break;
+            case  3:
+                statusmodified = this.statusRepository.findById(3L).orElse(null);
+                break;
+            case  4:
+                statusmodified = this.statusRepository.findById(4L).orElse(null);
+                break;
+            default:
+                return "redirect:/tecnico";
+        }
+
+        if(statusmodified != null){
+            chamado.setIdStatus(statusmodified);
+            chamado.setIdTecnico(pessoa);
+            chamadoRepository.save(chamado);
+        }
+//
+//           modelAndView.addObject("chamados", new ChamadoDTO() );
+
+
+        return "redirect:/tecnico";
+    }
+
+    public Chamado FindIDChamado(int id) {
+        Optional<Chamado> optionalChamado = chamadoRepository.findById((long) id);
+        return optionalChamado.orElse(null);
+    }
 
 
 /*    @GetMapping ("usuario.chamados")

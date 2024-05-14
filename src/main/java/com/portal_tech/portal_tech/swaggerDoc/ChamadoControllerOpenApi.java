@@ -15,7 +15,7 @@ public interface ChamadoControllerOpenApi {
     public ResponseEntity<ChamadoDTO> save(ChamadoDTO dto);
 
     @Operation(summary = "Método que retorna todos os chamados cadastradas na api.")
-    public ResponseEntity<List<ChamadoDTO>> findAll();
+    public List<ChamadoDTO>  findAll();
 
     @Operation(summary = "Método que busca um chamado por id.")
     public ResponseEntity<ChamadoDTO> findById(Long id);

@@ -1,18 +1,14 @@
 package com.portal_tech.portal_tech.services;
 
 import com.portal_tech.portal_tech.models.Chamado;
-import com.portal_tech.portal_tech.models.Pessoa;
-import com.portal_tech.portal_tech.models.Prioridade;
-import com.portal_tech.portal_tech.models.Status;
 import com.portal_tech.portal_tech.models.dtos.ChamadoDTO;
-import com.portal_tech.portal_tech.models.dtos.StatusDTO;
 import com.portal_tech.portal_tech.repositores.ChamadoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -33,15 +29,15 @@ public class ChamadoService {
         return new ResponseEntity<>((new ChamadoDTO(chamado)), HttpStatus.CREATED);
     }
 
-    public ResponseEntity<List<ChamadoDTO>> findAllChamados() {
+    public List<ChamadoDTO> findAllChamados() {
         List<Chamado> chamados = this.chamadoRepository.findAll();
         if (chamados.isEmpty()){
             throw new RuntimeException("Não há chamados cadastrados!");
         }
         else {
-            List<ChamadoDTO>  listChamadoDTO= chamados.stream().map(ChamadoDTO::new).collect(Collectors.toList());
-            //DateTimeFormatter dtFormatada = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-            return new ResponseEntity<>( listChamadoDTO, HttpStatus.OK);//converte lst chamados em lst de chamados dto
+            List<ChamadoDTO> listChamadoDTO = chamados.stream().map(ChamadoDTO::new).collect(Collectors.toList());
+
+            return listChamadoDTO;//converte lst chamados em lst de chamados dto
         }
     }
 

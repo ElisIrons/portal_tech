@@ -46,7 +46,9 @@
                 <h1 class="container-texto" th:text="'Bem-vindo, ' + ${userName} + '!'">Bem-vindo(a)!</h1>
                 <h2 class="container-subtitulo">Chamados</h2>
                 <div class="tabela-container">
+
                     <table class="tabela">
+                        <form action="/tecnico" method="post">
                         <thead>
                         <tr>
                             <th>Data de Abertura</th>
@@ -93,14 +95,28 @@
                                             <option value="finalizado">Finalizado</option>
                                         </select></td>  -->
 
-                            <td>   <label for="status">Status:</label><br>
-                                <select id="status" name="status" required>
-                                    <option value="em-analise"  name="status" th:value="${optionStatus}" th:checked="${optionStatus == 'Em Amálise'}">Em análise</option>
-                                    <option value="aguardando" th:selected="${chamado.id_status.nome} == 'aguardando'">Aguardando técnico</option>
-                                    <option value="em-atendimento" th:selected="${chamado.id_status.nome == 'em-atendimento'}">Em atendimento</option>
-                                    <option value="outro-setor" th:selected="${chamado.id_status.nome == 'outro-setor'}">Escalado para outro setor</option>
-                                    <option value="em-analise" th:selected="${chamado.id_status.nome == 'em-analise'}">Em análise</option>
-                                    <option value="finalizado" th:selected="${chamado.id_status.nome == 'finalizado'}">Finalizado</option>
+                            <td>
+<!--                                <label for="status">Status:</label><br>-->
+<!--                                <select id="status" name="status" required>-->
+<!--                                    <option value="em-analise"  name="status" th:value="${optionStatus}" th:checked="${optionStatus == 'Em Amálise'}">Em análise</option>-->
+<!--                                    <option value="aguardando"  name="status" th:selected="${chamado.id_status.nome} == 'aguardando'">Aguardando técnico</option>-->
+<!--                                    <option value="em-atendimento"  name="status" th:selected="${chamado.id_status.nome == 'em-atendimento'}">Em atendimento</option>-->
+<!--                                    <option value="outro-setor"  name="status" th:selected="${chamado.id_status.nome == 'outro-setor'}">Escalado para outro setor</option>-->
+<!--                                    <option value="em-analise"  name="status" th:selected="${chamado.id_status.nome == 'em-analise'}">Em análise</option>-->
+<!--                                    <option value="finalizado"  name="status" th:selected="${chamado.id_status.nome == 'finalizado'}">Finalizado</option>-->
+
+                                <input type="hidden" name="id" th:value="${chamado.id}" />
+                                <input type="hidden" name="nome" value="${nome}" />
+                                    <select name="status" id="status-select" >
+                                        <option value ="0" selected>Selecione</option>
+                                        <option value=1 >Chamado aberto</option>
+                                        <option value=2>Em atendimento</option>
+                                        <option value=3 >Finalizado</option>
+                                        <option value=4 >Cancelado</option>
+                                        <option value=5 >Aguardando técnico</option>
+                                        <option value=6 >Em análise</option>
+                                        <option value=7 >Escalado para outro setor</option>
+                                    </select>
 
 <!--                                     <option value="finalizado" th:selected="${chamado.id_status.nome == 'finalizado'}">Finalizado</option>-->
 
@@ -117,7 +133,9 @@
 
                         </tr>
                         </tbody>
+                        </form>
                     </table>
+
                 </div>
                 </div>
             </section>
