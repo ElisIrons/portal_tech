@@ -113,7 +113,7 @@ public class AutenticacaoService {
             } else if (pessoa != null && tipoPessoa.equals("Técnico")) {
                 long pessoaID = pessoa.getId();
                 String pessoaName = pessoa.getNome();
-                return "redirect:/tecnico";
+                return "redirect:/tecnico/" + pessoaID;
 
             } else if (pessoa != null && tipoPessoa.equals("Administrador")) {
                 long pessoaID = pessoa.getId();

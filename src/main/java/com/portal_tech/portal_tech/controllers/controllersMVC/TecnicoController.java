@@ -5,6 +5,7 @@ import com.portal_tech.portal_tech.models.Pessoa;
 import com.portal_tech.portal_tech.models.Status;
 import com.portal_tech.portal_tech.models.dtos.ChamadoDTO;
 import com.portal_tech.portal_tech.repositores.ChamadoRepository;
+import com.portal_tech.portal_tech.repositores.PessoaRepository;
 import com.portal_tech.portal_tech.repositores.StatusRepository;
 import com.portal_tech.portal_tech.services.ChamadoServiceFront;
 import com.portal_tech.portal_tech.swaggerDoc.TecnicoControllerOpenApi;
@@ -32,8 +33,10 @@ public class TecnicoController { //implements TecnicoControllerOpenApi {
 
     @Autowired
     private StatusRepository statusRepository;
-    @GetMapping ("/tecnico")
-    public String findAllChamados(Model model){
+    @Autowired
+    private PessoaRepository pessoaRepository;
+    @GetMapping ("/tecnico/{id}")
+    public String findAllChamados(Model model, HttpSession request){
         List<ChamadoDTO> chamadoDTO =  chamadoServiceFront.findAllChamados().getBody();                                      //this.chamadoService.findAllChamados();
         model.addAttribute("chamados", chamadoDTO);
 
@@ -56,6 +59,7 @@ public class TecnicoController { //implements TecnicoControllerOpenApi {
         }
         model.addAttribute("dtFormatada", dataFormatada);
         model.addAttribute("dtFimFormatada", dataFimFormatada);
+
 
         return "/index.tecnico";
     }
@@ -120,16 +124,16 @@ public class TecnicoController { //implements TecnicoControllerOpenApi {
         return "index.tecnico";
     }
     @PostMapping("/tecnico")
-    public String chamados(@RequestParam("status") long status, @RequestParam int id, HttpSession session, String algo){
+    public String chamados(@RequestParam("status") long status, @RequestParam int id, HttpSession session){
 //        ModelAndView modelAndView = new ModelAndView("/tecnico");
 //        List<ChamadoDTO> chamadoDTO =  chamadoServiceFront.findAllChamados().getBody();
         Chamado chamado = this.FindIDChamado(id);
         Status statusmodified = null;
-        Pessoa pessoa =(Pessoa) session.getAttribute("cache");
-        session.setAttribute("cache", pessoa.getNome() );
 
+        Pessoa pessoa = (Pessoa) session.getAttribute("cache");
+         session.setAttribute("cache", pessoa.getNome() );
 
-
+//         Pessoa pessoa1 = this.findIDPessoa((int) idPessoa);
         switch ((int) status){
             case 1:
                 statusmodified = this.statusRepository.findById(1L).orElse(null);
@@ -151,18 +155,28 @@ public class TecnicoController { //implements TecnicoControllerOpenApi {
             chamado.setIdStatus(statusmodified);
             chamado.setIdTecnico(pessoa);
             chamadoRepository.save(chamado);
+
+            session.setAttribute("cache", pessoa.getNome() );
+
         }
 //
 //           modelAndView.addObject("chamados", new ChamadoDTO() );
 
 
-        return "redirect:/tecnico";
+
+        return "redirect:/tecnico/" + pessoa.getId();
     }
 
     public Chamado FindIDChamado(int id) {
         Optional<Chamado> optionalChamado = chamadoRepository.findById((long) id);
         return optionalChamado.orElse(null);
     }
+
+    public Pessoa findIDPessoa(int idPessoa){
+        Optional<Pessoa> pessoa1 = this.pessoaRepository.findById(Long.valueOf(idPessoa));
+        return pessoa1.orElse(null);
+    }
+
 
 
 /*    @GetMapping ("usuario.chamados")
