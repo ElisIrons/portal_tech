@@ -88,7 +88,7 @@ public class AutenticacaoService {
 
         String tipoPessoa = "";
         if (pessoa == null) {
-            model.addAttribute("erro", "Usuário ou senhas inválidos");//mensagem de erro na tela de login
+            model.addAttribute("erro", "Usuário ou senha inválidos");//mensagem de erro na tela de login
             return "/login";
 
         }else {
@@ -109,7 +109,7 @@ public class AutenticacaoService {
             if (pessoa != null && tipoPessoa.equals("Usuário")) {
                 long pessoaID = pessoa.getId();
                 String pessoaName = pessoa.getNome();//o usuário esta cadastrado no banco
-                return "redirect:usuario/chamados/" + pessoaID;
+                return "redirect:/tela-usuario";
             } else if (pessoa != null && tipoPessoa.equals("Técnico")) {
                 long pessoaID = pessoa.getId();
                 String pessoaName = pessoa.getNome();
@@ -118,9 +118,9 @@ public class AutenticacaoService {
             } else if (pessoa != null && tipoPessoa.equals("Administrador")) {
                 long pessoaID = pessoa.getId();
                 String pessoaName = pessoa.getNome();
-                return "redirect:/adminpanel/" + pessoaID;
+                return "redirect:/adminpainel/" + pessoaID;
             } else {
-                model.addAttribute("erro", "Usuário ou senhas inválidos");//mensagem de erro na tela de login
+                model.addAttribute("erro", "Usuário ou senha inválidos");//mensagem de erro na tela de login
                 return "/login";
             }
         }

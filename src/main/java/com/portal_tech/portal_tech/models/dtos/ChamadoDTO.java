@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.security.Timestamp;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class ChamadoDTO {
     private Long id;
@@ -63,9 +64,8 @@ public class ChamadoDTO {
         chamado.setId(chamadoDTO.getId());
         chamado.setDescricao(chamadoDTO.getDescricao());
         chamado.setDt_abertura(chamadoDTO.getDt_abertura());
-        chamado.setDt_inicio(chamadoDTO.getDt_inicio());
         chamado.setDt_fim(chamadoDTO.getDt_fim());
-
+        chamado.setDt_inicio(chamadoDTO.getDt_inicio());
 
         chamado.setIdUsuario(chamadoDTO.getId_usuario());
 
@@ -74,6 +74,9 @@ public class ChamadoDTO {
         chamado.setIdPrioridade(chamadoDTO.getId_prioridade());
 
         chamado.setIdStatus(chamadoDTO.getId_status());
+
+
+
 
         return chamado;
     }

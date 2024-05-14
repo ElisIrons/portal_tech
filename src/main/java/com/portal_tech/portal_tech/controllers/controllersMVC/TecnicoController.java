@@ -50,7 +50,7 @@ public class TecnicoController { //implements TecnicoControllerOpenApi {
         Pessoa userOn = (Pessoa) session.getAttribute("cache");
         String nomeUsuario = userOn.getNome();
         model.addAttribute("userOn", userOn);
-        return "index.tecnico";
+        return "tela.tecnico";
     }
     /*@GetMapping ("/tecnico")
     public String indexUsuario(Model model){
@@ -114,7 +114,7 @@ public class TecnicoController { //implements TecnicoControllerOpenApi {
         String nomeUsuario = userOn.getNome();
         model.addAttribute("userOn", nomeUsuario);
 
-        return "index.tecnico";
+        return "tela.tecnico";
     }
 
 
