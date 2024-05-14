@@ -1,8 +1,10 @@
 package com.portal_tech.portal_tech.controllers.controllersMVC;
 
+import com.portal_tech.portal_tech.models.Pessoa;
 import com.portal_tech.portal_tech.models.dtos.ChamadoDTO;
 import com.portal_tech.portal_tech.services.ChamadoServiceFront;
 import com.portal_tech.portal_tech.swaggerDoc.TecnicoControllerOpenApi;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,7 +23,7 @@ public class TecnicoController { //implements TecnicoControllerOpenApi {
     private ChamadoServiceFront chamadoServiceFront;
 
     @GetMapping ("/tecnico")
-    public String findAllChamados(Model model){
+    public String findAllChamados(Model model, HttpSession session){
         List<ChamadoDTO> chamadoDTO =  chamadoServiceFront.findAllChamados().getBody();                                      //this.chamadoService.findAllChamados();
         model.addAttribute("chamados", chamadoDTO);
 
@@ -45,6 +47,9 @@ public class TecnicoController { //implements TecnicoControllerOpenApi {
         model.addAttribute("dtFormatada", dataFormatada);
         model.addAttribute("dtFimFormatada", dataFimFormatada);
 
+        Pessoa userOn = (Pessoa) session.getAttribute("cache");
+        String nomeUsuario = userOn.getNome();
+        model.addAttribute("userOn", userOn);
         return "index.tecnico";
     }
     /*@GetMapping ("/tecnico")
@@ -78,8 +83,8 @@ public class TecnicoController { //implements TecnicoControllerOpenApi {
     }*/
     // TECNICO NÃO EXCLUIRÁ NEM CRIARÁ NOVO CHAMADO
 
-    @GetMapping ("/index/tecnico/{id}")
-    public String findById_Tecnico(@PathVariable("id") Long id_tecnico, Model model){
+    @GetMapping ("/tecnico/{id}")
+    public String findById_Tecnico(@PathVariable("id") Long id_tecnico, Model model, HttpSession session){
         List<ChamadoDTO> chamadoDTO =  chamadoServiceFront.findById_Tecnico(id_tecnico).getBody();
         model.addAttribute("chamados", chamadoDTO);
 
@@ -104,6 +109,10 @@ public class TecnicoController { //implements TecnicoControllerOpenApi {
             }
         }
         model.addAttribute("dtFimFormatada", dataFimFormatada);
+
+        Pessoa userOn = (Pessoa) session.getAttribute("cache");
+        String nomeUsuario = userOn.getNome();
+        model.addAttribute("userOn", nomeUsuario);
 
         return "index.tecnico";
     }
@@ -147,10 +156,10 @@ public class TecnicoController { //implements TecnicoControllerOpenApi {
         return "usuario.chamados";
     }
 
-    @PostMapping("/{id}")
-    public String updateById(@PathVariable Long id, @ModelAttribute("chamadoDTO") ChamadoDTO chamadoDTO){
-        chamadoServiceFront.updateById(id, chamadoDTO);
-        return "usuario/chamados"; //pra voltar pra tela de chamados - VER SE SERÁ MES TELA USUARIO
+    @PostMapping("/tecnico/{id_tecnico}) //     /{id_chamado}")
+    public String updateById(@PathVariable("id_tecnico") Long id_tecnico, @PathVariable("id_chamado") Long id_chamado, @ModelAttribute("chamadoDTO") ChamadoDTO chamadoDTO){
+        chamadoServiceFront.updateById(chamadoDTO.getId(), chamadoDTO);
+        return "redirect:/tecnico/" + id_tecnico; //pra voltar pra tela de chamados
     }
 
 }
