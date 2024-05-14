@@ -2,12 +2,8 @@ package com.portal_tech.portal_tech.controllers.controllersMVC;
 
 import com.portal_tech.portal_tech.models.Pessoa;
 
-import com.portal_tech.portal_tech.models.Setor;
-import com.portal_tech.portal_tech.models.Teste;
 import com.portal_tech.portal_tech.repositores.SetorRepository;
 import com.portal_tech.portal_tech.services.AutenticacaoService;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
@@ -17,12 +13,8 @@ import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 @Controller
-public class AutenticacaoController  {
+public class AutenticacaoController {
 
     @Autowired
     private AutenticacaoService autenticacaoService;
@@ -30,11 +22,11 @@ public class AutenticacaoController  {
     @Autowired
     private SetorRepository setorRepository;
 
+
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login() {
         return "/login";
     }
-
 
     @RequestMapping(value = "/cadastro", method = RequestMethod.GET)
     public String cadastrar() {
@@ -54,23 +46,6 @@ public class AutenticacaoController  {
 
         return autenticacaoService.cadastrar(model, request, nome, telefone, email, senha);
 
-    }
-
-        @GetMapping("/teste")
-        public String index(Model model) {
-            List<String> setores = Arrays.asList("Administrativo", "Marketing", "Recursos Humanos","Suporte");
-            List<Setor> listOfSetor = this.setorRepository.findAll();
-            model.addAttribute("setores", setores);
-//            model.addAttribute( "selecionado", new Teste(2L, "Brasil") );
-
-            return "/teste";
-        }
-
-    @PostMapping("/teste")
-    public String indexPost(Model model, @RequestParam("setor") String nome) {
-        System.out.println(nome);
-
-        return "/teste";
     }
 
     }
