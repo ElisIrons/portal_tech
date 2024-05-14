@@ -18,7 +18,7 @@ public class TecnicoController {
     @Autowired
     private ChamadoService chamadoService;
 
-    @GetMapping ("/tecnico")
+    @GetMapping ("/tecnico/{id}")
     public String indexUsuario(Model model){
         List<ChamadoDTO> chamadoDTO =  chamadoService.findAllChamados();                                      //this.chamadoService.findAllChamados();
         model.addAttribute("chamados", chamadoDTO);
