@@ -6,7 +6,7 @@
             name="viewport"
             content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
-    <link rel="stylesheet" type="text/css" href="./styles/cadastro.css"/>
+    <link rel="stylesheet" type="text/css" href="/styles/cadastro.css"/>
 
     <link rel="preconnect" href="https://fonts.googleapis.com"/>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
@@ -22,12 +22,12 @@
     />
 
     <title>Portal Tech</title>
-    <link rel="icon" href="/static/styles/images/logo.jpeg"/>
+    <link rel="icon" href="/styles/images/logo.jpeg"/>
 </head>
 <body>
 <header class="cabecalho">
     <div class="logo">
-        <img src="/static/styles/images/logo.jpeg" alt="logo Portal Tech"/>
+        <img src="/styles/images/logo.jpeg" alt="logo Portal Tech"/>
     </div>
     <div class="titulo">
         <h1>Portal Tech</h1>
@@ -74,12 +74,12 @@
                                 <li>
                                     <label>
                                         <input
-                                               th:checked="${optionTipo == 'Técnico'}"
+                                                th:checked="${optionTipo == 'Técnico'}"
                                                 type="radio"
                                                 name="tipo"
                                                 value="Técnico"
                                                 onclick="mostrarSetor()"
-                                               required
+                                                required
 
                                         />Técnico
                                     </label>
@@ -97,25 +97,18 @@
                                     </label>
                                 </li>
                             </ul>
-<!--                        </fieldset>-->
-<!--                    </div>-->
-
-                    <div id="setorDiv" style="display: none">
-<!--                                <label for="setor"  name="setor" id="setor" class="setor">Setor:</label>-->
-                        <label for="setor" name="setor" id="setor" class="setor">Setor:
-                        <select name="setor" >
-                            <option value="Administrativo" name="setor">Administrativo</option>
-                            <option value="Marketing" name="setor">Marketing</option>
-                            <option value="Recursos Humanos" name="setor">Recursos Humanos</option>
-                            <option value="Suporte" name="setor">Suporte</option>
-                        </select>
-                        </label>
-
+                        </fieldset>
                     </div>
-                    </fieldset>
-            </div>
-
-
+                    <div id="setorDiv" style="display: none">
+                        <label for="setor" name="setor">Setor:
+                            <select name="setor" id="setor" class="setor">
+                                <option value="Administrativo" name="setor">Administrativo</option>
+                                <option value="Marketing" name="setor">Marketing</option>
+                                <option value="Recursos Humanos" name="setor">Recursos Humanos</option>
+                                <option value="Suporte" name="setor">Suporte</option>
+                            </select>
+                        </label>
+                    </div>
                     <div>
                         <label for="nome">Nome completo:</label>
                         <input
@@ -152,7 +145,7 @@
                                 placeholder="Digite seu e-mail"
                         />
                     </div>
-                    <div th:if="${erro != null}" th:text="${erro}"  class="alert alert-danger" role="alert"></div>
+                    <div th:if="${erro != null}" th:text="${erro}" class="alert alert-danger" role="alert"></div>
                     <div>
                         <label for="senha">Senha:</label>
                         <input
@@ -187,7 +180,7 @@
         <div class="footer-content">
             <div class="github">
                 <img
-                        src="/static/styles/images/github.png"
+                        src="/styles/images/github.png"
                         alt="GitHub Logo"
                         class="github-img"
                 />
