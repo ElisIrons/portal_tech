@@ -50,7 +50,7 @@
 <!--                    <form action="/tecnico/${id_tecnico}/${id_chamado}" method="post">-->
 <!---                    <form th:id="'/tecnico' + ${id_tecnico} + ${id_chamado}" th:action="@{/tecnico/${id_tecnico}}" method="post">-->
 <!--                <form action="@{/tecnico/${id_tecnico}/${id_chamado}}" method="post">-->
-                <form action="@{/tecnico/${id_tecnico}}" method="post">
+                <form action="/tecnico/${id_tecnico}" method="post">
                     <div class="tabela-container">
                         <table class="tabela">
                             <thead>
@@ -72,6 +72,7 @@
                                 <td th:text="${chamado.id_usuario.nome}">Usuario</td>
                                 <td th:text="${chamado.id_usuario.setor.nome}">Setor</td>
     <!--                            <td th:text="${chamado.id_prioridade.nome}">Prioridade</td>-->
+
                                 <td>   <label for="prioridade"></label><br>
                                     <select id="prioridade" name="prioridade" required>
                                         <option value="baixa" th:selected="${chamado.id_prioridade.nome == 'Baixa'}">Baixa</option>
@@ -91,12 +92,12 @@
                                     </select></td>
 
                                 <td th:text="${dtFimFormatada[i.index]}">Data Fim</td>
-                                <td th:text="${chamado.id}">ID CHAMADO</td>
 
-                                <input type="hidden" name="id_chamado" th:value="${chamado.id}" /> <!-- campo oculto p/ passar por parâmetro o id do chamado -->
-                                <input type="hidden" name="id_tecnico" th:value="${chamado.id_tecnico}" /> <!-- campo oculto p/ passar por parâmetro o id do chamado -->
-
-                                <td><button type="submit" class="botao-salvar">Salvar</button> </td>
+         <!--                       <input type="hidden" name="id_tecnico" th:value="${chamado.id_tecnico}" /> --> <!-- campo oculto p/ passar por parâmetro o id do chamado -->
+                                <td><button type="submit" class="botao-salvar">Salvar</button> <!--</td> -->
+<!--                                <td>-->
+                                    <input type="hidden" name="id_chamado" th:value="${chamado.id}" />  <!-- campo oculto p/ passar por parâmetro o id do chamado -->
+                                </td>
                             </tr>
                             </tbody>
                         </table>

@@ -156,10 +156,30 @@ public class TecnicoController { //implements TecnicoControllerOpenApi {
         return "usuario.chamados";
     }
 
-    @PostMapping("/tecnico/{id_tecnico}) //     /{id_chamado}")
-    public String updateById(@PathVariable("id_tecnico") Long id_tecnico, @PathVariable("id_chamado") Long id_chamado, @ModelAttribute("chamadoDTO") ChamadoDTO chamadoDTO){
-        chamadoServiceFront.updateById(chamadoDTO.getId(), chamadoDTO);
-        return "redirect:/tecnico/" + id_tecnico; //pra voltar pra tela de chamados
+
+
+    @PostMapping("/tecnico/{id_tecnico}")
+    public String updateById(@RequestParam("id_chamado") Long id_chamado, @ModelAttribute("chamadoDTO") ChamadoDTO chamadoDTO, HttpSession session){
+        //@PathVariable("id_chamado") Long id_chamado,
+        chamadoServiceFront.updateById(chamadoDTO.getId(), chamadoDTO); //id_chamado, chamadoDTO);
+
+        Pessoa userOn = (Pessoa) session.getAttribute("cache");
+        Long tecnicoId = userOn.getId();
+
+
+        return "redirect:/tecnico/" + tecnicoId;
+
+//        return "redirect:/tecnico/";
+
+//        return "redirect:/tecnico/" + tecnicoId;
+
+//        long tecnicoId = chamadoDTO.getId_tecnico().getId();
+
+
+
+//        return "redirect:/tecnico/{id_tecnico}";
+//        return "redirect:/tecnico/" + id_tecnico; //pra voltar pra tela de chamados
+//        return "redirect:/tecnico/" + chamadoDTO.getId_tecnico(); //pra voltar pra tela de chamados
     }
 
 }
