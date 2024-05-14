@@ -6,6 +6,8 @@ import com.portal_tech.portal_tech.models.Setor;
 import com.portal_tech.portal_tech.models.Teste;
 import com.portal_tech.portal_tech.repositores.SetorRepository;
 import com.portal_tech.portal_tech.services.AutenticacaoService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
@@ -20,7 +22,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Controller
-public class AutenticacaoController {
+public class AutenticacaoController  {
 
     @Autowired
     private AutenticacaoService autenticacaoService;
@@ -28,11 +30,11 @@ public class AutenticacaoController {
     @Autowired
     private SetorRepository setorRepository;
 
-
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login() {
         return "/login";
     }
+
 
     @RequestMapping(value = "/cadastro", method = RequestMethod.GET)
     public String cadastrar() {
@@ -53,7 +55,6 @@ public class AutenticacaoController {
         return autenticacaoService.cadastrar(model, request, nome, telefone, email, senha);
 
     }
-
 
         @GetMapping("/teste")
         public String index(Model model) {
