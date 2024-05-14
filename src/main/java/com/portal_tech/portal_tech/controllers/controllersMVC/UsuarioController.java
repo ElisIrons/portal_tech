@@ -29,7 +29,7 @@ public class UsuarioController implements UsuarioControllerOpenApi {
 
 
     // Método para visualizar todos os chamados quando uma solicitação GET é feita para /usuario/chamados
-    @GetMapping("/usuario/chamados")
+    @GetMapping("/usuario/chamados/{id}")
     public String visualizarChamados(Model model) {
         List<ChamadoDTO> chamadoDTO = chamadoServiceFront.findAllChamados().getBody();
         model.addAttribute("chamados", chamadoDTO);

@@ -37,6 +37,7 @@ public class ChamadoController implements ChamadoControllerOpenApi {
     public ResponseEntity<List<ChamadoDTO>> findAll(){
         return (ResponseEntity<List<ChamadoDTO>>) this.chamadoService.findAll();
     }
+
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "O ID requisitado foi encontrado"),
             @ApiResponse(responseCode = "404", description = "O ID requisitado não existe/foi encontrado no sistema")
