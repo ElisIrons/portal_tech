@@ -17,7 +17,7 @@ public class Chamado {
     @Column (nullable = false)
     private String descricao;
 
-    @Column (nullable = false)
+    @Column (nullable = true)
     private LocalDate dt_abertura;
 
     @Column
@@ -26,7 +26,7 @@ public class Chamado {
     @Column
     private LocalDate dt_fim;
 
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    @ManyToOne(optional = true, fetch = FetchType.EAGER)
     @JoinColumn(name = "id_usuario")
     private Pessoa id_usuario;
 
