@@ -145,7 +145,6 @@ public class ChamadoDTO {
         this.id_prioridade = id_prioridade;
     }
 
-
     public Status getId_status(){
         return id_status;
         //return id_status != null ? id_status.getId() : null;

@@ -58,7 +58,7 @@ public class PrioridadeService {
     }
 
     public ResponseEntity<String> deleteById(Long id) {
-
+        PrioridadeDTO prioridade = findById(id).getBody();
         this.prioridadeRepository.deleteById(id);
         return new ResponseEntity<>("elemento deletado com sucesso", HttpStatus.OK);
     }

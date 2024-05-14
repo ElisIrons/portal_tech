@@ -27,9 +27,9 @@ public class ChamadoService {
     private StatusService statusService;
 
     public ResponseEntity<ChamadoDTO> save(ChamadoDTO dto) {
-        Chamado chamado = dto.convert(dto); // Chamar convert() usando a instância de ChamadoDTO
+        Chamado chamado =  ChamadoDTO.convert(dto);   //dto.convert(dto); // Chamar convert() usando a instância de ChamadoDTO
         System.out.println("chamado.getIdStatus() " + chamado.getIdStatus());
-        chamado = this.chamadoRepository.save(chamado);
+        //chamado = this.chamadoRepository.save(chamado);
         return new ResponseEntity<>((new ChamadoDTO(chamado)), HttpStatus.CREATED);
     }
 
@@ -44,32 +44,78 @@ public class ChamadoService {
             return new ResponseEntity<>(listChamadoDTO, HttpStatus.OK);//converte lst chamados em lst de chamados dto
         }
     }
+
+
     public ResponseEntity<ChamadoDTO> findById(Long id) {
         Optional<Chamado> optionalChamado = this.chamadoRepository.findById(id);
         if (optionalChamado.isPresent()) {
             Chamado chamado = optionalChamado.get();
             return new ResponseEntity<>(new ChamadoDTO(chamado), HttpStatus.OK);
-        }
-        else{
+        } else {
             throw new RuntimeException("O chamado não foi encontrado! ID: " + id);
         }
-        //Pessoa usuario = new Pessoa(chamado.get().getIdUsuario().getId());
-        //Pessoa tecnico = new Pessoa(chamado.get().getIdTecnico().getId());
-        //Status status = new Status(chamado.get().getIdStatus().getId());
-        //Prioridade prioridade = new Prioridade(chamado.get().getIdPrioridade().getId());
-/*        if(chamado.isEmpty()){
-            throw new RuntimeException("O chamado não foi encontrado! ID: " + id);
+    }
+
+    public List<ChamadoDTO> findById_Tecnico(Long id_tecnico) {
+            List<Chamado> chamados = this.chamadoRepository.findById_Tecnico(id_tecnico);
+            if (chamados.isEmpty()){
+                throw new RuntimeException("Não há chamados cadastrados!");
+            }
+            else {
+                //DateTimeFormatter dtFormatada = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                return chamados.stream().map(ChamadoDTO::new).collect(Collectors.toList());//converte lst chamados em lst de chamados dto
+            }
+        }
+
+    public List<ChamadoDTO> findById_Usuario(Long id_usuario) {
+        List<Chamado> chamados = this.chamadoRepository.findById_Usuario(id_usuario);
+        if (chamados.isEmpty()){
+            throw new RuntimeException("Não há chamados cadastrados!");
         }
         else {
-            return new ChamadoDTO(chamado.get());
-        }*/
+            //DateTimeFormatter dtFormatada = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            return chamados.stream().map(ChamadoDTO::new).collect(Collectors.toList());//converte lst chamados em lst de chamados dto
+        }
+    }
 
+    public List<ChamadoDTO> findById_Status(Long id_status) {
+        List<Chamado> chamados = this.chamadoRepository.findById_Status(id_status);
+        if (chamados.isEmpty()){
+            throw new RuntimeException("Não há chamados cadastrados!");
+        }
+        else {
+            //DateTimeFormatter dtFormatada = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            return chamados.stream().map(ChamadoDTO::new).collect(Collectors.toList());//converte lst chamados em lst de chamados dto
+        }
+    }
+
+    public List<ChamadoDTO> findById_Prioridade(Long id_prioridade) {
+        List<Chamado> chamados = this.chamadoRepository.findById_Prioridade(id_prioridade);
+        if (chamados.isEmpty()){
+            throw new RuntimeException("Não há chamados cadastrados!");
+        }
+        else {
+            //DateTimeFormatter dtFormatada = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            return chamados.stream().map(ChamadoDTO::new).collect(Collectors.toList());//converte lst chamados em lst de chamados dto
+        }
+    }
+
+    public List<ChamadoDTO> findById_Setor(Long id_setor) {
+        List<Chamado> chamados = this.chamadoRepository.findById_Setor(id_setor);
+        if (chamados.isEmpty()){
+            throw new RuntimeException("Não há chamados cadastrados!");
+        }
+        else {
+            //DateTimeFormatter dtFormatada = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            return chamados.stream().map(ChamadoDTO::new).collect(Collectors.toList());//converte lst chamados em lst de chamados dto
+        }
     }
 
     public ResponseEntity<String> deleteById(Long id) {
         this.chamadoRepository.deleteById(id);
         return new ResponseEntity<>("chamado deletado com sucesso", HttpStatus.OK);
     }
+
 
     public ResponseEntity<ChamadoDTO> updateById(Long id, ChamadoDTO dto) {
         this.findById(id);

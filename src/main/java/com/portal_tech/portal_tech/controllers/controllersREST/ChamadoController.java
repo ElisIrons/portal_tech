@@ -46,6 +46,31 @@ public class ChamadoController implements ChamadoControllerOpenApi {
         return this.chamadoService.findById(id);
     }
 
+    @GetMapping("/tecnico/{id_tecnico}")
+    public List<ChamadoDTO> findById_Tecnico(@PathVariable Long id_tecnico){
+        return this.chamadoService.findById_Tecnico(id_tecnico);
+    }
+
+    @GetMapping("/usuario/{id_usuario}")
+    public List<ChamadoDTO> findById_Usuario(@PathVariable Long id_usuario){
+        return this.chamadoService.findById_Usuario(id_usuario);
+    }
+
+    @GetMapping("/status/{id_status}")
+    public List<ChamadoDTO> findById_Status(@PathVariable Long id_status){
+        return this.chamadoService.findById_Status(id_status);
+    }
+
+    @GetMapping("/prioridade/{id_prioridade}")
+    public List<ChamadoDTO> findById_Prioridade(@PathVariable Long id_prioridade){
+        return this.chamadoService.findById_Prioridade(id_prioridade);
+    }
+
+    @GetMapping("/setor/{id_setor}")
+    public List<ChamadoDTO> findById_Setor(@PathVariable Long id_setor){
+        return this.chamadoService.findById_Setor(id_setor);
+    }
+
 
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "O elemento foi deletado com sucesso"),

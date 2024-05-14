@@ -24,7 +24,8 @@ public class JavaDocConfig {
                                 new Tag().name("Prioridade").description("Alta/média/baixa"),
                                 new Tag().name("Chamado").description("Gerenciamento dos dados das requisições que a aplicação recebe"),
                                 new Tag().name("Status").description("Aberto/Em andamento/Finalizado"),
-                                new Tag().name("Setor").description("Informática/RH/Marketing")
+                                new Tag().name("Setor").description("Informática/RH/Marketing"),
+                                new Tag().name("Autenticação").description("")
                         )
                 );
     }
