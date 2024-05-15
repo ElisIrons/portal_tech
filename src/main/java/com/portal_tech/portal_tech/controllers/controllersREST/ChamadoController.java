@@ -21,7 +21,8 @@ public class ChamadoController implements ChamadoControllerOpenApi {
 
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "os dados foram salvos com sucesso"),
-            @ApiResponse(responseCode = "400", description = "Faltam dados obrigatórios a serem passados/não foi possível salvar")
+            @ApiResponse(responseCode = "400", description = "Faltam dados obrigatórios a serem passados/não foi possível salvar"),
+            @ApiResponse(responseCode = "500", description = "Faltam dados obrigatórios a serem passados/não foi possível salvar")
     })
     @PostMapping
     public ResponseEntity<ChamadoDTO>save(@RequestBody ChamadoDTO dto){

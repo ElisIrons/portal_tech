@@ -1,7 +1,8 @@
 package com.portal_tech.portal_tech.services;
 
-import com.portal_tech.portal_tech.exceptions.CustomExceptionHandler;
-import com.portal_tech.portal_tech.exceptions.UnprocessableEntityException;
+import com.portal_tech.portal_tech.exceptions.ConflictException409;
+import com.portal_tech.portal_tech.exceptions.ExceptionHandler500;
+import com.portal_tech.portal_tech.exceptions.UnprocessableEntityException422;
 import com.portal_tech.portal_tech.models.Pessoa;
 import com.portal_tech.portal_tech.models.Setor;
 import com.portal_tech.portal_tech.models.Tipo;
@@ -29,17 +30,30 @@ public class PessoaService {
     @Autowired
     private TipoRepository tipoRepository;
 
-    public ResponseEntity<PessoaDTO> register(Map<String, Object> pessoaDTORecord) {
+    public ResponseEntity<PessoaDTO> register(Map<String, Object> pessoaDTO) {
         try {
-            Pessoa pessoa = convertDtoToPessoa(pessoaDTORecord);
 
+           String email =(String) pessoaDTO.get("email");
+            boolean personExists = this.verifyIfPersonAlreadyExistsByEmail(email);
+            System.out.println(personExists);
+            if(personExists){
+                throw new ConflictException409("Pessoa já cadastrada no sistema, o email " + email + " já existe cadastrado");
+            }
+            Pessoa pessoa = convertDtoToPessoa(pessoaDTO);
             this.pessoaRepository.save(pessoa);
-             PessoaDTO pessoaDTO1 = new PessoaDTO((int) pessoa.getId(), pessoa.getNome(), pessoa.getEmail(), pessoa.getTelefone(), pessoa.getSenha(), pessoa.getSetor().getId(), pessoa.getTipo().getId());
-            System.out.println(pessoaDTO1);
             return new ResponseEntity<>(new PessoaDTO((int) pessoa.getId(), pessoa.getNome(), pessoa.getEmail(), pessoa.getTelefone(), pessoa.getSenha(),(long) pessoa.getSetor().getId(),(long) pessoa.getTipo().getId()), HttpStatus.OK); //usei get para retornar o
-        }catch (Exception e){
-            throw  new CustomExceptionHandler("Erro ao salvar a pessoa" + e);
+        }catch (ConflictException409 e){
+            throw new ConflictException409((e.getMessage()));
         }
+        catch (Exception e){
+            throw  new ExceptionHandler500("Erro ao salvar a pessoa" + e);
+        }
+    }
+
+    public boolean verifyIfPersonAlreadyExistsByEmail(String email){
+        Pessoa pessoa = this.pessoaRepository.findEmail(email);
+        System.out.println(pessoa);
+        return pessoa.getEmail() != null;
     }
 
     private static Pessoa convertDtoToPessoa(Map<String, Object> pessoaDTO) {
@@ -70,7 +84,7 @@ public class PessoaService {
             Tipo tipo = new Tipo(pessoa.get().getTipo().getId());
 
             if (pessoa.isEmpty()) {
-                throw new UnprocessableEntityException("Usuário não encontrado!");
+                throw new UnprocessableEntityException422("Não foram encontradas informações do usuário com ID " + id);
             }
 
                 if(pessoa.get().getSetor() == null) {
@@ -79,10 +93,10 @@ public class PessoaService {
 
                 }
                 return new ResponseEntity<>(new PessoaDTO((int) pessoa.get().getId(), pessoa.get().getNome(), pessoa.get().getEmail(), pessoa.get().getTelefone(), pessoa.get().getSenha(), tipo.getId(), setor.getId()), HttpStatus.OK); //usei get para retornar o objeto dentro de Optional
-            }catch (UnprocessableEntityException e){
-            throw new UnprocessableEntityException(e.getMessage());
+            }catch (UnprocessableEntityException422 e){
+            throw new UnprocessableEntityException422(e.getMessage());
         }catch (Exception e){
-            throw new CustomExceptionHandler(format("Não foi possível localizar o ID passado, ID = %s",id), e);
+            throw new ExceptionHandler500(format("Não foi possível localizar o ID passado, ID = %s",id), e);
         }
 
 
@@ -91,19 +105,22 @@ public class PessoaService {
     public ResponseEntity<PessoaDTO> updateInfById(long id, Map<String, Object> pessoaDTO) {
 
         try {
-            Pessoa pessoa = this.pessoaRepository.findById(id).orElseThrow(() -> new UnprocessableEntityException("Pessoa não encontrada"));
+            Pessoa pessoa = this.pessoaRepository.findById(id).orElseThrow(() -> new UnprocessableEntityException422("Pessoa não encontrada"));
 
-            Pessoa pessoaNova = converPessoatoToDTO(id, pessoaDTO, pessoa);
+            Pessoa pessoaNova = convertPessoatoToDTO(id, pessoaDTO, pessoa);
 
             this.pessoaRepository.save(pessoaNova);
             return new ResponseEntity<>(new PessoaDTO((int) pessoaNova.getId(), pessoaNova.getNome(), pessoaNova.getEmail(), pessoaNova.getTelefone(), pessoaNova.getSenha(), pessoa.getTipo().getId(), pessoa.getSetor().getId()), HttpStatus.OK); //usei get para retornar o objeto dentro de Optional
-        }catch (Exception e){
-            throw new CustomExceptionHandler("Erro ao atualizar os dados da pessoa");
+        }catch (UnprocessableEntityException422 e){
+            throw new UnprocessableEntityException422("Erro ao atualizar os dados da pessoa");
+        }
+        catch (Exception e){
+            throw new ExceptionHandler500("Erro ao atualizar os dados da pessoa");
         }
 
     }
 
-    private static Pessoa converPessoatoToDTO(long id, Map<String, Object> pessoaDTO, Pessoa pessoa) {
+    private static Pessoa convertPessoatoToDTO(long id, Map<String, Object> pessoaDTO, Pessoa pessoa) {
         Pessoa pessoaNova = new Pessoa();
 
         pessoaNova.setId(id);
@@ -129,17 +146,16 @@ public class PessoaService {
 
     public ResponseEntity<String> deleteById(long id) {
         try{
-
-        if(this.findById(id).equals(new CustomExceptionHandler("Usuário não encontrado!"))){
-            throw new UnprocessableEntityException("Não foi possível deletar o produto com id" + id);
-        }else{
-            this.pessoaRepository.deleteById(id);
+                this.findById(id);
+             this.pessoaRepository.deleteById(id);
             return new ResponseEntity<>("Os dados foram deletados com sucesso", HttpStatus.OK);
+
         }
-        }catch (Exception e){
-            throw new CustomExceptionHandler("Eroo ao deletar a pessoa");
+        catch (Exception e){
+            throw new ExceptionHandler500("Erro ao deletar a pessoa ");
         }
     }
+
 
 //Fazer estas listas separadas se tiver tempo
     public ResponseEntity<List<PessoaDTO>> findAll() {
@@ -162,51 +178,53 @@ public class PessoaService {
                 listOfPessoaDTO.add(pessoaDTO);
             }
 
-            listas(listOfPessoaDTO);
+//            listas(listOfPessoaDTO);
 
             return new ResponseEntity<>(listOfPessoaDTO, HttpStatus.OK);
         }catch (Exception e){
-            throw new CustomExceptionHandler("Erro ao buscar todos as pessoas cadastradas");
+            throw new ExceptionHandler500("Erro ao buscar todos as pessoas cadastradas");
         }
 
 
     }
 
-    private void listas(List<PessoaDTO> listOfPessoaDTO) {
-        List<String> listUsuario = new ArrayList<>();
-        List<String> listTecnico = new ArrayList<>();
-        List<String> listAdmin = new ArrayList<>();
 
 
-        List<Tipo>listTipo = this.tipoRepository.findAll();
-        String nomeTipo = " ";
-        for (Tipo tipo : listTipo) {
-            for (PessoaDTO pessoaDTO1 : listOfPessoaDTO){
-                if(tipo.getId() == pessoaDTO1.tipo()){
-                    nomeTipo = tipo.getNome();
-                    if(nomeTipo.equals("Usuário")){
-                        listUsuario.add(nomeTipo);
-                    } else if (nomeTipo.equals("Técnico")) {
-                        listTecnico.add(nomeTipo);
-                    }else {
-                        listAdmin.add(nomeTipo);
-                    }
-                }
-            }
-        }
-
-        for(String usuario : listUsuario){
-            System.out.println("lista usuario:  " + usuario);
-        }
-
-        for(String tecnico : listTecnico){
-            System.out.println("lista técnico " + tecnico);
-        }
-
-        for(String admin : listAdmin){
-            System.out.println("lista admin" + admin);
-        }
-    }
+//    private void listas(List<PessoaDTO> listOfPessoaDTO) {
+//        List<String> listUsuario = new ArrayList<>();
+//        List<String> listTecnico = new ArrayList<>();
+//        List<String> listAdmin = new ArrayList<>();
+//
+//
+//        List<Tipo>listTipo = this.tipoRepository.findAll();
+//        String nomeTipo = " ";
+//        for (Tipo tipo : listTipo) {
+//            for (PessoaDTO pessoaDTO1 : listOfPessoaDTO){
+//                if(tipo.getId() == pessoaDTO1.tipo()){
+//                    nomeTipo = tipo.getNome();
+//                    if(nomeTipo.equals("Usuário")){
+//                        listUsuario.add(nomeTipo);
+//                    } else if (nomeTipo.equals("Técnico")) {
+//                        listTecnico.add(nomeTipo);
+//                    }else {
+//                        listAdmin.add(nomeTipo);
+//                    }
+//                }
+//            }
+//        }
+//
+//        for(String usuario : listUsuario){
+//            System.out.println("lista usuario:  " + usuario);
+//        }
+//
+//        for(String tecnico : listTecnico){
+//            System.out.println("lista técnico " + tecnico);
+//        }
+//
+//        for(String admin : listAdmin){
+//            System.out.println("lista admin" + admin);
+//        }
+//    }
 
 
 }
