@@ -228,11 +228,11 @@ font-family: "Orbitron", sans-serif;
   margin-top: 20px;
   text-align: center;
 }
-
+/*
 .campo {
   margin-bottom: 10px;
 }
-
+*/
 .campo-container input[type="text"],
 .campo-container textarea,
 .campo-container select {
@@ -260,9 +260,8 @@ font-family: "Orbitron", sans-serif;
   font-style: italic;
 }
 
-#descricao {
-  width: 100%;
-  height: 50px;
+.campo-container #descricao {
+  height: 180px;
 }
 
 .container-input-cadastrar {
