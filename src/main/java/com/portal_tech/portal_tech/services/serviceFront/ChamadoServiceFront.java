@@ -21,20 +21,20 @@ public class ChamadoServiceFront {
     private ChamadoRepository chamadoRepository;
 
     //Salva um novo chamado no banco de dados.
-    public ResponseEntity<ChamadoDTO> save(ChamadoDTO dto) {
+    public ChamadoDTO save(ChamadoDTO dto) {
         Chamado chamado = dto.convert(dto);
         chamado = chamadoRepository.save(chamado);
-        return new ResponseEntity<>(new ChamadoDTO(chamado), HttpStatus.CREATED);
+        return new ChamadoDTO(chamado);
     }
 
     //Busca todos os chamados cadastrados no banco de dados.
-    public ResponseEntity<List<ChamadoDTO>> findAllChamados() {
+    public List<ChamadoDTO> findAllChamados() {
         List<Chamado> chamados = chamadoRepository.findAll();
         if (chamados.isEmpty()) {
             throw new RuntimeException("Não há chamados cadastrados!");
         } else {
             List<ChamadoDTO> listChamadoDTO = chamados.stream().map(ChamadoDTO::new).collect(Collectors.toList());
-            return new ResponseEntity<>(listChamadoDTO, HttpStatus.OK);
+            return listChamadoDTO;
         }
     }
 

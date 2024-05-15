@@ -30,7 +30,7 @@ public class AdministradorController {
 
 @GetMapping ("/adminpainel")
     public String findAllChamados(Model model, HttpSession session){
-    List<ChamadoDTO> chamadoDTO = chamadoServiceFront.findAllChamados().getBody();
+    List<ChamadoDTO> chamadoDTO = chamadoServiceFront.findAllChamados();
     model.addAttribute("chamados", chamadoDTO);
 
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
