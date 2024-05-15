@@ -17,11 +17,8 @@ public class Chamado {
     @Column (nullable = false)
     private String descricao;
 
-    @Column (nullable = true)
+    @Column (nullable = false)
     private LocalDate dt_abertura;
-
-    @Column
-    private LocalDate dt_inicio;
 
     @Column
     private LocalDate dt_fim;
@@ -37,9 +34,6 @@ public class Chamado {
     @ManyToOne(optional = true, fetch = FetchType.EAGER)
     @JoinColumn(name = "id_status", referencedColumnName = "id", nullable = true, columnDefinition = "BIGINT DEFAULT 1") //insertable = false, updatable = false,
     private Status id_status;
-
-    /*@Column(name = "id_status")
-    private Long id_status;*/
 
     @ManyToOne(optional = true) //qdo abrir o chamado não terá prioridade, só após o adm ou técnico atribuírem
     @JoinColumn(name = "id_prioridade", referencedColumnName = "id", nullable = true, columnDefinition = "BIGINT DEFAULT 1")
@@ -89,13 +83,6 @@ public class Chamado {
         this.dt_abertura = dt_abertura;
     }
 
-    public LocalDate getDt_inicio() {
-        return dt_inicio;
-    }
-
-    public void setDt_inicio(LocalDate dt_inicio) {
-        this.dt_inicio = dt_inicio;
-    }
 
     public LocalDate getDt_fim() {
         return dt_fim;

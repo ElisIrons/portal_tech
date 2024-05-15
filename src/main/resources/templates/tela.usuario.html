@@ -58,7 +58,9 @@
                     </div>
 
                     <div class="vizualizar-chamados">
-                        <a href="/usuario/chamados"><img class="color-image" src="/styles/images/vizualizar-chamados.png" /></a>
+                        <a th:href="@{/usuario/chamados/{id_usuario}(id_usuario=${userOn.id})}">
+                            <img class="color-image" src="/styles/images/vizualizar-chamados.png" />
+                        </a>
                         <p>Visualizar Chamados Criados</p>
                     </div>
                 </div>

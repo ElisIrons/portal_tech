@@ -80,13 +80,13 @@ public class ChamadoServiceFront {
 
     }
 
-    public ResponseEntity<ChamadoDTO> findById_Usuario(Long id_usuario) {
-        List<Chamado> chamados = chamadoRepository.findById_Tecnico(id_usuario);
-        if (!chamados.isEmpty()) {
-            Chamado chamado = chamados.get(0);
-            return new ResponseEntity<>(new ChamadoDTO(chamado), HttpStatus.OK);
+    public ResponseEntity<List<ChamadoDTO>> findById_Usuario(Long id_usuario) {
+        List<Chamado> chamados = chamadoRepository.findById_Usuario(id_usuario);
+        if (chamados.isEmpty()) {
+            throw new RuntimeException("Não há chamados cadastrados!");
         } else {
-            throw new RuntimeException("O chamado não foi encontrado! ID: " + id_usuario);
+            List<ChamadoDTO> listChamadoDTO = chamados.stream().map(ChamadoDTO::new).collect(Collectors.toList());
+            return new ResponseEntity<>(listChamadoDTO, HttpStatus.OK);
         }
     }
 
