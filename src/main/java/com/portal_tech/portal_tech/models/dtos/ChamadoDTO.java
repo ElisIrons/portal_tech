@@ -24,7 +24,6 @@ public class ChamadoDTO {
 
     private LocalDate dt_abertura;
 
-    private LocalDate dt_inicio;
 
     private LocalDate dt_fim;
 
@@ -51,7 +50,6 @@ public class ChamadoDTO {
         this.id = chamado.getId();
         this.descricao = chamado.getDescricao();
         this.dt_abertura = chamado.getDt_abertura();
-        this.dt_inicio = chamado.getDt_inicio();
         this.dt_fim = chamado.getDt_fim();
         this.id_usuario = chamado.getIdUsuario();
         this.id_tecnico = chamado.getIdTecnico();
@@ -65,7 +63,6 @@ public class ChamadoDTO {
         chamado.setDescricao(chamadoDTO.getDescricao());
         chamado.setDt_abertura(chamadoDTO.getDt_abertura());
         chamado.setDt_fim(chamadoDTO.getDt_fim());
-        chamado.setDt_inicio(chamadoDTO.getDt_inicio());
 
         chamado.setIdUsuario(chamadoDTO.getId_usuario());
 
@@ -108,13 +105,6 @@ public class ChamadoDTO {
         this.dt_abertura = dt_abertura;
     }
 
-    public LocalDate getDt_inicio() {
-        return dt_inicio;
-    }
-
-    public void setDt_inicio(LocalDate dt_inicio) {
-        this.dt_inicio = dt_inicio;
-    }
 
     public LocalDate getDt_fim() {
         return dt_fim;

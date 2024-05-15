@@ -244,6 +244,7 @@ font-family: "Orbitron", sans-serif;
   border-radius: 15px;
   outline: none;
   margin: 0 auto;
+  margin-bottom:20px;
 }
 
 .campo-container input[type="text"]:hover,
@@ -251,6 +252,7 @@ font-family: "Orbitron", sans-serif;
 .campo-container select:hover {
   background-color: var(--hover-cor);
   color: var(--black-cor);
+  cursor:pointer;
 }
 
 ::-webkit-input-placeholder {
@@ -381,7 +383,7 @@ font-family: "Orbitron", sans-serif;
 }
 
 
-.botao-salvar{
+.botao-salvar, .botao-excluir{
   color: #03e9f4;
   font-size: 14px;
   text-decoration: none;
@@ -393,7 +395,7 @@ font-family: "Orbitron", sans-serif;
   cursor:pointer;
 }
 
-.botao-salvar:hover{
+.botao-salvar:hover, .botao-excluir:hover{
  background: #03e9f4;
   color: #f1eee6;
   box-shadow: 0 0 10px #03e9f4, 0 0 50px #03e9f4, 0 0 100px #03e9f4,

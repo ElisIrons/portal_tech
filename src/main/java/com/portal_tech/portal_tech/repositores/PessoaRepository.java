@@ -14,4 +14,6 @@ public interface PessoaRepository extends JpaRepository<Pessoa, Long> {
     @Query(value = "select * from pessoa where email = :email", nativeQuery = true)
     public Pessoa findEmail(String email);
 
+
+
 }
