@@ -10,16 +10,16 @@ public class Pessoa {
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column (length = 100, nullable = false)
+    @Column (length = 100)
     private String nome;
 
-    @Column (length = 100, nullable = false)
+    @Column (length = 100)
     private String email;
 
-    @Column (length = 8, nullable = false)
+    @Column (length = 8)
     private String senha;
 
-    @Column (length = 100)
+    @Column (length = 10 )
     private String telefone;
 
     @ManyToOne(cascade=CascadeType.PERSIST, optional = false)

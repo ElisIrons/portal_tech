@@ -24,7 +24,7 @@ import java.util.Optional;
 
 @Controller
 
-public class TecnicoController { //implements TecnicoControllerOpenApi {
+public class TecnicoController<idPessoa> { //implements TecnicoControllerOpenApi {
 
     @Autowired
     private ChamadoServiceFront chamadoServiceFront;
@@ -35,6 +35,7 @@ public class TecnicoController { //implements TecnicoControllerOpenApi {
     private StatusRepository statusRepository;
     @Autowired
     private PessoaRepository pessoaRepository;
+
 
     @GetMapping("/tecnico")
     public String findAllChamados(Model model, HttpSession session) {
@@ -61,7 +62,7 @@ public class TecnicoController { //implements TecnicoControllerOpenApi {
         model.addAttribute("dtFimFormatada", dataFimFormatada);
 
 
-        return "/index.tecnico";
+        return "/tela.tecnico";
 //        Pessoa userOn = (Pessoa) session.getAttribute("cache");
 //        String nomeUsuario = userOn.getNome();
 //        model.addAttribute("userOn", userOn);
@@ -130,16 +131,21 @@ public class TecnicoController { //implements TecnicoControllerOpenApi {
 
             return "tela.tecnico";
         }
-        @PostMapping("/tecnico")
+        @PostMapping("/tecnico/{id}")
         public String chamados ( @RequestParam("status") long status, @RequestParam int id, HttpSession session){
 //        ModelAndView modelAndView = new ModelAndView("/tecnico");
 //        List<ChamadoDTO> chamadoDTO =  chamadoServiceFront.findAllChamados().getBody();
             Chamado chamado = this.FindIDChamado(id);
+
             Status statusmodified = null;
 
             Pessoa pessoa = (Pessoa) session.getAttribute("cache");
             session.setAttribute("cache", pessoa.getNome());
 
+             long idPessoa= pessoa.getId();
+            Pessoa pessoaDados = this.pessoaRepository.getReferenceById(idPessoa);
+
+            System.out.println(pessoaDados);
 //         Pessoa pessoa1 = this.findIDPessoa((int) idPessoa);
             switch ((int) status) {
                 case 1:
@@ -153,6 +159,9 @@ public class TecnicoController { //implements TecnicoControllerOpenApi {
                     break;
                 case 4:
                     statusmodified = this.statusRepository.findById(4L).orElse(null);
+                    break;
+                case 5:
+                    statusmodified = this.statusRepository.findById(5L).orElse(null);
                     break;
                 default:
                     return "redirect:/tecnico";
@@ -170,7 +179,7 @@ public class TecnicoController { //implements TecnicoControllerOpenApi {
 //           modelAndView.addObject("chamados", new ChamadoDTO() );
 
 
-            return "redirect:/tecnico/" + pessoa.getId();
+            return "redirect:/tecnico";
         }
 
         public Chamado FindIDChamado ( int id){

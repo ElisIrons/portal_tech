@@ -1,7 +1,6 @@
 package com.portal_tech.portal_tech.controllers.controllersREST;
 
 import com.portal_tech.portal_tech.models.dtos.PessoaDTO;
-
 import com.portal_tech.portal_tech.services.PessoaService;
 import java.util.Map;
 
@@ -26,8 +25,8 @@ public class PessoaController implements PessoaControllerOpenApi {
             @ApiResponse(responseCode = "400", description = "Faltam dados obrigatórios a serem passados/não foi possível salvar")
     })
     @PostMapping("/save")
-    public ResponseEntity<PessoaDTO> save( @RequestBody Map<String, Object> pessoaDTO){
-        return this.pessoaService.register(pessoaDTO);
+    public ResponseEntity<PessoaDTO> save(@RequestBody Map<String, Object> pessoaDTORecord){
+        return this.pessoaService.register(pessoaDTORecord);
     }
 
     @ApiResponses(value = {

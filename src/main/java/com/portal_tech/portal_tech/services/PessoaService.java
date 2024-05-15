@@ -5,8 +5,8 @@ import com.portal_tech.portal_tech.exceptions.UnprocessableEntityException;
 import com.portal_tech.portal_tech.models.Pessoa;
 import com.portal_tech.portal_tech.models.Setor;
 import com.portal_tech.portal_tech.models.Tipo;
-import com.portal_tech.portal_tech.models.dtos.PessoaDTO;
 
+import com.portal_tech.portal_tech.models.dtos.PessoaDTO;
 import com.portal_tech.portal_tech.repositores.PessoaRepository;
 import com.portal_tech.portal_tech.repositores.TipoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,18 +29,20 @@ public class PessoaService {
     @Autowired
     private TipoRepository tipoRepository;
 
-    public ResponseEntity<PessoaDTO> register(Map<String, Object> pessoaDTO) {
+    public ResponseEntity<PessoaDTO> register(Map<String, Object> pessoaDTORecord) {
         try {
-            Pessoa pessoa = convertToDTO(pessoaDTO);
+            Pessoa pessoa = convertDtoToPessoa(pessoaDTORecord);
 
             this.pessoaRepository.save(pessoa);
-            return new ResponseEntity<>(new PessoaDTO(pessoa.getId(), pessoa.getNome(), pessoa.getEmail(), pessoa.getTelefone(), pessoa.getSenha(), pessoa.getSetor().getId(), pessoa.getTipo().getId()), HttpStatus.OK); //usei get para retornar o
+             PessoaDTO pessoaDTO1 = new PessoaDTO((int) pessoa.getId(), pessoa.getNome(), pessoa.getEmail(), pessoa.getTelefone(), pessoa.getSenha(), pessoa.getSetor().getId(), pessoa.getTipo().getId());
+            System.out.println(pessoaDTO1);
+            return new ResponseEntity<>(new PessoaDTO((int) pessoa.getId(), pessoa.getNome(), pessoa.getEmail(), pessoa.getTelefone(), pessoa.getSenha(),(long) pessoa.getSetor().getId(),(long) pessoa.getTipo().getId()), HttpStatus.OK); //usei get para retornar o
         }catch (Exception e){
             throw  new CustomExceptionHandler("Erro ao salvar a pessoa" + e);
         }
     }
 
-    private static Pessoa convertToDTO(Map<String, Object> pessoaDTO) {
+    private static Pessoa convertDtoToPessoa(Map<String, Object> pessoaDTO) {
         String nomeTipo = (String) pessoaDTO.get("nomeTipo");
 
         String nomeSetor = (String) pessoaDTO.get("nomeSetor");
@@ -76,7 +78,7 @@ public class PessoaService {
                     setor.setId(0);
 
                 }
-                return new ResponseEntity<>(new PessoaDTO(pessoa.get().getId(), pessoa.get().getNome(), pessoa.get().getEmail(), pessoa.get().getTelefone(), pessoa.get().getSenha(), tipo.getId(), setor.getId()), HttpStatus.OK); //usei get para retornar o objeto dentro de Optional
+                return new ResponseEntity<>(new PessoaDTO((int) pessoa.get().getId(), pessoa.get().getNome(), pessoa.get().getEmail(), pessoa.get().getTelefone(), pessoa.get().getSenha(), tipo.getId(), setor.getId()), HttpStatus.OK); //usei get para retornar o objeto dentro de Optional
             }catch (UnprocessableEntityException e){
             throw new UnprocessableEntityException(e.getMessage());
         }catch (Exception e){
@@ -94,7 +96,7 @@ public class PessoaService {
             Pessoa pessoaNova = converPessoatoToDTO(id, pessoaDTO, pessoa);
 
             this.pessoaRepository.save(pessoaNova);
-            return new ResponseEntity<>(new PessoaDTO(pessoaNova.getId(), pessoaNova.getNome(), pessoaNova.getEmail(), pessoaNova.getTelefone(), pessoaNova.getSenha(), pessoa.getTipo().getId(), pessoa.getSetor().getId()), HttpStatus.OK); //usei get para retornar o objeto dentro de Optional
+            return new ResponseEntity<>(new PessoaDTO((int) pessoaNova.getId(), pessoaNova.getNome(), pessoaNova.getEmail(), pessoaNova.getTelefone(), pessoaNova.getSenha(), pessoa.getTipo().getId(), pessoa.getSetor().getId()), HttpStatus.OK); //usei get para retornar o objeto dentro de Optional
         }catch (Exception e){
             throw new CustomExceptionHandler("Erro ao atualizar os dados da pessoa");
         }
@@ -156,7 +158,7 @@ public class PessoaService {
                     setor.setId(0);
                     pessoa.setSetor(setor);
                 }
-                pessoaDTO = new PessoaDTO(pessoa.getId(), pessoa.getNome(), pessoa.getSenha(), pessoa.getTelefone(), pessoa.getSenha(), pessoa.getTipo().getId(), pessoa.getSetor().getId());
+                pessoaDTO = new PessoaDTO((int) pessoa.getId(), pessoa.getNome(), pessoa.getSenha(), pessoa.getTelefone(), pessoa.getSenha(), pessoa.getTipo().getId(), pessoa.getSetor().getId());
                 listOfPessoaDTO.add(pessoaDTO);
             }
 

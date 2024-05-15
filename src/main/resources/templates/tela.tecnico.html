@@ -48,7 +48,8 @@
                 <div class="tabela-container">
 
                     <table class="tabela">
-                        <form action="/tecnico" method="post">
+<!--                        <form action="/tecnico"   th:href="@{/tecnico/{id}(id = ${id})}" method="post">-->
+                            <form th:href="@{/tecnico/{id}(id = ${id})}" method="post">
                         <thead>
                         <tr>
                             <th>Data de Abertura</th>
@@ -109,13 +110,11 @@
                                 <input type="hidden" name="nome" value="${nome}" />
                                     <select name="status" id="status-select" >
                                         <option value ="0" selected>Selecione</option>
-                                        <option value=1 >Chamado aberto</option>
-                                        <option value=2>Em atendimento</option>
-                                        <option value=3 >Finalizado</option>
-                                        <option value=4 >Cancelado</option>
-                                        <option value=5 >Aguardando técnico</option>
-                                        <option value=6 >Em análise</option>
-                                        <option value=7 >Escalado para outro setor</option>
+                                        <option value=1>Em análise</option>
+                                        <option value=2>Aguardando técnico</option>
+                                        <option value=3>Em atendimento</option>
+                                        <option value=4>Escalado para outro setor</option>
+                                        <option value=5>Finalizado</option>
                                     </select>
 
 <!--                                     <option value="finalizado" th:selected="${chamado.id_status.nome == 'finalizado'}">Finalizado</option>-->
