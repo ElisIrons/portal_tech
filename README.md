@@ -27,8 +27,8 @@ Cada chamado técnico registra informações essenciais, como o nome do usuário
 
 - `Atribuição Automática de Chamados:` Automatizar o processo de atribuição de chamados aos técnicos com base em critérios predefinidos, como especialização, disponibilidade ou carga de trabalho.
 - `Geração de Relatórios e Métricas:` Capacidade de gerar relatórios e métricas detalhadas sobre o desempenho do suporte técnico, incluindo tempo médio de resolução, volume de chamados e SLAs.
-- `Priorização de Chamados:` Permite a definição de prioridades para os chamados com base na gravidade do problema ou na importância da solicitação.
-- `Gestão Integrada:` Possui painel de gestão da fila de chamados pelo administrador, facilitando a comunicação entre gestor e técnico.
+- `Comunicação Integrada:` Recurso que facilita a comunicação entre usuários, técnicos e administradores através de mensagens internas no sistema, permitindo discussões sobre os chamados em andamento.
+
 
 # Autores
 
