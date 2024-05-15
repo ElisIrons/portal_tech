@@ -3,7 +3,7 @@ package com.portal_tech.portal_tech.controllers.controllersMVC;
 import com.portal_tech.portal_tech.models.Pessoa;
 
 import com.portal_tech.portal_tech.repositores.SetorRepository;
-import com.portal_tech.portal_tech.services.AutenticacaoService;
+import com.portal_tech.portal_tech.services.serviceFront.AutenticacaoService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 

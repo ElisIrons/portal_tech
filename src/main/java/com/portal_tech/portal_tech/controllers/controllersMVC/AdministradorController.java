@@ -3,7 +3,7 @@ package com.portal_tech.portal_tech.controllers.controllersMVC;
 import com.portal_tech.portal_tech.models.Pessoa;
 import com.portal_tech.portal_tech.models.dtos.ChamadoDTO;
 import com.portal_tech.portal_tech.services.ChamadoService;
-import com.portal_tech.portal_tech.services.ChamadoServiceFront;
+import com.portal_tech.portal_tech.services.serviceFront.ChamadoServiceFront;
 import com.portal_tech.portal_tech.services.PessoaService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
