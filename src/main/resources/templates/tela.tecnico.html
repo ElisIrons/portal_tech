@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <link rel="stylesheet" type="text/css" href="/styles/usuario.chamado.css"/>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100..700&display=swap" rel="stylesheet"/>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link
+            href="https://fonts.googleapis.com/css2?family=Jersey+20&family=Orbitron:wght@400..900&family=Righteous&family=Roboto+Mono:wght@100..700&display=swap"
+            rel="stylesheet"/>
+
+    <title>Portal Tech</title>
+    <link rel="icon" href="styles/images/logo.jpeg"/>
+</head>
+
+<body>
+<header class="cabecalho">
+    <div class="logo">
+        <img src="styles/images/logo.jpeg" alt="logo Portal Tech"/>
+    </div>
+    <div class="titulo">
+        <h1>Portal Tech</h1>
+    </div>
+    <nav class="cabecalhoMenu">
+        <a href="/">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            HOME
+        </a>
+    </nav>
+</header>
+
+<section class="home">
+    <div class="container">
+        <main class="container-form">
+            <section class="container-box">
+                <h1 class="container-texto" th:text="'Bem-vindo, ' + ${userName} + '!'">Bem-vindo(a)!</h1>
+                <h2 class="container-subtitulo">Chamados</h2>
+                <div class="tabela-container">
+
+                    <table class="tabela">
+                        <form action="/tecnico" method="post">
+                        <thead>
+                        <tr>
+                            <th>Data de Abertura</th>
+                            <th>Usuário</th>
+                            <th>Setor</th>
+                            <th>Prioridade</th>
+                            <th>Descrição</th>
+                            <th>Status</th>
+                            <th>Data da Finalização</th>
+                            <th>Salvar</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="chamado, i : ${chamados}">
+                            <!-- <td th:text="${chamado.dt_abertura}">Data Abertura</td>-->
+                            <td th:text="${dtFormatada[i.index]}">Data Abertura</td>
+                            <td th:text="${chamado.id_usuario.nome}">Usuario</td>
+                            <td th:text="${chamado.id_usuario.setor.nome}">Setor</td>
+                            <td th:text="${chamado.id_prioridade.nome}">Prioridade</td>
+                            <td th:text="${chamado.descricao}">Descrição</td>
+<!--                            <td th:text="${chamado.id_status.nome}">TESTEEE</td>-->
+                            <!--                                <select id="status" name="status" required>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>
+                                        <label th:each="optionPrioridade : ${selectPrioridadeOptions}"></label>
+                                        <select id="prioridade" name="prioridade">
+                                            <option value="baixa" name="prioridade" th:value="${optionPrioridade}" th:checked="${optionPrioridade == 'baixa' }"> Baixa</option>
+                                            <option value="media" name="prioridade" th:value="${optionPrioridade}" th:checked="${optionPrioridade == 'media' }">Média</option>
+                                            <option value="alta" name="prioridade" th:value="${optionPrioridade}" th:checked="${optionPrioridade == 'alta' }">Alta</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                    </td>
+                                    <td>
+                                        <label th:each="optionPrioridade : ${selectPrioridadeOptions}"></label>
+                                        <select id="status" name="status">
+                                            <option value="em-analise">Em análise</option>
+                                            <option value="aguardando">Aguardando técnico</option>
+                                            <option value="em-atendimento">Em atendimento</option>
+                                            <option value="outro-setor">Escalado para outro setor</option>
+                                            <option value="finalizado">Finalizado</option>
+                                        </select></td>  -->
+
+                            <td>
+<!--                                <label for="status">Status:</label><br>-->
+<!--                                <select id="status" name="status" required>-->
+<!--                                    <option value="em-analise"  name="status" th:value="${optionStatus}" th:checked="${optionStatus == 'Em Amálise'}">Em análise</option>-->
+<!--                                    <option value="aguardando"  name="status" th:selected="${chamado.id_status.nome} == 'aguardando'">Aguardando técnico</option>-->
+<!--                                    <option value="em-atendimento"  name="status" th:selected="${chamado.id_status.nome == 'em-atendimento'}">Em atendimento</option>-->
+<!--                                    <option value="outro-setor"  name="status" th:selected="${chamado.id_status.nome == 'outro-setor'}">Escalado para outro setor</option>-->
+<!--                                    <option value="em-analise"  name="status" th:selected="${chamado.id_status.nome == 'em-analise'}">Em análise</option>-->
+<!--                                    <option value="finalizado"  name="status" th:selected="${chamado.id_status.nome == 'finalizado'}">Finalizado</option>-->
+
+                                <input type="hidden" name="id" th:value="${chamado.id}" />
+                                <input type="hidden" name="nome" value="${nome}" />
+                                    <select name="status" id="status-select" >
+                                        <option value ="0" selected>Selecione</option>
+                                        <option value=1 >Chamado aberto</option>
+                                        <option value=2>Em atendimento</option>
+                                        <option value=3 >Finalizado</option>
+                                        <option value=4 >Cancelado</option>
+                                        <option value=5 >Aguardando técnico</option>
+                                        <option value=6 >Em análise</option>
+                                        <option value=7 >Escalado para outro setor</option>
+                                    </select>
+
+<!--                                     <option value="finalizado" th:selected="${chamado.id_status.nome == 'finalizado'}">Finalizado</option>-->
+
+<!--                                    <option value="finalizado"  name="status" th:value="${optionStatus}" th:checked="${optionStatus == 'Finalizado'}">Finalizado</option> -->
+<!--                                    <option value="5" th:selected="${chamado.id_status == 5}">Finalizado</option>-->
+                                </select></td>
+
+                            <td th:text="${dtFimFormatada[i.index]}">Data Fim</td>
+
+
+                            <td><button type="submit" class="botao-salvar">Salvar</button> </td>
+
+
+
+                        </tr>
+                        </tbody>
+                        </form>
+                    </table>
+
+                </div>
+                </div>
+            </section>
+        </main>
+    </div>
+</section>
+
+<footer class="footer">
+    <div class="container">
+        <div class="footer-content">
+            <div class="github">
+                <img src="styles/images/github.png" alt="GitHub Logo" class="github-img"/>
+            </div>
+            <div class="github-links">
+                <a href="https://github.com/alineadcosta95">Aline Alves </a>
+                <a href="https://github.com/ElisIrons">Elis Rodrigues</a>
+                <a href="https://github.com/keilaarakaki">Keila Arakaki</a>
+                <a href="https://github.com/nayarakarinearaujo">Nayara Karine</a>
+                <a href="https://github.com/Thais-Abe">Thais Abe </a>
+            </div>
+        </div>
+    </div>
+</footer>
+</body>
+</html>
