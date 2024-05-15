@@ -43,41 +43,44 @@
     <div class="container">
         <main class="container-form">
             <section class="container-box">
-                <h1 class="container-texto" th:text="'Bem-vindo, ' +  ${userOn} + '!'">Bem-vindo(a)!</h1>
-                                            <!-- ${userName} -->
-                <h2 class="container-subtitulo">Chamados</h2>
-                <div class="tabela-container">
+                <h1 class="container-texto" th:text="'Bem-vindo, ' + ${userOn} + '!'">Bem-vindo(a)!</h1>
 
-                    <table class="tabela">
-                        <thead>
-                        <tr>
-                            <th>Data de Abertura</th>
-                            <th>Usuário</th>
-                            <th>Setor</th>
-                            <th>Prioridade</th>
-                            <th>Descrição</th>
-                            <th>Status</th>
-                            <th>Data da Finalização</th>
-                            <th>Salvar</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr th:each="chamado, i : ${chamados}">
-                            <form action="/tecnico" method="post">
+                <h2 class="container-subtitulo">Chamados</h2>
+<!--                <form action="@{'/tecnico/' + ${id_tecnico}" method="post">-->
+<!--                    <form action="/tecnico/${id_tecnico}/${id_chamado}" method="post">-->
+<!---                    <form th:id="'/tecnico' + ${id_tecnico} + ${id_chamado}" th:action="@{/tecnico/${id_tecnico}}" method="post">-->
+<!--                <form action="@{/tecnico/${id_tecnico}/${id_chamado}}" method="post">-->
+                <form action="/tecnico/${id_tecnico}" method="post">
+                    <div class="tabela-container">
+                        <table class="tabela">
+                            <thead>
+                            <tr>
+                                <th>Data de Abertura</th>
+                                <th>Usuário</th>
+                                <th>Setor</th>
+                                <th>Prioridade</th>
+                                <th>Descrição</th>
+                                <th>Status</th>
+                                <th>Data da Finalização</th>
+                                <th>Salvar</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="chamado, i : ${chamados}">
                                 <!-- <td th:text="${chamado.dt_abertura}">Data Abertura</td>-->
                                 <td th:text="${dtFormatada[i.index]}">Data Abertura</td>
                                 <td th:text="${chamado.id_usuario.nome}">Usuario</td>
                                 <td th:text="${chamado.id_usuario.setor.nome}">Setor</td>
     <!--                            <td th:text="${chamado.id_prioridade.nome}">Prioridade</td>-->
+
                                 <td>   <label for="prioridade"></label><br>
                                     <select id="prioridade" name="prioridade" required>
                                         <option value="baixa" th:selected="${chamado.id_prioridade.nome == 'Baixa'}">Baixa</option>
                                         <option value="media" th:selected="${chamado.id_prioridade.nome == 'Média'}">Média</option>
                                         <option value="alta" th:selected="${chamado.id_prioridade.nome == 'Alta'}">Alta</option>
                                     </select></td>
-                                    <input type="hidden" name="id_prioridade" th:value="${chamado.id_prioridade.id}" />
-
                                 <td th:text="${chamado.descricao}">Descrição</td>
+
 
                                 <td>   <label for="status"></label><br>
                                     <select id="status" name="status" required>
@@ -86,37 +89,21 @@
                                         <option value="em-atendimento" th:selected="${chamado.id_status.nome == 'Em atendimento'}">Em atendimento</option>
                                         <option value="outro-setor" th:selected="${chamado.id_status.nome == 'Escalado para outro setor'}">Escalado para outro setor</option>
                                         <option value="finalizado" th:selected="${chamado.id_status.nome == 'Finalizado'}">Finalizado</option>
-                                    </select>
-                                    <input type="hidden" name="id_status" th:value="${chamado.id_status.id}" />
-
-                                </td>
+                                    </select></td>
 
                                 <td th:text="${dtFimFormatada[i.index]}">Data Fim</td>
 
-                                <input type="hidden" name="id" th:value="${chamado.id}" />
-                                <input type="hidden" name="id_chamado" th:value="${chamado.id}" />
-
-
-                                <!--                                <input type="hidden" name="nome" value="${nome}" />
-                                -->
-    <!--                                     <option value="finalizado" th:selected="${chamado.id_status.nome == 'finalizado'}">Finalizado</option>-->
-
-    <!--                                    <option value="finalizado"  name="status" th:value="${optionStatus}" th:checked="${optionStatus == 'Finalizado'}">Finalizado</option> -->
-    <!--                                    <option value="5" th:selected="${chamado.id_status == 5}">Finalizado</option>-->
-    <!--                                </select></td>-->
-
-
-
-                                <td><button type="submit" class="botao-salvar">Salvar</button> </td>
-                            </form>
-                        </tr>
-
-                        </tbody>
-                        </form>
-                    </table>
-
-                </div>
-
+         <!--                       <input type="hidden" name="id_tecnico" th:value="${chamado.id_tecnico}" /> --> <!-- campo oculto p/ passar por parâmetro o id do chamado -->
+                                <td><button type="submit" class="botao-salvar">Salvar</button> <!--</td> -->
+<!--                                <td>-->
+                                    <input type="hidden" name="id_chamado" th:value="${chamado.id}" />  <!-- campo oculto p/ passar por parâmetro o id do chamado -->
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </form>
+    <!--            </div>-->
             </section>
         </main>
     </div>
