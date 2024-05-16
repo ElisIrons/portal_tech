@@ -38,6 +38,7 @@ public class Chamado {
     @ManyToOne(optional = true) //qdo abrir o chamado não terá prioridade, só após o adm ou técnico atribuírem
     @JoinColumn(name = "id_prioridade", referencedColumnName = "id", nullable = true, columnDefinition = "BIGINT DEFAULT 1")
     private Prioridade id_prioridade;
+
     public Chamado() {
     }
 

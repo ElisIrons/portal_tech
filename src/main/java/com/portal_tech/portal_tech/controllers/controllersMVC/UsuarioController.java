@@ -5,6 +5,7 @@ import com.portal_tech.portal_tech.models.Pessoa;
 import com.portal_tech.portal_tech.models.Prioridade;
 import com.portal_tech.portal_tech.models.Status;
 import com.portal_tech.portal_tech.models.dtos.ChamadoDTO;
+import com.portal_tech.portal_tech.models.dtos.PrioridadeDTO;
 import com.portal_tech.portal_tech.repositores.ChamadoRepository;
 import com.portal_tech.portal_tech.repositores.PrioridadeRepository;
 import com.portal_tech.portal_tech.repositores.StatusRepository;
@@ -52,51 +53,66 @@ public class UsuarioController {
     @GetMapping("/usuario/novo/chamado")
     public String novaTelaChamado(Model model, HttpSession session) {
         Pessoa userOn = (Pessoa) session.getAttribute("cache");
+        List<Chamado> chamados = chamadoRepository.findById_Usuario(userOn.getId());
+
+        List<Prioridade> listPrioridades = prioridadeRepository.findAll();
+
+
+        List<PrioridadeDTO> listPrioridadesDTO = new ArrayList<>();
+        for(Prioridade prioridade : listPrioridades){
+            listPrioridadesDTO.add(new PrioridadeDTO(prioridade));
+
+        }
+
+
+        model.addAttribute("listPrioridadesDTO", listPrioridadesDTO);
+
+        PrioridadeDTO prioridadeDTO = new PrioridadeDTO();
+
+
         model.addAttribute("userOn", userOn);
         return "usuario.novo.chamado";
     }
 
-//    public Chamado buscaChamado (Long id){
-//        Optional<Chamado> optionalChamado = chamadoRepository.findById(id);
-//        return optionalChamado.orElse(null);
-//    }
-
-    @PostMapping("/usuario/novo/chamado")
-    public String chamados (@RequestParam("prioridade") String prioridade,
-                             @RequestParam Long id_chamado,
-                             HttpSession session) {
-
-        Chamado chamado = this.buscaChamado(id_chamado);
-
-        Prioridade prioridademodified = null;
-        Prioridade prioridadeBd = chamado.getIdPrioridade();
-        switch (prioridade) {
-            case "baixa":
-                prioridademodified = this.prioridadeRepository.findById(1L).orElse(null);
-                break;
-            case "media":
-                prioridademodified = this.prioridadeRepository.findById(2L).orElse(null);
-                break;
-            case "alta":
-                prioridademodified = this.prioridadeRepository.findById(3L).orElse(null);
-                break;
-            default:
-                return "redirect:/tela-usuario";
-        }
-        if (prioridademodified != null) {
-            chamado.setIdPrioridade(prioridademodified);
-            chamadoRepository.save(chamado);
-        } else {
-            chamado.setIdPrioridade(prioridadeBd);
-        }
-        return "redirect:/tela-usuario";
-    }
-
-    public Chamado buscaChamado(Long id){
+    public Chamado buscaChamado (Long id){
         Optional<Chamado> optionalChamado = chamadoRepository.findById(id);
         return optionalChamado.orElse(null);
     }
 
+    @PostMapping("/usuario/novo/chamado")
+    public String chamados ( @RequestParam("prioridade") int prioridade,
+                             HttpSession session, @RequestParam String descricao){
+
+        Pessoa userOn = (Pessoa) session.getAttribute("cache");
+        long idUsuario = userOn.getId();
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate dtAbertura = LocalDate.now();
+        String dtFormatada = dtAbertura.format(formatter);
+        LocalDate date = LocalDate.parse(dtFormatada, formatter);
+        Chamado chamado = new Chamado();
+        chamado.setDescricao(descricao);      chamado.setDt_abertura(date);
+
+
+        Prioridade prioridade1 = new Prioridade();
+        prioridade1.setId((long) prioridade);
+        chamado.setIdPrioridade(prioridade1);
+
+        Pessoa pessoa  = new Pessoa();
+        pessoa.setId(idUsuario);
+        chamado.setIdUsuario(pessoa);
+
+
+        Chamado chamado1 = this.chamadoRepository.save(chamado);
+        System.out.println(chamado1);
+
+
+                return "redirect:/tela-usuario";
+        }
+
+
+
+//        return "redirect:usuario.novo.chamado"; // + pessoa.getId();
 
 
 
