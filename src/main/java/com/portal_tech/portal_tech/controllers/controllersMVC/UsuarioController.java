@@ -56,18 +56,16 @@ public class UsuarioController {
         return "usuario.novo.chamado";
     }
 
-    public Chamado buscaChamado (Long id){
-        Optional<Chamado> optionalChamado = chamadoRepository.findById(id);
-        return optionalChamado.orElse(null);
-    }
+//    public Chamado buscaChamado (Long id){
+//        Optional<Chamado> optionalChamado = chamadoRepository.findById(id);
+//        return optionalChamado.orElse(null);
+//    }
 
     @PostMapping("/usuario/novo/chamado")
-    public String chamados ( @RequestParam("status") String status,
-                             @RequestParam Long id_status,
-                             @RequestParam("prioridade") String prioridade,
+    public String chamados (@RequestParam("prioridade") String prioridade,
                              @RequestParam Long id_chamado,
-                             @RequestParam int id,
-                             HttpSession session){
+                             HttpSession session) {
+
         Chamado chamado = this.buscaChamado(id_chamado);
 
         Prioridade prioridademodified = null;
@@ -83,61 +81,23 @@ public class UsuarioController {
                 prioridademodified = this.prioridadeRepository.findById(3L).orElse(null);
                 break;
             default:
-                return "redirect:usuario.novo.chamado";
+                return "redirect:/tela-usuario";
         }
-
-
-
-        Status statusmodified = null;
-        Status statusbd = chamado.getIdStatus();
-
-/*  aqui testar qdo tiver id            Pessoa pessoa = (Pessoa) session.getAttribute("cache");
-              session.setAttribute("cache", pessoa.getNome());
-
-              long idPessoa= pessoa.getId();
-              Pessoa pessoaDados = this.pessoaRepository.getReferenceById(idPessoa);
- */
-
-
-//         Pessoa pessoa1 = this.findIDPessoa((int) idPessoa);
-
-        // aqui switch (status.intValue()) {
-        switch (status) {
-            case "em-analise":
-                statusmodified = this.statusRepository.findById(1L).orElse(null);
-                break;
-            case "aguardando":
-                statusmodified = this.statusRepository.findById(2L).orElse(null);
-                break;
-            case "em-atendimento":
-                statusmodified = this.statusRepository.findById(3L).orElse(null);
-                break;
-            case "outro-setor":
-                statusmodified = this.statusRepository.findById(4L).orElse(null);
-                break;
-            case "finalizado":
-                statusmodified = this.statusRepository.findById(5L).orElse(null);
-                break;
-            default:
-                return "redirect:usuario.novo.chamado";
-        }
-
-        if (statusmodified != null || prioridademodified != null) {
-            chamado.setIdStatus(statusmodified);
+        if (prioridademodified != null) {
             chamado.setIdPrioridade(prioridademodified);
-//  aqui testar qdo tiver id                  chamado.setIdTecnico(pessoa);
             chamadoRepository.save(chamado);
-
-// aqui testar qdo tiver id                  session.setAttribute("cache", pessoa.getNome());
-        }
-        else{
-            chamado.setIdStatus(statusbd);
+        } else {
             chamado.setIdPrioridade(prioridadeBd);
-// aqui testar qdo tiver id                  session.setAttribute("cache", pessoa.getNome());
         }
-
-        return "redirect:usuario.novo.chamado"; // + pessoa.getId();
+        return "redirect:/tela-usuario";
     }
+
+    public Chamado buscaChamado(Long id){
+        Optional<Chamado> optionalChamado = chamadoRepository.findById(id);
+        return optionalChamado.orElse(null);
+    }
+
+
 
 
 /*
