@@ -1,22 +1,10 @@
 package com.portal_tech.portal_tech.controllers.controllersMVC;
 
-import com.portal_tech.portal_tech.models.Chamado;
 import com.portal_tech.portal_tech.models.Pessoa;
-import com.portal_tech.portal_tech.models.Prioridade;
-import com.portal_tech.portal_tech.models.Setor;
-import com.portal_tech.portal_tech.models.Status;
-import com.portal_tech.portal_tech.models.Tipo;
 import com.portal_tech.portal_tech.models.dtos.ChamadoDTO;
-import com.portal_tech.portal_tech.models.dtos.PessoaDTO;
-import com.portal_tech.portal_tech.repositores.ChamadoRepository;
-import com.portal_tech.portal_tech.repositores.PessoaRepository;
-import com.portal_tech.portal_tech.repositores.PrioridadeRepository;
-import com.portal_tech.portal_tech.repositores.SetorRepository;
-import com.portal_tech.portal_tech.repositores.StatusRepository;
-import com.portal_tech.portal_tech.repositores.TipoRepository;
-import com.portal_tech.portal_tech.services.ChamadoService;
-import com.portal_tech.portal_tech.services.ChamadoServiceFront;
-import com.portal_tech.portal_tech.services.PessoaService;
+import com.portal_tech.portal_tech.services.serviceBack.ChamadoService;
+import com.portal_tech.portal_tech.services.serviceFront.ChamadoServiceFront;
+import com.portal_tech.portal_tech.services.serviceBack.PessoaService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -42,7 +30,7 @@ public class AdministradorController {
 
 @GetMapping ("/adminpainel")
     public String findAllChamados(Model model, HttpSession session){
-    List<ChamadoDTO> chamadoDTO = chamadoServiceFront.findAllChamados().getBody();
+    List<ChamadoDTO> chamadoDTO = chamadoServiceFront.findAllChamados();
     model.addAttribute("chamados", chamadoDTO);
 
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");

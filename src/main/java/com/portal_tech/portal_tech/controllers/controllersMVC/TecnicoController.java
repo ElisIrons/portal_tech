@@ -9,7 +9,7 @@ import com.portal_tech.portal_tech.repositores.ChamadoRepository;
 import com.portal_tech.portal_tech.repositores.PessoaRepository;
 import com.portal_tech.portal_tech.repositores.PrioridadeRepository;
 import com.portal_tech.portal_tech.repositores.StatusRepository;
-import com.portal_tech.portal_tech.services.ChamadoServiceFront;
+import com.portal_tech.portal_tech.services.serviceFront.ChamadoServiceFront;
 import com.portal_tech.portal_tech.swaggerDoc.TecnicoControllerOpenApi;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +42,7 @@ public class TecnicoController { //implements TecnicoControllerOpenApi {
 
     @GetMapping("/tecnico")
     public String findAllChamados(Model model, HttpSession session) { //abertos sem técnico
-        List<ChamadoDTO> chamadoDTO = chamadoServiceFront.findChamadosSemTecnico().getBody(); //findAllChamados().getBody();                                      //this.chamadoService.findAllChamados();
+        List<ChamadoDTO> chamadoDTO = chamadoServiceFront.findChamadosSemTecnico(); //findAllChamados().getBody();                                      //this.chamadoService.findAllChamados();
         model.addAttribute("chamados", chamadoDTO);
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -271,7 +271,7 @@ public class TecnicoController { //implements TecnicoControllerOpenApi {
 
         @GetMapping("/usuario/chamado/{id}")
         public String findById (@PathVariable("id") Long id, Model model){
-            ChamadoDTO chamadoDTO = chamadoServiceFront.findById(id).getBody();
+            ChamadoDTO chamadoDTO = chamadoServiceFront.findById(id);
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
             String dtFormatada = null, dtFimFormatada = null;
             if (chamadoDTO.getDt_abertura() != null) {

@@ -3,7 +3,7 @@ package com.portal_tech.portal_tech.controllers.controllersREST;
 import com.portal_tech.portal_tech.models.Setor;
 import com.portal_tech.portal_tech.models.dtos.SetorDTO;
 import com.portal_tech.portal_tech.repositores.SetorRepository;
-import com.portal_tech.portal_tech.services.SetorService;
+import com.portal_tech.portal_tech.services.serviceBack.SetorService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;

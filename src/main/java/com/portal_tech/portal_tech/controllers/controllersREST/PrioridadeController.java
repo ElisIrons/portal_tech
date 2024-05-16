@@ -1,7 +1,7 @@
 package com.portal_tech.portal_tech.controllers.controllersREST;
 
 import com.portal_tech.portal_tech.models.dtos.PrioridadeDTO;
-import com.portal_tech.portal_tech.services.PrioridadeService;
+import com.portal_tech.portal_tech.services.serviceBack.PrioridadeService;
 import com.portal_tech.portal_tech.swaggerDoc.PrioridadeControllerOpenApi;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;

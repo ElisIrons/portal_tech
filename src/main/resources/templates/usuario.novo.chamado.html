@@ -66,11 +66,13 @@
                         <div>
                             <span class="input-group-text">Prioridade</span>
                         </div>
-                        <select class="form-control" id="prioridade" name="prioridade">
-                            <option value="baixa">Baixa</option>
-                            <option value="media">Média</option>
-                            <option value="alta">Alta</option>
+                        <select class="form-control" id="prioridade" name="prioridade" required>
+                            <option value="baixa" th:selected="${chamado.id_prioridade.nome == 'Baixa'}">Baixa</option>
+                            <option value="media" th:selected="${chamado.id_prioridade.nome == 'Média'}">Média</option>
+                            <option value="alta" th:selected="${chamado.id_prioridade.nome == 'Alta'}">Alta</option>
                         </select>
+                        <input type="hidden" name="id_prioridade" th:value="${chamado.id_prioridade.id}" />
+
                         <div class="data">
                             <div class="data_abertura">
                                 <label for="data_abertura" id="data_abertura" class="input-group-text campo label"
@@ -94,6 +96,7 @@
                     </div>
                 </div>
             </section>
+        </main>
     </div>
     <footer class="footer">
         <div class="container">
@@ -111,5 +114,6 @@
             </div>
         </div>
     </footer>
+</section>
 </body>
 </html>
