@@ -1,7 +1,7 @@
 package com.portal_tech.portal_tech.controllers.controllersREST;
 
 import com.portal_tech.portal_tech.models.dtos.PessoaDTO;
-import com.portal_tech.portal_tech.services.PessoaService;
+import com.portal_tech.portal_tech.services.serviceBack.PessoaService;
 import java.util.Map;
 
 import com.portal_tech.portal_tech.swaggerDoc.PessoaControllerOpenApi;

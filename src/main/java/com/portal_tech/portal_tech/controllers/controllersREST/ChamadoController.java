@@ -1,7 +1,7 @@
 package com.portal_tech.portal_tech.controllers.controllersREST;
 
 import com.portal_tech.portal_tech.models.dtos.ChamadoDTO;
-import com.portal_tech.portal_tech.services.ChamadoService;
+import com.portal_tech.portal_tech.services.serviceBack.ChamadoService;
 import com.portal_tech.portal_tech.swaggerDoc.ChamadoControllerOpenApi;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;

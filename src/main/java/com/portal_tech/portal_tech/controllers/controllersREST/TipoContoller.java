@@ -2,7 +2,7 @@ package com.portal_tech.portal_tech.controllers.controllersREST;
 
 
 import com.portal_tech.portal_tech.models.dtos.TipoDTO;
-import com.portal_tech.portal_tech.services.TipoService;
+import com.portal_tech.portal_tech.services.serviceBack.TipoService;
 import com.portal_tech.portal_tech.swaggerDoc.TipoControllerOpenApi;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;

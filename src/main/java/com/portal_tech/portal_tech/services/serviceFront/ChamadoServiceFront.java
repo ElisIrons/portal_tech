@@ -1,7 +1,9 @@
-package com.portal_tech.portal_tech.services.serviceFront;
+package com.portal_tech.portal_tech.services;
 
 import com.portal_tech.portal_tech.models.Chamado;
+import com.portal_tech.portal_tech.models.Pessoa;
 import com.portal_tech.portal_tech.models.dtos.ChamadoDTO;
+import com.portal_tech.portal_tech.models.dtos.PessoaDTO;
 import com.portal_tech.portal_tech.repositores.ChamadoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Query;
@@ -61,6 +63,7 @@ public class ChamadoServiceFront {
         if (optionalChamado.isPresent()) {
             Chamado chamado = optionalChamado.get();
             Chamado updatedChamado = dto.convert(dto);
+            updatedChamado.setIdTecnico(dto.getId_tecnico());
             updatedChamado.setId(id);
             chamadoRepository.save(updatedChamado);
             return new ChamadoDTO(updatedChamado);

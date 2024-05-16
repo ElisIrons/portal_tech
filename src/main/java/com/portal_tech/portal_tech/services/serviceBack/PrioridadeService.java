@@ -1,4 +1,4 @@
-package com.portal_tech.portal_tech.services;
+package com.portal_tech.portal_tech.services.serviceBack;
 
 import com.portal_tech.portal_tech.models.Prioridade;
 import com.portal_tech.portal_tech.models.dtos.PrioridadeDTO;
