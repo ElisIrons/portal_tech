@@ -31,6 +31,17 @@ public class ChamadoServiceFront {
     }
 
     //Busca todos os chamados cadastrados no banco de dados.
+    public ResponseEntity<List<ChamadoDTO>> findChamadosSemTecnico() {
+        List<Chamado> chamados = chamadoRepository.findChamadosSemTecnico();
+        if (chamados.isEmpty()) {
+            throw new RuntimeException("Não há chamados cadastrados!");
+        } else {
+            List<ChamadoDTO> listChamadoDTO = chamados.stream().map(ChamadoDTO::new).collect(Collectors.toList());
+            return new ResponseEntity<>(listChamadoDTO, HttpStatus.OK);
+        }
+    }
+
+    //Busca todos os chamados cadastrados no banco de dados.
     public ResponseEntity<List<ChamadoDTO>> findAllChamados() {
         List<Chamado> chamados = chamadoRepository.findAll();
         if (chamados.isEmpty()) {
@@ -40,6 +51,7 @@ public class ChamadoServiceFront {
             return new ResponseEntity<>(listChamadoDTO, HttpStatus.OK);
         }
     }
+
 
     //Buscar um chamado pelo ID fornecido.
     public ResponseEntity<ChamadoDTO> findById(Long id) {

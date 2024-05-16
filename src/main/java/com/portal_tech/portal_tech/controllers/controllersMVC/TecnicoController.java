@@ -41,8 +41,8 @@ public class TecnicoController { //implements TecnicoControllerOpenApi {
     private PrioridadeRepository prioridadeRepository;
 
     @GetMapping("/tecnico")
-    public String findAllChamados(Model model, HttpSession session) {
-        List<ChamadoDTO> chamadoDTO = chamadoServiceFront.findAllChamados().getBody();                                      //this.chamadoService.findAllChamados();
+    public String findAllChamados(Model model, HttpSession session) { //abertos sem técnico
+        List<ChamadoDTO> chamadoDTO = chamadoServiceFront.findChamadosSemTecnico().getBody(); //findAllChamados().getBody();                                      //this.chamadoService.findAllChamados();
         model.addAttribute("chamados", chamadoDTO);
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -64,12 +64,17 @@ public class TecnicoController { //implements TecnicoControllerOpenApi {
         model.addAttribute("dtFormatada", dataFormatada);
         model.addAttribute("dtFimFormatada", dataFimFormatada);
 
-    /*    Pessoa userOn = (Pessoa) session.getAttribute("cache");
+/*        Pessoa userOn = (Pessoa) session.getAttribute("cache");
         String nomeUsuario = userOn.getNome();
         model.addAttribute("userOn", userOn);*/
-        //return "index.tecnico"; --agora
+
+//sempre terá alguém logado
+        Pessoa userOn = (Pessoa) session.getAttribute("cache");
+        String nomeUsuario = userOn.getNome();
+        model.addAttribute("userOn", nomeUsuario);
+
         return "tela.tecnico";
-        //return "/index.tecnico";
+
 
     }
     /*@GetMapping ("/tecnico")
@@ -138,10 +143,10 @@ public class TecnicoController { //implements TecnicoControllerOpenApi {
 
         @PostMapping("/tecnico")
         public String chamados ( @RequestParam("status") String status,
-                                 @RequestParam Long id_status,
                                  @RequestParam("prioridade") String prioridade,
                                  @RequestParam Long id_chamado,
-                                 @RequestParam int id,
+                                 Model model,
+                             //    @RequestParam Long id,
                                  HttpSession session){
             Chamado chamado = this.buscaChamado(id_chamado);
 
@@ -161,8 +166,6 @@ public class TecnicoController { //implements TecnicoControllerOpenApi {
                     return "redirect:/tecnico";
             }
 
-
-
             Status statusmodified = null;
             Status statusbd = chamado.getIdStatus();
 
@@ -173,28 +176,29 @@ public class TecnicoController { //implements TecnicoControllerOpenApi {
               Pessoa pessoaDados = this.pessoaRepository.getReferenceById(idPessoa);
  */
 
-
-//         Pessoa pessoa1 = this.findIDPessoa((int) idPessoa);
-
-              // aqui switch (status.intValue()) {
               switch (status) {
                   case "em-analise":
                       statusmodified = this.statusRepository.findById(1L).orElse(null);
+                      chamado.setDt_fim(null);
                       break;
                   case "aguardando":
                       statusmodified = this.statusRepository.findById(2L).orElse(null);
+                      chamado.setDt_fim(null);
                       break;
                   case "em-atendimento":
                       statusmodified = this.statusRepository.findById(3L).orElse(null);
+                      chamado.setDt_fim(null);
                       break;
                   case "outro-setor":
                       statusmodified = this.statusRepository.findById(4L).orElse(null);
+                      chamado.setDt_fim(null);
                       break;
                   case "finalizado":
                       statusmodified = this.statusRepository.findById(5L).orElse(null);
+                      chamado.setDt_fim(LocalDate.now());
                       break;
                   default:
-                      return "redirect:/tecnico";
+                      return "redirect:/tecnico/" + chamado.getIdTecnico().getId();
               }
 
               if (statusmodified != null || prioridademodified != null) {
@@ -211,7 +215,11 @@ public class TecnicoController { //implements TecnicoControllerOpenApi {
 // aqui testar qdo tiver id                  session.setAttribute("cache", pessoa.getNome());
               }
 
-            return "redirect:/tecnico"; // + pessoa.getId();
+
+            return "redirect:/tecnico/" + chamado.getIdTecnico().getId(); //{id}"; // + pessoa.getId();
+
+            //return "redirect:/tecnico"; // + pessoa.getId();
+            // /tecnico/{id}
         }
 
         public Chamado FindIDChamado ( int id){
@@ -267,7 +275,9 @@ public class TecnicoController { //implements TecnicoControllerOpenApi {
             return "usuario.chamados";
         }
 
-        @PostMapping("/tecnico/{id_tecnico}) //     /{id_chamado}")
+
+    // não sei se precisará
+        @PostMapping("/tecnico/{id_tecnico}")  //     /{id_chamado}")
         public String updateById (@PathVariable("id_tecnico") Long id_tecnico, @PathVariable("id_chamado") Long
         id_chamado, @ModelAttribute("chamadoDTO") ChamadoDTO chamadoDTO){
             chamadoServiceFront.updateById(chamadoDTO.getId(), chamadoDTO);

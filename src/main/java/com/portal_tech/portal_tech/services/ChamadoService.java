@@ -41,7 +41,17 @@ public class ChamadoService {
         }
     }
 
+    public List<ChamadoDTO> findChamadosSemTecnico() {
+        List<Chamado> chamados = this.chamadoRepository.findChamadosSemTecnico();
+        if (chamados.isEmpty()){
+            throw new RuntimeException("Não há chamados cadastrados!");
+        }
+        else {
+            List<ChamadoDTO> listChamadoDTO = chamados.stream().map(ChamadoDTO::new).collect(Collectors.toList());
 
+            return listChamadoDTO;//converte lst chamados em lst de chamados dto
+        }
+    }
     public ResponseEntity<ChamadoDTO> findById(Long id) {
         Optional<Chamado> optionalChamado = this.chamadoRepository.findById(id);
         if (optionalChamado.isPresent()) {
