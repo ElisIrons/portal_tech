@@ -1,5 +1,6 @@
 package com.portal_tech.portal_tech.controllers.controllersREST;
 
+import com.portal_tech.portal_tech.models.Prioridade;
 import com.portal_tech.portal_tech.models.dtos.PrioridadeDTO;
 import com.portal_tech.portal_tech.services.serviceBack.PrioridadeService;
 import com.portal_tech.portal_tech.swaggerDoc.PrioridadeControllerOpenApi;
@@ -21,11 +22,12 @@ public class PrioridadeController implements PrioridadeControllerOpenApi {
 
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "os dados foram salvos com sucesso"),
-            @ApiResponse(responseCode = "400", description = "Faltam dados obrigatórios a serem passados/não foi possível salvar")
+            @ApiResponse(responseCode = "400", description = "Faltam dados obrigatórios a serem passados/não foi possível salvar"),
+            @ApiResponse(responseCode = "500", description = "Erro no servidor")
     })
     @RequestMapping(value = "/criar", method = RequestMethod.POST)
-    public void criarPrioridades() {
-        this.prioridadeService.CriaPrioridade();
+    public void criarPrioridades(PrioridadeDTO prioridadeDTO) {
+        this.prioridadeService.CriaPrioridade(prioridadeDTO);
 
     }
 
@@ -36,7 +38,8 @@ public class PrioridadeController implements PrioridadeControllerOpenApi {
 
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK"),
-            @ApiResponse(responseCode = "404", description = "Erro interno")
+            @ApiResponse(responseCode = "404", description = "Erro interno"),
+            @ApiResponse(responseCode = "500", description = "Erro no servidor")
     })
     @RequestMapping(value = "/mostrar", method = RequestMethod.GET)
     public ResponseEntity<List<PrioridadeDTO>> findAll(){
@@ -51,13 +54,18 @@ public class PrioridadeController implements PrioridadeControllerOpenApi {
 
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "O elemento foi deletado com sucesso"),
-            @ApiResponse(responseCode = "404", description = "O ID requisitado não existe/foi encontrado no sistema")
+            @ApiResponse(responseCode = "404", description = "O ID requisitado não existe/foi encontrado no sistema"),
+            @ApiResponse(responseCode = "500", description = "Erro no servidor")
     })
     @RequestMapping(value = "/excluir/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<String> deleteById(@PathVariable Long id) {
         return this.prioridadeService.deleteById(id);
     }
-
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "O elemento foi deletado com sucesso"),
+            @ApiResponse(responseCode = "404", description = "O ID requisitado não existe/foi encontrado no sistema"),
+            @ApiResponse(responseCode = "500", description = "Erro no servidor")
+    })
 
     @RequestMapping(value = "/editar/{id}", method = RequestMethod.PUT)
     public ResponseEntity<PrioridadeDTO> updateById(@PathVariable Long id, @RequestBody PrioridadeDTO prioridade) {

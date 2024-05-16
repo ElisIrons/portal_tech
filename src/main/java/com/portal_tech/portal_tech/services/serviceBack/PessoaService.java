@@ -30,7 +30,6 @@ public class PessoaService {
 
     public ResponseEntity<PessoaDTO> register(Map<String, Object> pessoaDTO) {
         try {
-
             String email = (String) pessoaDTO.get("email");
             boolean personExists = this.verifyIfPersonAlreadyExistsByEmail(email);
             if (personExists) {
