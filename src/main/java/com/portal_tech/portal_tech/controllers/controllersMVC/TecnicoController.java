@@ -64,48 +64,16 @@ public class TecnicoController { //implements TecnicoControllerOpenApi {
         model.addAttribute("dtFormatada", dataFormatada);
         model.addAttribute("dtFimFormatada", dataFimFormatada);
 
-/*        Pessoa userOn = (Pessoa) session.getAttribute("cache");
-        String nomeUsuario = userOn.getNome();
-        model.addAttribute("userOn", userOn);*/
-
 //sempre terá alguém logado
         Pessoa userOn = (Pessoa) session.getAttribute("cache");
         String nomeUsuario = userOn.getNome();
         model.addAttribute("userOn", nomeUsuario);
+        /*      model.addAttribute("userOn", userOn);*/
 
         return "tela.tecnico";
 
 
     }
-    /*@GetMapping ("/tecnico")
-    public String indexUsuario(Model model){
-        List<ChamadoDTO> chamadoDTO = chamadoServiceFront.findAllChamados().getBody();                                      //this.chamadoService.findAllChamados();
-        model.addAttribute("chamados", chamadoDTO);
-
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        List<String> dataFormatada = new ArrayList<>();
-        for (ChamadoDTO chamado : chamadoDTO){
-            LocalDate dtAbertura = chamado.getDt_abertura();
-            String dtFormatada = dtAbertura.format(formatter);
-            dataFormatada.add(dtFormatada);
-        }
-        model.addAttribute("dtFormatada", dataFormatada);
-
-        List<String> dataFimFormatada = new ArrayList<>();
-        for (ChamadoDTO chamado : chamadoDTO){
-            LocalDate dtFim = chamado.getDt_fim();
-            if (dtFim != null) {
-                String dtFimFormatada = dtFim.format(formatter);
-                dataFimFormatada.add(dtFimFormatada);
-            }
-            else {
-                dataFimFormatada.add("");
-            }
-        }
-        model.addAttribute("dtFimFormatada", dataFimFormatada);
-
-        return "index.tecnico";
-    }*/
         // TECNICO NÃO EXCLUIRÁ NEM CRIARÁ NOVO CHAMADO
 
         @GetMapping("/tecnico/{id}")
@@ -157,7 +125,8 @@ public class TecnicoController { //implements TecnicoControllerOpenApi {
                                  @RequestParam("prioridade") String prioridade,
                                  @RequestParam Long id_chamado,
                                  Model model,
-                             //    @RequestParam Long id,
+                                 //@RequestParam("id_tecnico") Long id_tecnico,
+                                // @PathVariable("id") Long id_tecnico,
                                  HttpSession session){
             Chamado chamado = this.buscaChamado(id_chamado);
 
@@ -212,25 +181,28 @@ public class TecnicoController { //implements TecnicoControllerOpenApi {
                       return "redirect:/tecnico/" + chamado.getIdTecnico().getId();
               }
 
-              if (statusmodified != null || prioridademodified != null) {
+
+            // pro técnico atribuir chamado em aberto para ele mesmo
+            Pessoa userOn = (Pessoa) session.getAttribute("cache");
+            long id_tecnico = userOn.getId();
+            Pessoa tecnico = this.pessoaRepository.findById(id_tecnico).orElse(null);
+            chamado.setIdTecnico(tecnico);
+
+
+            if (statusmodified != null || prioridademodified != null) {
                   chamado.setIdStatus(statusmodified);
                   chamado.setIdPrioridade(prioridademodified);
-//  aqui testar qdo tiver id                  chamado.setIdTecnico(pessoa);
+
                   chamadoRepository.save(chamado);
 
-// aqui testar qdo tiver id                  session.setAttribute("cache", pessoa.getNome());
               }
               else{
                   chamado.setIdStatus(statusbd);
                   chamado.setIdPrioridade(prioridadeBd);
-// aqui testar qdo tiver id                  session.setAttribute("cache", pessoa.getNome());
               }
-
 
             return "redirect:/tecnico/" + chamado.getIdTecnico().getId(); //{id}"; // + pessoa.getId();
 
-            //return "redirect:/tecnico"; // + pessoa.getId();
-            // /tecnico/{id}
         }
 
         public Chamado FindIDChamado ( int id){
@@ -250,22 +222,6 @@ public class TecnicoController { //implements TecnicoControllerOpenApi {
 
 
 
-/*    @GetMapping ("usuario.chamados")
-    @GetMapping ("tecnico/chamados")
-    public String findAllChamados(Model model){
-        List<ChamadoDTO> chamadoDTO = chamadoServiceFront.findAllChamados().getBody();
-        model.addAttribute("chamados", chamadoDTO);
-
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        List<String> dataFormatada = new ArrayList<>();
-        for (ChamadoDTO chamado : chamadoDTO){
-            LocalDate dtAbertura = chamado.getDt_abertura();
-            String dtFormatada = dtAbertura.format(formatter);
-            dataFormatada.add(dtFormatada);
-        }
-        model.addAttribute("dtFormatada", dataFormatada);
-        return "usuario.chamados"; // PRECISA DO ID DO TECNICO PARA FILTRAR CHAMADOS DELE
-    }*/
         // TECNICO NÃO EXCLUIRÁ NEM CRIARÁ NOVO CHAMADO
 
 
