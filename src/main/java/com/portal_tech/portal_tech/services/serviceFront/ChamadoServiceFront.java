@@ -5,6 +5,7 @@ import com.portal_tech.portal_tech.models.Pessoa;
 import com.portal_tech.portal_tech.models.dtos.ChamadoDTO;
 import com.portal_tech.portal_tech.models.dtos.PessoaDTO;
 import com.portal_tech.portal_tech.repositores.ChamadoRepository;
+import com.portal_tech.portal_tech.repositores.PessoaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -22,11 +23,25 @@ public class ChamadoServiceFront {
     @Autowired
     private ChamadoRepository chamadoRepository;
 
+    @Autowired
+    private PessoaRepository pessoaRepository;
+
     //Salva um novo chamado no banco de dados.
     public ChamadoDTO save(ChamadoDTO dto) {
         Chamado chamado = dto.convert(dto);
         chamado = chamadoRepository.save(chamado);
         return new ChamadoDTO(chamado);
+    }
+
+    //Busca todos os chamados cadastrados no banco de dados.
+    public List<ChamadoDTO> findChamadosSemTecnico() {
+        List<Chamado> chamados = chamadoRepository.findChamadosSemTecnico();
+        if (chamados.isEmpty()) {
+            throw new RuntimeException("Não há chamados cadastrados!");
+        } else {
+            List<ChamadoDTO> listChamadoDTO = chamados.stream().map(ChamadoDTO::new).collect(Collectors.toList());
+            return (listChamadoDTO);
+        }
     }
 
     //Busca todos os chamados cadastrados no banco de dados.
@@ -39,6 +54,7 @@ public class ChamadoServiceFront {
             return listChamadoDTO;
         }
     }
+
 
     //Buscar um chamado pelo ID fornecido.
     public ChamadoDTO findById(Long id) {
@@ -124,4 +140,8 @@ public class ChamadoServiceFront {
     }
 
 
+    public List<Pessoa> findAllTecnicos() {
+        return  pessoaRepository.findByTipo("Técnico");
+    }
 }
+

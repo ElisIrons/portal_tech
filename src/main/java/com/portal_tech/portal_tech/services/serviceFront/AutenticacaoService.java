@@ -113,7 +113,7 @@ public class AutenticacaoService {
             } else if (pessoa != null && tipoPessoa.equals("Administrador")) {
                 long pessoaID = pessoa.getId();
                 String pessoaName = pessoa.getNome();
-                return "redirect:/adminpainel/" + pessoaID;
+                return "redirect:/adminpainel";
             } else {
                 model.addAttribute("erro", "Usuário ou senha inválidos");//mensagem de erro na tela de login
                 return "/login";

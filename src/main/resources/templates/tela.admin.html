@@ -2,28 +2,28 @@
 <html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <link rel="stylesheet" type="text/css" href="/styles/usuario.chamado.css" />
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <link rel="stylesheet" type="text/css" href="/styles/usuario.chamado.css"/>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100..700&display=swap" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100..700&display=swap" rel="stylesheet"/>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
     <link
             href="https://fonts.googleapis.com/css2?family=Jersey+20&family=Orbitron:wght@400..900&family=Righteous&family=Roboto+Mono:wght@100..700&display=swap"
-            rel="stylesheet" />
+            rel="stylesheet"/>
 
     <title>Portal Tech</title>
-    <link rel="icon" href="styles/images/logo.jpeg" />
+    <link rel="icon" href="styles/images/logo.jpeg"/>
 </head>
 
 <body>
 <header class="cabecalho">
     <div class="logo">
-        <img src="styles/images/logo.jpeg" alt="logo Portal Tech" />
+        <img src="styles/images/logo.jpeg" alt="logo Portal Tech"/>
     </div>
     <div class="titulo">
         <h1>Portal Tech</h1>
@@ -43,42 +43,81 @@
     <div class="container">
         <main class="container-form">
             <section class="container-box">
-                <h1 class="container-texto" th:text="'Bem-vindo, ' + ${userOn} + '!'">Bem-vindo(a)!</h1>
+                <h1 class="container-texto" th:text="'Bem-vindo, ' + ${userOn.nome} + '!'">Bem-vindo(a)!</h1>
                 <h2 class="container-subtitulo">Painel de Chamados</h2>
                 <div class="tabela-container">
                     <table class="tabela">
                         <thead>
                         <tr>
                             <th>Data de Abertura</th>
-                            <th>Id_Usuário</th>
+                            <th>Usuário</th>
                             <th>Setor</th>
                             <th>Descrição</th>
                             <th>Prioridade</th>
                             <th>Responsavél</th>
                             <th>Status</th>
+                            <th>Data da Finalização</th>
                             <th>Salvar</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:each="chamado : ${chamados}">
-                            <td th:text="${dtFormatada}">Data Abertura</td>
-                            <td th:text="${chamado.id_usuario.nome}">Usuario</td>
-                            <td th:text="${chamado.id_usuario.setor.nome}">Setor</td>
-                            <td th:text="${chamado.descricao}">Descrição</td>
-                            <td>
-                                <label th:each="optionPrioridade : ${selectPrioridadeOptions}"></label>
-                                <select id="prioridade" name="prioridade">
-                                    <option value="baixa" name="prioridade" th:value="${optionPrioridade}" th:checked="${optionPrioridade == 'baixa' }"> Baixa</option>
-                                    <option value="media" name="prioridade" th:value="${optionPrioridade}" th:checked="${optionPrioridade == 'media' }">Média</option>
-                                    <option value="alta" name="prioridade" th:value="${optionPrioridade}" th:checked="${optionPrioridade == 'alta' }">Alta</option>
-                                </select>
-                            </td>
-                            <td th:text="${chamado.id_tecnico.nome}">Responsável</td>
-                            <td th:text="${chamado.id_status.nome}">Status</td>
-                            <td><button type="submit" class="botao-salvar">Salvar</button> </td>
+                        <tr th:each="chamado, i : ${chamados}">
+                            <form action="/adminpainel" method="post">
+                                <td th:text="${dtFormatada[i.index]}">Data Abertura</td>
+                                <td th:text="${chamado.id_usuario.nome}">Usuario</td>
+                                <td th:text="${chamado.id_usuario.setor.nome}">Setor</td>
+                                <td th:text="${chamado.descricao}">Descrição</td>
+                                <td><label for="prioridade"></label>
+                                    <select id="prioridade" name="prioridade">
+                                        <option value="baixa" th:selected="${chamado.id_prioridade.nome == 'Baixa'}">Baixa</option>
+                                        <option value="media" th:selected="${chamado.id_prioridade.nome == 'Média'}">Média</option>
+                                        <option value="alta" th:selected="${chamado.id_prioridade.nome == 'Alta'}">Alta</option>
+                                    </select>
+                                    <input type="hidden" name="id_prioridade" th:value="${chamado.id_prioridade.id}"/>
+                                </td>
+                                <td>
+                                    <select name="id_tecnico">
+                                        <option value="" th:selected="${chamado.id_tecnico == null}">Nenhum técnico atribuído</option>
+                                        <option th:each="tecnico : ${tecnicos}" th:value="${tecnico.id}"
+                                                th:selected="${tecnico.nome.equals(chamado.id_tecnico.nome)}"
+                                                th:text="${tecnico.nome}">Nome do técnico
+                                        </option>
+                                    </select>
+                                </td>
+
+                                <td><label for="status"></label><br>
+                                    <select id="status" name="status" required>
+                                        <option value="em-analise"
+                                                th:selected="${chamado.id_status.nome == 'Em análise'}">Em análise
+                                        </option>
+                                        <option value="aguardando"
+                                                th:selected="${chamado.id_status.nome == 'Aguardando técnico'}">
+                                            Aguardando técnico
+                                        </option>
+                                        <option value="em-atendimento"
+                                                th:selected="${chamado.id_status.nome == 'Em atendimento'}">Em
+                                            atendimento
+                                        </option>
+                                        <option value="outro-setor"
+                                                th:selected="${chamado.id_status.nome == 'Escalado para outro setor'}">
+                                            Escalado para outro setor
+                                        </option>
+                                        <option value="finalizado"
+                                                th:selected="${chamado.id_status.nome == 'Finalizado'}">Finalizado
+                                        </option>
+                                    </select>
+                                    <input type="hidden" name="id_status" th:value="${chamado.id_status.id}"/>
+
+                                </td>
+
+                                <td>Data finalização</td>
+                                <td>
+                                        <input type="hidden" name="id_chamado" th:value="${chamado.id}"/>
+                                        <button type="submit" class="botao-salvar">salvar</button>
+                                </td>
+                            </form>
                         </tr>
                         </tbody>
-                        <tbody>
                     </table>
                 </div>
             </section>
@@ -90,7 +129,7 @@
     <div class="container">
         <div class="footer-content">
             <div class="github">
-                <img src="styles/images/github.png" alt="GitHub Logo" class="github-img" />
+                <img src="styles/images/github.png" alt="GitHub Logo" class="github-img"/>
             </div>
             <div class="github-links">
                 <a href="https://github.com/alineadcosta95">Aline Alves </a>
@@ -103,7 +142,4 @@
     </div>
 </footer>
 </body>
-
-</html>
-
 </html>
