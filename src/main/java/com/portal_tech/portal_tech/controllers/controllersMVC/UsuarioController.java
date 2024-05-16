@@ -8,7 +8,7 @@ import com.portal_tech.portal_tech.models.dtos.ChamadoDTO;
 import com.portal_tech.portal_tech.repositores.ChamadoRepository;
 import com.portal_tech.portal_tech.repositores.PrioridadeRepository;
 import com.portal_tech.portal_tech.repositores.StatusRepository;
-import com.portal_tech.portal_tech.services.ChamadoServiceFront;
+import com.portal_tech.portal_tech.services.serviceFront.ChamadoServiceFront;
 
 
 import com.portal_tech.portal_tech.swaggerDoc.SetorControllerOpenApi;

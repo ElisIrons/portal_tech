@@ -33,6 +33,13 @@ public interface ChamadoRepository extends JpaRepository<Chamado, Long> {
             "       AND C.ID = :id_setor", nativeQuery = true)
     public List<Chamado> findById_Setor(@Param("id_setor") Long id_setor);
 
+    @Query(value = "SELECT * FROM CHAMADO WHERE ID_TECNICO is null and dt_fim is null", nativeQuery = true)
+    public List<Chamado> findChamadosSemTecnico();//@Param("id_tecnico") Long id_tecnico); //deixei o parâmetro para poder voltar
+
+    @Query(value = "SELECT * FROM CHAMADO WHERE dt_fim is null", nativeQuery = true)
+    public List<Chamado> findChamadosAbertos(); //se precisar, pode colocar parâmetro
+
+    
     @Modifying
     @Transactional
     @Query(value = "ALTER TABLE chamado MODIFY COLUMN id_prioridade BIGINT DEFAULT 1; ", nativeQuery = true)

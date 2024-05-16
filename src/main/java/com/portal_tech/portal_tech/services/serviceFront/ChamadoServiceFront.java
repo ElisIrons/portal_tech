@@ -1,4 +1,4 @@
-package com.portal_tech.portal_tech.services;
+package com.portal_tech.portal_tech.services.serviceFront;
 
 import com.portal_tech.portal_tech.models.Chamado;
 import com.portal_tech.portal_tech.models.Pessoa;
@@ -30,6 +30,17 @@ public class ChamadoServiceFront {
     }
 
     //Busca todos os chamados cadastrados no banco de dados.
+    public List<ChamadoDTO> findChamadosSemTecnico() {
+        List<Chamado> chamados = chamadoRepository.findChamadosSemTecnico();
+        if (chamados.isEmpty()) {
+            throw new RuntimeException("Não há chamados cadastrados!");
+        } else {
+            List<ChamadoDTO> listChamadoDTO = chamados.stream().map(ChamadoDTO::new).collect(Collectors.toList());
+            return (listChamadoDTO);
+        }
+    }
+
+    //Busca todos os chamados cadastrados no banco de dados.
     public List<ChamadoDTO> findAllChamados() {
         List<Chamado> chamados = chamadoRepository.findAll();
         if (chamados.isEmpty()) {
@@ -39,6 +50,7 @@ public class ChamadoServiceFront {
             return listChamadoDTO;
         }
     }
+
 
     //Buscar um chamado pelo ID fornecido.
     public ChamadoDTO findById(Long id) {
