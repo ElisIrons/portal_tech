@@ -1,10 +1,10 @@
 package com.portal_tech.portal_tech.services;
 
-import com.portal_tech.portal_tech.exceptions.ConflictException409;
+
 import com.portal_tech.portal_tech.exceptions.ExceptionHandler500;
 import com.portal_tech.portal_tech.exceptions.UnprocessableEntityException422;
 import com.portal_tech.portal_tech.models.Chamado;
-import com.portal_tech.portal_tech.models.Pessoa;
+
 import com.portal_tech.portal_tech.models.dtos.ChamadoDTO;
 import com.portal_tech.portal_tech.repositores.ChamadoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +12,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
