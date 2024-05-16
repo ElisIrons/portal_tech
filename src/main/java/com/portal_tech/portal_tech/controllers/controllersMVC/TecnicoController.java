@@ -109,36 +109,47 @@ public class TecnicoController { //implements TecnicoControllerOpenApi {
         // TECNICO NÃO EXCLUIRÁ NEM CRIARÁ NOVO CHAMADO
 
         @GetMapping("/tecnico/{id}")
-        public String findById_Tecnico (@PathVariable("id") Long id_tecnico, Model model, HttpSession session){
-            List<ChamadoDTO> chamadoDTO = chamadoServiceFront.findById_Tecnico(id_tecnico).getBody();
-            model.addAttribute("chamados", chamadoDTO);
-
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-            List<String> dataFormatada = new ArrayList<>();
-            for (ChamadoDTO chamado : chamadoDTO) {
-                LocalDate dtAbertura = chamado.getDt_abertura();
-                String dtFormatada = dtAbertura.format(formatter);
-                dataFormatada.add(dtFormatada);
-            }
-            model.addAttribute("dtFormatada", dataFormatada);
-
-            List<String> dataFimFormatada = new ArrayList<>();
-            for (ChamadoDTO chamado : chamadoDTO) {
-                LocalDate dtFim = chamado.getDt_fim();
-                if (dtFim != null) {
-                    String dtFimFormatada = dtFim.format(formatter);
-                    dataFimFormatada.add(dtFimFormatada);
-                } else {
-                    dataFimFormatada.add("");
+        public String findById_Tecnico (@PathVariable("id") Long id_tecnico, Model model, HttpSession session) {
+            List<Chamado> chamados = chamadoRepository.findById_Tecnico(id_tecnico);
+            if (chamados.isEmpty()) {
+                Pessoa userOn = (Pessoa) session.getAttribute("cache");
+                String nomeUsuario = userOn.getNome();
+                model.addAttribute("userOn", nomeUsuario);
+                return "tela.tecnico";
+            } else {
+                List<ChamadoDTO> chamadoDTO = new ArrayList<>();
+                for (Chamado chamado : chamados) {
+                    chamadoDTO.add(new ChamadoDTO(chamado));
                 }
+                model.addAttribute("chamados", chamadoDTO);
+
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                List<String> dataFormatada = new ArrayList<>();
+                for (ChamadoDTO chamado : chamadoDTO) {
+                    LocalDate dtAbertura = chamado.getDt_abertura();
+                    String dtFormatada = dtAbertura.format(formatter);
+                    dataFormatada.add(dtFormatada);
+                }
+                model.addAttribute("dtFormatada", dataFormatada);
+
+                List<String> dataFimFormatada = new ArrayList<>();
+                for (ChamadoDTO chamado : chamadoDTO) {
+                    LocalDate dtFim = chamado.getDt_fim();
+                    if (dtFim != null) {
+                        String dtFimFormatada = dtFim.format(formatter);
+                        dataFimFormatada.add(dtFimFormatada);
+                    } else {
+                        dataFimFormatada.add("");
+                    }
+                }
+                model.addAttribute("dtFimFormatada", dataFimFormatada);
+
+                Pessoa userOn = (Pessoa) session.getAttribute("cache");
+                String nomeUsuario = userOn.getNome();
+                model.addAttribute("userOn", nomeUsuario);
+
+                return "tela.tecnico";
             }
-            model.addAttribute("dtFimFormatada", dataFimFormatada);
-
-            Pessoa userOn = (Pessoa) session.getAttribute("cache");
-            String nomeUsuario = userOn.getNome();
-            model.addAttribute("userOn", nomeUsuario);
-
-            return "tela.tecnico";
         }
 
         @PostMapping("/tecnico")
