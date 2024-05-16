@@ -19,10 +19,6 @@ public class AutenticacaoController {
     @Autowired
     private AutenticacaoService autenticacaoService;
 
-    @Autowired
-    private SetorRepository setorRepository;
-
-
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login() {
         return "/login";

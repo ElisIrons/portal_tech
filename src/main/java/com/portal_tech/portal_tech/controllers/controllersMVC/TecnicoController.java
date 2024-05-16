@@ -9,7 +9,7 @@ import com.portal_tech.portal_tech.repositores.ChamadoRepository;
 import com.portal_tech.portal_tech.repositores.PessoaRepository;
 import com.portal_tech.portal_tech.repositores.PrioridadeRepository;
 import com.portal_tech.portal_tech.repositores.StatusRepository;
-import com.portal_tech.portal_tech.services.ChamadoServiceFront;
+import com.portal_tech.portal_tech.services.serviceFront.ChamadoServiceFront;
 import com.portal_tech.portal_tech.swaggerDoc.TecnicoControllerOpenApi;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +23,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Controller
 
@@ -42,35 +43,43 @@ public class TecnicoController { //implements TecnicoControllerOpenApi {
 
     @GetMapping("/tecnico")
     public String findAllChamados(Model model, HttpSession session) {
-        List<ChamadoDTO> chamadoDTO = chamadoServiceFront.findAllChamados().getBody();                                      //this.chamadoService.findAllChamados();
-        model.addAttribute("chamados", chamadoDTO);
+//        List<ChamadoDTO> chamadoDTO = chamadoServiceFront.findAllChamados();
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        List<String> dataFormatada = new ArrayList<>();
-        List<String> dataFimFormatada = new ArrayList<>();
-        for (ChamadoDTO chamado : chamadoDTO) {
-            LocalDate dtAbertura = chamado.getDt_abertura();
-            String dtFormatada = dtAbertura.format(formatter);
-            dataFormatada.add(dtFormatada);
+        List<Chamado> chamados = chamadoRepository.findAll();
+        if (chamados.isEmpty()) {
+            return "tela.tecnico";//this.chamadoService.findAllChamados();
 
-            LocalDate dtFim = chamado.getDt_fim();
-            if (dtFim != null) {
-                String dtFimFormatada = dtFim.format(formatter);
-                dataFimFormatada.add(dtFimFormatada);
-            } else {
-                dataFimFormatada.add("");
+        }else {
+            List<ChamadoDTO> chamadoDTO = chamados.stream().map(ChamadoDTO::new).collect(Collectors.toList());
+            model.addAttribute("chamados", chamadoDTO);
+
+
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            List<String> dataFormatada = new ArrayList<>();
+            List<String> dataFimFormatada = new ArrayList<>();
+            for (ChamadoDTO chamado : chamadoDTO) {
+                LocalDate dtAbertura = chamado.getDt_abertura();
+                String dtFormatada = dtAbertura.format(formatter);
+                dataFormatada.add(dtFormatada);
+
+                LocalDate dtFim = chamado.getDt_fim();
+                if (dtFim != null) {
+                    String dtFimFormatada = dtFim.format(formatter);
+                    dataFimFormatada.add(dtFimFormatada);
+                } else {
+                    dataFimFormatada.add("");
+                }
             }
-        }
-        model.addAttribute("dtFormatada", dataFormatada);
-        model.addAttribute("dtFimFormatada", dataFimFormatada);
+            model.addAttribute("dtFormatada", dataFormatada);
+            model.addAttribute("dtFimFormatada", dataFimFormatada);
 
     /*    Pessoa userOn = (Pessoa) session.getAttribute("cache");
         String nomeUsuario = userOn.getNome();
         model.addAttribute("userOn", userOn);*/
-        //return "index.tecnico"; --agora
-        return "tela.tecnico";
-        //return "/index.tecnico";
-
+            //return "index.tecnico"; --agora
+            return "tela.tecnico";
+            //return "/index.tecnico";
+        }
     }
     /*@GetMapping ("/tecnico")
     public String indexUsuario(Model model){
@@ -105,35 +114,49 @@ public class TecnicoController { //implements TecnicoControllerOpenApi {
 
         @GetMapping("/tecnico/{id}")
         public String findById_Tecnico (@PathVariable("id") Long id_tecnico, Model model, HttpSession session){
-            List<ChamadoDTO> chamadoDTO = chamadoServiceFront.findById_Tecnico(id_tecnico).getBody();
-            model.addAttribute("chamados", chamadoDTO);
 
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-            List<String> dataFormatada = new ArrayList<>();
-            for (ChamadoDTO chamado : chamadoDTO) {
-                LocalDate dtAbertura = chamado.getDt_abertura();
-                String dtFormatada = dtAbertura.format(formatter);
-                dataFormatada.add(dtFormatada);
-            }
-            model.addAttribute("dtFormatada", dataFormatada);
+            List<Chamado> chamados = chamadoRepository.findById_Tecnico(id_tecnico);
+            if (chamados.isEmpty()) {
+                Pessoa userOn = (Pessoa) session.getAttribute("cache");
+                String nomeUsuario = userOn.getNome();
+                model.addAttribute("userOn", nomeUsuario);
+                return "tela.tecnico";
 
-            List<String> dataFimFormatada = new ArrayList<>();
-            for (ChamadoDTO chamado : chamadoDTO) {
-                LocalDate dtFim = chamado.getDt_fim();
-                if (dtFim != null) {
-                    String dtFimFormatada = dtFim.format(formatter);
-                    dataFimFormatada.add(dtFimFormatada);
-                } else {
-                    dataFimFormatada.add("");
+            }else {
+                List<ChamadoDTO> chamadoDTO = new ArrayList<>();
+                for(Chamado chamado : chamados){
+                  chamadoDTO.add(new ChamadoDTO(chamado));
                 }
+
+                model.addAttribute("chamados", chamadoDTO);
+
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                List<String> dataFormatada = new ArrayList<>();
+                for (ChamadoDTO chamado : chamadoDTO) {
+                    LocalDate dtAbertura = chamado.getDt_abertura();
+                    String dtFormatada = dtAbertura.format(formatter);
+                    dataFormatada.add(dtFormatada);
+                }
+                model.addAttribute("dtFormatada", dataFormatada);
+
+                List<String> dataFimFormatada = new ArrayList<>();
+                for (ChamadoDTO chamado : chamadoDTO) {
+                    LocalDate dtFim = chamado.getDt_fim();
+                    if (dtFim != null) {
+                        String dtFimFormatada = dtFim.format(formatter);
+                        dataFimFormatada.add(dtFimFormatada);
+                    } else {
+                        dataFimFormatada.add("");
+                    }
+                }
+                model.addAttribute("dtFimFormatada", dataFimFormatada);
+
+                Pessoa userOn = (Pessoa) session.getAttribute("cache");
+                String nomeUsuario = userOn.getNome();
+                model.addAttribute("userOn", nomeUsuario);
+
+                return "tela.tecnico";
             }
-            model.addAttribute("dtFimFormatada", dataFimFormatada);
-
-            Pessoa userOn = (Pessoa) session.getAttribute("cache");
-            String nomeUsuario = userOn.getNome();
-            model.addAttribute("userOn", nomeUsuario);
-
-            return "tela.tecnico";
         }
 
         @PostMapping("/tecnico")
@@ -252,7 +275,7 @@ public class TecnicoController { //implements TecnicoControllerOpenApi {
 
         @GetMapping("/usuario/chamado/{id}")
         public String findById (@PathVariable("id") Long id, Model model){
-            ChamadoDTO chamadoDTO = chamadoServiceFront.findById(id).getBody();
+            ChamadoDTO chamadoDTO = chamadoServiceFront.findById(id);
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
             String dtFormatada = null, dtFimFormatada = null;
             if (chamadoDTO.getDt_abertura() != null) {

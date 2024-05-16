@@ -7,30 +7,31 @@ import jakarta.persistence.*;
 public class Pessoa {
 
     @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column (length = 100)
+    @Column(length = 100)
     private String nome;
 
-    @Column (length = 100)
+    @Column(length = 100)
     private String email;
 
-    @Column (length = 8)
+    @Column(length = 8)
     private String senha;
 
-    @Column (length = 10 )
+    @Column(length = 10)
     private String telefone;
 
-    @ManyToOne(cascade=CascadeType.PERSIST, optional = false)
+    @ManyToOne(cascade = CascadeType.PERSIST, optional = false)
     @JoinColumn(name = "id_tipo")
     private Tipo tipo;
 
 
     //    @ManyToOne(optional = true) //opcional pois só Usuário terá setor
-    @ManyToOne(cascade=CascadeType.PERSIST, optional = true)
+    @ManyToOne(cascade = CascadeType.PERSIST, optional = true)
     @JoinColumn(name = "id_setor")
     private Setor setor;
+
 
     public Pessoa() {
     }
@@ -107,16 +108,13 @@ public class Pessoa {
         this.setor = setor;
     }
 
-    public long pegaSoIDTipo(Tipo tipo){
+    public long pegaSoIDTipo(Tipo tipo) {
         return tipo.getId();
     }
 
-//    public void setTipo(long tipo) {
-//        this.tipo = tipo;
-//
-//    }
-//
-//
-//    public void setSetor(long idsetor) {
-//    }
+
 }
+
+
+
+

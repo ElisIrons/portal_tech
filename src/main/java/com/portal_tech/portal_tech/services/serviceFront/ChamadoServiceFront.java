@@ -1,4 +1,4 @@
-package com.portal_tech.portal_tech.services;
+package com.portal_tech.portal_tech.services.serviceFront;
 
 import com.portal_tech.portal_tech.models.Chamado;
 import com.portal_tech.portal_tech.models.Pessoa;

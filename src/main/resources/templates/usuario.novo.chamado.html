@@ -55,7 +55,7 @@
                 <h2 class="container-subtitulo">Criar novo chamado</h2>
 
                 <div class="campo-container">
-                    <form action="/usuario/novo/chamado" method="post">
+                    <form action="/usuario/novo/chamado"  method="post">
                         <div class="descricao">
                             <div>
                                 <span class="input-group-text">Descrição</span>
@@ -66,12 +66,23 @@
                         <div>
                             <span class="input-group-text">Prioridade</span>
                         </div>
+<!--                        <select class="form-control" id="prioridade" name="prioridade" required>-->
+<!--                            <option value="baixa" th:selected="${chamado.id_prioridade.nome == 'Baixa'}">Baixa</option>-->
+<!--                            <option value="media" th:selected="${chamado.id_prioridade.nome == 'Média'}">Média</option>-->
+<!--                            <option value="alta" th:selected="${chamado.id_prioridade.nome == 'Alta'}">Alta</option>-->
+<!--                        </select>-->
+<!--                        <input type="hidden" name="id_prioridade" th:value="${chamado.id_prioridade.id}" />-->
+<!--                        <form  th:each="prioridade : ${listPrioridadesDTO}"></form>-->
+                        <p  th:each="prioridade : ${listPrioridadesDTO}"></p>
                         <select class="form-control" id="prioridade" name="prioridade" required>
-                            <option value="baixa" th:selected="${chamado.id_prioridade.nome == 'Baixa'}">Baixa</option>
-                            <option value="media" th:selected="${chamado.id_prioridade.nome == 'Média'}">Média</option>
-                            <option value="alta" th:selected="${chamado.id_prioridade.nome == 'Alta'}">Alta</option>
+<!--                            <option th:each="prioridade : ${listPrioridadesDTO}"-->
+<!--                                    th:value="${prioridade}">-->
+                            <option value=1 th:selected="${prioridade == 'Baixa'}">Baixa</option>
+                            <option value=2 th:selected="${prioridade == 'Média'}">Média</option>
+                            <option value=3 th:selected="${prioridade== 'Alta'}">Alta</option>
                         </select>
-                        <input type="hidden" name="id_prioridade" th:value="${chamado.id_prioridade.id}" />
+                        <input type="hidden" name="id" th:value="${id}" />
+
 
                         <div class="data">
                             <div class="data_abertura">

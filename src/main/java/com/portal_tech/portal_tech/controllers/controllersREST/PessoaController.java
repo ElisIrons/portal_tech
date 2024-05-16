@@ -22,16 +22,18 @@ public class PessoaController implements PessoaControllerOpenApi {
 
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "os dados foram salvos com sucesso"),
-            @ApiResponse(responseCode = "400", description = "Faltam dados obrigatórios a serem passados/não foi possível salvar")
+            @ApiResponse(responseCode = "409", description = "A pessoa já foi cadastrada no sistema com este email"),
+            @ApiResponse(responseCode = "500", description = "Faltam dados obrigatórios a serem passados/não foi possível salvar")
     })
     @PostMapping("/save")
-    public ResponseEntity<PessoaDTO> save(@RequestBody Map<String, Object> pessoaDTORecord) {
-        return this.pessoaService.register(pessoaDTORecord);
+    public ResponseEntity<PessoaDTO> save(@RequestBody Map<String, Object> pessoaDTO) {
+        return this.pessoaService.register(pessoaDTO);
     }
 
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "O ID requisitado foi encontrado"),
-            @ApiResponse(responseCode = "404", description = "O ID requisitado não existe/foi encontrado no sistema")
+            @ApiResponse(responseCode = "422", description = "O ID requisitado não existe/foi encontrado no sistema"),
+            @ApiResponse(responseCode = "500", description = "Faltam dados obrigatórios a serem passados/não foi possível salvar")
     })
     @GetMapping("/{id}")
     public ResponseEntity<PessoaDTO> findById(@PathVariable long id) {
@@ -40,7 +42,7 @@ public class PessoaController implements PessoaControllerOpenApi {
 
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "as alterações foram realizadas com sucesso"),
-            @ApiResponse(responseCode = "204", description = "faltam dados a serem passados no body/url"),
+            @ApiResponse(responseCode = "422", description = "faltam dados a serem passados no body/url"),
             @ApiResponse(responseCode = "500", description = "O ID requisitado não existe/foi encontrado no sistema")
     })
     @PutMapping("/update/{id}")
@@ -51,7 +53,8 @@ public class PessoaController implements PessoaControllerOpenApi {
 
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "O elemento foi deletado com sucesso"),
-            @ApiResponse(responseCode = "404", description = "O ID requisitado não existe/foi encontrado no sistema")
+            @ApiResponse(responseCode = "422", description = "O ID requisitado não existe/foi encontrado no sistema"),
+            @ApiResponse(responseCode = "500", description = "Faltam dados obrigatórios a serem passados/não foi possível salvar")
     })
     @RequestMapping(value = "delete/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<String> deleteById(@PathVariable long id) {
@@ -59,8 +62,7 @@ public class PessoaController implements PessoaControllerOpenApi {
     }
 
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "OK"),
-            @ApiResponse(responseCode = "404", description = "Erro interno")
+            @ApiResponse(responseCode = "500", description = "Faltam dados obrigatórios a serem passados/não foi possível salvar")
     })
     @GetMapping
     public ResponseEntity<List<PessoaDTO>> findAll() {

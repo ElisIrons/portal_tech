@@ -23,8 +23,6 @@ public class AutenticacaoService {
     @Autowired
     private TipoRepository tipoRepository;
 
-    @Autowired
-    private SetorRepository setorRepository;
 
     public String cadastrar(Model model, HttpServletRequest request,  String nome,
                              String telefone, String email,String senha) {
@@ -33,7 +31,6 @@ public class AutenticacaoService {
 
 
         model.addAttribute("optionTipo", listOfTypes);
-
 
         String tipoSelected = request.getParameter("tipo");
 
@@ -50,8 +47,6 @@ public class AutenticacaoService {
             return "/cadastro";
         }
 
-
-
 }
 
     private static Pessoa getPessoa(String nome, String telefone, String email, String senha, String tipoSelected, String setorSelected) {
@@ -60,7 +55,6 @@ public class AutenticacaoService {
 
 
         tipo.setNome(tipoSelected);
-
 
         Setor setor = new Setor();
         if(setorSelected == null) {
@@ -86,13 +80,14 @@ public class AutenticacaoService {
 
         Pessoa pessoa = pessoaRepository.verifyLogin(pessoaParam.getEmail(), pessoaParam.getSenha());//inf vindas do banco, valida se o email e a senha existem no banco
 
+
         String tipoPessoa = "";
         if (pessoa == null) {
             model.addAttribute("erro", "Usuário ou senha inválidos");//mensagem de erro na tela de login
             return "/login";
 
-        }else {
-            long pessoaTipoID = (long) pessoa.getTipo().getId();//tenho o id da pessoa
+        } else {
+            long pessoaTipoID = pessoa.getTipo().getId();//tenho o id da pessoa
             List<Tipo> listTipo = this.tipoRepository.findAll();
             long tipoPessoaID = 0;
             for (Tipo tipo : listTipo) {
@@ -124,5 +119,5 @@ public class AutenticacaoService {
                 return "/login";
             }
         }
-        }
+    }
 }
