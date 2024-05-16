@@ -1,6 +1,5 @@
 package com.portal_tech.portal_tech.services;
 
-import com.portal_tech.portal_tech.controllers.controllersREST.PessoaController;
 import com.portal_tech.portal_tech.models.Chamado;
 import com.portal_tech.portal_tech.models.Pessoa;
 import com.portal_tech.portal_tech.models.dtos.ChamadoDTO;
@@ -24,29 +23,29 @@ public class ChamadoServiceFront {
     private ChamadoRepository chamadoRepository;
 
     //Salva um novo chamado no banco de dados.
-    public ResponseEntity<ChamadoDTO> save(ChamadoDTO dto) {
+    public ChamadoDTO save(ChamadoDTO dto) {
         Chamado chamado = dto.convert(dto);
         chamado = chamadoRepository.save(chamado);
-        return new ResponseEntity<>(new ChamadoDTO(chamado), HttpStatus.CREATED);
+        return new ChamadoDTO(chamado);
     }
 
     //Busca todos os chamados cadastrados no banco de dados.
-    public ResponseEntity<List<ChamadoDTO>> findAllChamados() {
+    public List<ChamadoDTO> findAllChamados() {
         List<Chamado> chamados = chamadoRepository.findAll();
         if (chamados.isEmpty()) {
             throw new RuntimeException("Não há chamados cadastrados!");
         } else {
             List<ChamadoDTO> listChamadoDTO = chamados.stream().map(ChamadoDTO::new).collect(Collectors.toList());
-            return new ResponseEntity<>(listChamadoDTO, HttpStatus.OK);
+            return listChamadoDTO;
         }
     }
 
     //Buscar um chamado pelo ID fornecido.
-    public ResponseEntity<ChamadoDTO> findById(Long id) {
+    public ChamadoDTO findById(Long id) {
         Optional<Chamado> optionalChamado = chamadoRepository.findById(id);
         if (optionalChamado.isPresent()) {
             Chamado chamado = optionalChamado.get();
-            return new ResponseEntity<>(new ChamadoDTO(chamado), HttpStatus.OK);
+            return new ChamadoDTO(chamado);
         } else {
             throw new RuntimeException("O chamado não foi encontrado! ID: " + id);
         }
@@ -59,7 +58,7 @@ public class ChamadoServiceFront {
     }
 
     //Atualiza um chamado existente com base no ID fornecido.
-    public ResponseEntity<ChamadoDTO> updateById(Long id, ChamadoDTO dto) {
+    public ChamadoDTO updateById(Long id, ChamadoDTO dto) {
         Optional<Chamado> optionalChamado = chamadoRepository.findById(id);
         if (optionalChamado.isPresent()) {
             Chamado chamado = optionalChamado.get();
@@ -67,21 +66,19 @@ public class ChamadoServiceFront {
             updatedChamado.setIdTecnico(dto.getId_tecnico());
             updatedChamado.setId(id);
             chamadoRepository.save(updatedChamado);
-            return new ResponseEntity<>(new ChamadoDTO(updatedChamado), HttpStatus.CREATED);
+            return new ChamadoDTO(updatedChamado);
         } else {
             throw new RuntimeException("O chamado não foi encontrado! ID: " + id);
         }
     }
 
-
-
-    public ResponseEntity<List<ChamadoDTO>> findById_Tecnico(Long id_tecnico) {
+    public List<ChamadoDTO> findById_Tecnico(Long id_tecnico) {
         List<Chamado> chamados = chamadoRepository.findById_Tecnico(id_tecnico);
         if (chamados.isEmpty()) {
             throw new RuntimeException("Não há chamados cadastrados!");
         } else {
             List<ChamadoDTO> listChamadoDTO = chamados.stream().map(ChamadoDTO::new).collect(Collectors.toList());
-            return new ResponseEntity<>(listChamadoDTO, HttpStatus.OK);
+            return listChamadoDTO;
         }
 
     }
@@ -96,31 +93,31 @@ public class ChamadoServiceFront {
         }
     }
 
-    public ResponseEntity<ChamadoDTO> findById_Status(Long id_status) {
+    public ChamadoDTO findById_Status(Long id_status) {
         List<Chamado> chamados = chamadoRepository.findById_Status(id_status);
         if (!chamados.isEmpty()) {
             Chamado chamado = chamados.get(0);
-            return new ResponseEntity<>(new ChamadoDTO(chamado), HttpStatus.OK);
+            return new ChamadoDTO(chamado);
         } else {
             throw new RuntimeException("O chamado não foi encontrado! ID: " + id_status);
         }
     }
 
-    public ResponseEntity<ChamadoDTO> findById_Prioridade(Long id_prioridade) {
+    public ChamadoDTO findById_Prioridade(Long id_prioridade) {
         List<Chamado> chamados = chamadoRepository.findById_Status(id_prioridade);
         if (!chamados.isEmpty()) {
             Chamado chamado = chamados.get(0);
-            return new ResponseEntity<>(new ChamadoDTO(chamado), HttpStatus.OK);
+            return new ChamadoDTO(chamado);
         } else {
             throw new RuntimeException("O chamado não foi encontrado! ID: " + id_prioridade);
         }
     }
 
-    public ResponseEntity<ChamadoDTO> findById_Setor(Long id_setor) {
+    public ChamadoDTO findById_Setor(Long id_setor) {
         List<Chamado> chamados = chamadoRepository.findById_Status(id_setor);
         if (!chamados.isEmpty()) {
             Chamado chamado = chamados.get(0);
-            return new ResponseEntity<>(new ChamadoDTO(chamado), HttpStatus.OK);
+            return new ChamadoDTO(chamado);
         } else {
             throw new RuntimeException("O chamado não foi encontrado! ID: " + id_setor);
         }

@@ -123,4 +123,6 @@ public class Chamado {
     public void setIdPrioridade(Prioridade id_prioridade) {
         this.id_prioridade = id_prioridade;
     }
+
+
 }

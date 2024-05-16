@@ -1,4 +1,4 @@
-package com.portal_tech.portal_tech.services;
+package com.portal_tech.portal_tech.services.serviceFront;
 
 import com.portal_tech.portal_tech.models.Pessoa;
 import com.portal_tech.portal_tech.models.Setor;
