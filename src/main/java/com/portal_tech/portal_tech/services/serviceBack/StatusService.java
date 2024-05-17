@@ -1,5 +1,7 @@
 package com.portal_tech.portal_tech.services.serviceBack;
 
+import com.portal_tech.portal_tech.exceptions.ExceptionHandler500;
+import com.portal_tech.portal_tech.exceptions.UnprocessableEntityException422;
 import com.portal_tech.portal_tech.models.Status;
 import com.portal_tech.portal_tech.models.dtos.StatusDTO;
 import com.portal_tech.portal_tech.repositores.StatusRepository;
@@ -20,44 +22,65 @@ public class StatusService {
     private StatusRepository statusRepository;
 
     public ResponseEntity<StatusDTO> save(StatusDTO dto){
-        // só nas 2 linhas abaixo é q é usada a entidade em si, só nelas é feita a chamada pro bd
-        Status status = StatusDTO.convert(dto); //convertendo tipo dto em tipo
-        status = this.statusRepository.save(status);
-        return new ResponseEntity<>(new StatusDTO(status), HttpStatus.CREATED);
+      try {
+          Status status = StatusDTO.convert(dto); //convertendo tipo dto em tipo
+          status = this.statusRepository.save(status);
+          return new ResponseEntity<>(new StatusDTO(status), HttpStatus.CREATED);
+      }catch (Exception e){
+          throw new ExceptionHandler500("Erro no servidor ao salvar o status novo adicionado");
+      }
     }
 
-    public ResponseEntity<List<StatusDTO>> findAll(){
-        List<Status> tipos = statusRepository.findAll();
-        if (tipos.isEmpty()){ //se estiver vazio, não encontrou nada cadastrado
-            throw new RuntimeException("Não há status cadastrados!");
-        }
-        else {
-            return new ResponseEntity<>(tipos.stream().map(StatusDTO::new).collect(Collectors.toList()), HttpStatus.OK); //conver lst tipos em lst de tps dto
+    public ResponseEntity<List<StatusDTO>> findAll() {
+        try {
+            List<Status> tipos = statusRepository.findAll();
+            if (tipos.isEmpty()) { //se estiver vazio, não encontrou nada cadastrado
+                throw new UnprocessableEntityException422("Não há status cadastrados!");
+            } else {
+                return new ResponseEntity<>(tipos.stream().map(StatusDTO::new).collect(Collectors.toList()), HttpStatus.OK); //conver lst tipos em lst de tps dto
+            }
+        } catch (UnprocessableEntityException422 e) {
+            throw new UnprocessableEntityException422(e.getMessage());
+        } catch (Exception e) {
+            throw new ExceptionHandler500("Erro no servidor ao encontrar todos os status");
         }
     }
 
     public ResponseEntity<StatusDTO> findById(Long id){
-        Optional<Status> resultado = this.statusRepository.findById(id);
-        if (resultado.isEmpty()){
-            throw new RuntimeException("Status não encontrado!");
-        }
-        else {
-            return new ResponseEntity<>(new StatusDTO(resultado.get()), HttpStatus.OK); //usei get para retornar o objeto dentro de Optional
+        try {
+            Optional<Status> resultado = this.statusRepository.findById(id);
+            if (resultado.isEmpty()) {
+                throw new UnprocessableEntityException422("Status não encontrado!");
+            } else {
+                return new ResponseEntity<>(new StatusDTO(resultado.get()), HttpStatus.OK); //usei get para retornar o objeto dentro de Optional
+            }
+        }catch (UnprocessableEntityException422 e){
+            throw new UnprocessableEntityException422(e.getMessage());
+        }catch (Exception e){
+            throw  new ExceptionHandler500("Erro no servidor");
         }
     }
 
 
     public ResponseEntity<String> deleteById(Long id){
-        this.statusRepository.deleteById(id);
-        return new ResponseEntity<>("Status deletado com sucesso!",HttpStatus.OK);
+        try {
+            this.statusRepository.deleteById(id);
+            return new ResponseEntity<>("Status deletado com sucesso!", HttpStatus.OK);
+        }catch (Exception e){
+            throw new ExceptionHandler500("Erro no servidor ao salvar" + e);
+        }
     }
 
-    public ResponseEntity<StatusDTO> updateById(Long id, StatusDTO dto){
-        this.findById(id);
-        Status status = StatusDTO.convert(dto);
-        status.setId(id);
-        status = this.statusRepository.save(status);
-        return new ResponseEntity<>(new StatusDTO(status), HttpStatus.CREATED);
+    public ResponseEntity<StatusDTO> updateById(Long id, StatusDTO dto) {
+        try {
+            this.findById(id);
+            Status status = StatusDTO.convert(dto);
+            status.setId(id);
+            status = this.statusRepository.save(status);
+            return new ResponseEntity<>(new StatusDTO(status), HttpStatus.CREATED);
+        }catch (Exception e){
+            throw new ExceptionHandler500(("Erro no servidor ao salvar" + e));
+        }
     }
 
 }

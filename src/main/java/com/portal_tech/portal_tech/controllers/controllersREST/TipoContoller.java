@@ -21,7 +21,8 @@ public class TipoContoller implements TipoControllerOpenApi {
 
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "os dados foram salvos com sucesso"),
-            @ApiResponse(responseCode = "400", description = "Faltam dados obrigatórios a serem passados/não foi possível salvar")
+            @ApiResponse(responseCode = "400", description = "Faltam dados obrigatórios a serem passados/não foi possível salvar"),
+            @ApiResponse(responseCode = "500", description = "Erro no servidor")
     })
     @PostMapping("/save")
     public ResponseEntity<TipoDTO> save(@RequestBody TipoDTO tipoDTO){
@@ -30,7 +31,8 @@ public class TipoContoller implements TipoControllerOpenApi {
     }
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK"),
-            @ApiResponse(responseCode = "404", description = "Erro interno")
+            @ApiResponse(responseCode = "404", description = "Erro interno"),
+            @ApiResponse(responseCode = "500", description = "Erro no servidor")
     })
     @GetMapping
     public ResponseEntity<List<TipoDTO>> findAll(){
@@ -38,7 +40,8 @@ public class TipoContoller implements TipoControllerOpenApi {
     }
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "O ID requisitado foi encontrado"),
-            @ApiResponse(responseCode = "404", description = "O ID requisitado não existe/foi encontrado no sistema")
+            @ApiResponse(responseCode = "404", description = "O ID requisitado não existe/foi encontrado no sistema"),
+            @ApiResponse(responseCode = "500", description = "Erro no servidor")
     })
     @RequestMapping(value="/{id}", method = RequestMethod.GET)
     public ResponseEntity<TipoDTO> findById(@PathVariable Long id){
@@ -46,7 +49,8 @@ public class TipoContoller implements TipoControllerOpenApi {
     }
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "O elemento foi deletado com sucesso"),
-            @ApiResponse(responseCode = "404", description = "O ID requisitado não existe/foi encontrado no sistema")
+            @ApiResponse(responseCode = "404", description = "O ID requisitado não existe/foi encontrado no sistema"),
+            @ApiResponse(responseCode = "500", description = "Erro no servidor")
     })
     @DeleteMapping(value="/{id}")
     public ResponseEntity<String> deleteById(@PathVariable Long id){

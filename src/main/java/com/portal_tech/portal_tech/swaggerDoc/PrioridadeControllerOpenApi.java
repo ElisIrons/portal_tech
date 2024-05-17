@@ -1,5 +1,6 @@
 package com.portal_tech.portal_tech.swaggerDoc;
 
+import com.portal_tech.portal_tech.models.Prioridade;
 import com.portal_tech.portal_tech.models.dtos.PrioridadeDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -12,7 +13,7 @@ import java.util.List;
 public interface PrioridadeControllerOpenApi {
 
     @Operation(summary = "Método que cria as prioridades padrão.")
-    void criarPrioridades();
+    void criarPrioridades(PrioridadeDTO prioridadeDTO);
 
     @Operation(summary = "Método que retorna todas as prioridades cadastradas na api.")
     public ResponseEntity<List<PrioridadeDTO>> findAll();
