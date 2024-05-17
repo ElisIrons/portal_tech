@@ -79,7 +79,7 @@
                                     <select name="id_tecnico">
                                         <option value="" th:selected="${chamado.id_tecnico == null}">Nenhum técnico atribuído</option>
                                         <option th:each="tecnico : ${tecnicos}" th:value="${tecnico.id}"
-                                                th:selected="${tecnico.nome.equals(chamado.id_tecnico.nome)}"
+                                                th:selected="${tecnico.nome.equals(chamado.id_tecnico?.nome)}"
                                                 th:text="${tecnico.nome}">Nome do técnico
                                         </option>
                                     </select>
