@@ -17,13 +17,13 @@
             rel="stylesheet"/>
 
     <title>Portal Tech</title>
-    <link rel="icon" href="styles/images/logo.jpeg"/>
+    <link rel="icon" href="/styles/images/logo.jpeg"/>
 </head>
 
 <body>
 <header class="cabecalho">
     <div class="logo">
-        <img src="styles/images/logo.jpeg" alt="logo Portal Tech"/>
+        <img src="/styles/images/logo.jpeg" alt="logo Portal Tech"/>
     </div>
     <div class="titulo">
         <h1>Portal Tech</h1>
@@ -52,8 +52,8 @@
     <div class="container">
         <main class="container-form">
             <section class="container-box">
-                <h1 class="container-texto" th:text="'Bem-vindo, ' +  ${userOn} + '!'">Bem-vindo(a)!</h1>
-                                            <!-- ${userName} -->
+                <h1 class="container-texto" th:text="'Bem-vindo(a), ' +  ${userOn} + '!'">Bem-vindo(a)!</h1>
+                <!-- ${userName} -->
                 <h2 class="container-subtitulo">Chamados</h2>
                 <div class="tabela-container">
 
@@ -77,44 +77,52 @@
                                 <td th:text="${dtFormatada[i.index]}">Data Abertura</td>
                                 <td th:text="${chamado.id_usuario.nome}">Usuario</td>
                                 <td th:text="${chamado.id_usuario.setor.nome}">Setor</td>
-    <!--                            <td th:text="${chamado.id_prioridade.nome}">Prioridade</td>-->
-                                <td>   <label for="prioridade"></label><br>
+                                <!--                            <td th:text="${chamado.id_prioridade.nome}">Prioridade</td>-->
+                                <td><label for="prioridade"></label><br>
                                     <select id="prioridade" name="prioridade" required>
-                                        <option value="baixa" th:selected="${chamado.id_prioridade.nome == 'Baixa'}">Baixa</option>
-                                        <option value="media" th:selected="${chamado.id_prioridade.nome == 'Média'}">Média</option>
-                                        <option value="alta" th:selected="${chamado.id_prioridade.nome == 'Alta'}">Alta</option>
+                                        <option value="baixa" th:selected="${chamado.id_prioridade.nome == 'Baixa'}">
+                                            Baixa
+                                        </option>
+                                        <option value="media" th:selected="${chamado.id_prioridade.nome == 'Média'}">
+                                            Média
+                                        </option>
+                                        <option value="alta" th:selected="${chamado.id_prioridade.nome == 'Alta'}">
+                                            Alta
+                                        </option>
                                     </select></td>
-                                    <input type="hidden" name="id_prioridade" th:value="${chamado.id_prioridade.id}" />
+                                <input type="hidden" name="id_prioridade" th:value="${chamado.id_prioridade.id}"/>
 
                                 <td th:text="${chamado.descricao}">Descrição</td>
 
-                                <td>   <label for="status"></label><br>
+                                <td><label for="status"></label><br>
                                     <select id="status" name="status" required>
-                                        <option value="em-analise" th:selected="${chamado.id_status.nome == 'Em análise'}">Em análise</option>
-                                        <option value="aguardando" th:selected="${chamado.id_status.nome == 'Aguardando técnico'}">Aguardando técnico</option>
-                                        <option value="em-atendimento" th:selected="${chamado.id_status.nome == 'Em atendimento'}">Em atendimento</option>
-                                        <option value="outro-setor" th:selected="${chamado.id_status.nome == 'Escalado para outro setor'}">Escalado para outro setor</option>
-                                        <option value="finalizado" th:selected="${chamado.id_status.nome == 'Finalizado'}">Finalizado</option>
+                                        <option value="em-analise"
+                                                th:selected="${chamado.id_status.nome == 'Em análise'}">Em análise
+                                        </option>
+                                        <option value="aguardando"
+                                                th:selected="${chamado.id_status.nome == 'Aguardando técnico'}">
+                                            Aguardando técnico
+                                        </option>
+                                        <option value="em-atendimento"
+                                                th:selected="${chamado.id_status.nome == 'Em atendimento'}">Em
+                                            atendimento
+                                        </option>
+                                        <option value="outro-setor"
+                                                th:selected="${chamado.id_status.nome == 'Escalado para outro setor'}">
+                                            Escalado para outro setor
+                                        </option>
+                                        <option value="finalizado"
+                                                th:selected="${chamado.id_status.nome == 'Finalizado'}">Finalizado
+                                        </option>
                                     </select>
-                                    <input type="hidden" name="id_status" th:value="${chamado.id_status.id}" />
+                                    <input type="hidden" name="id_status" th:value="${chamado.id_status.id}"/>
 
                                 </td>
 
                                 <td th:text="${dtFimFormatada[i.index]}">Data Fim</td>
 
-                                <input type="hidden" name="id" th:value="${chamado.id}" />
+                                <input type="hidden" name="id" th:value="${chamado.id}"/>
                                 <input type="hidden" name="id_chamado" th:value="${chamado.id}"/>
-
-                                <!--                                <input type="hidden" name="nome" value="${nome}" />
-                                -->
-    <!--                                     <option value="finalizado" th:selected="${chamado.id_status.nome == 'finalizado'}">Finalizado</option>-->
-
-    <!--                                    <option value="finalizado"  name="status" th:value="${optionStatus}" th:checked="${optionStatus == 'Finalizado'}">Finalizado</option> -->
-    <!--                                    <option value="5" th:selected="${chamado.id_status == 5}">Finalizado</option>-->
-    <!--                                </select></td>-->
-
-
-
                                 <td>
                                     <button type="submit" class="botao-salvar">Salvar</button>
                                 </td>
@@ -125,10 +133,7 @@
                         </form>
                     </table>
                 </div>
-<!--
-                <div class="return-index" style="margin-top: 250px;">
-                    <p><a th:href="@{/tecnico/{id_tecnico}(id_tecnico=${userOn.id})}><img class="color-image" src="/styles/images/voltar.png"/></a>Voltar para chamados</p>     <!--"@{/tecnico/{id}(id=${userOn.id})}"        "/tecnico/{id}"-->
-                <!--</div> -->
+
             </section>
         </main>
     </div>
@@ -138,7 +143,7 @@
     <div class="container">
         <div class="footer-content">
             <div class="github">
-                <img src="styles/images/github.png" alt="GitHub Logo" class="github-img"/>
+                <img src="/styles/images/github.png" alt="GitHub Logo" class="github-img"/>
             </div>
             <div class="github-links">
                 <a href="https://github.com/alineadcosta95">Aline Alves </a>

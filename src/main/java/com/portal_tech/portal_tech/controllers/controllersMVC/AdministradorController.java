@@ -77,7 +77,7 @@ public class AdministradorController {
             }
         }
         model.addAttribute("dtFormatada", dataFormatada);
-        model.addAttribute("dtFimFormata", dataFimFormatada);
+        model.addAttribute("dtFimFormatada", dataFimFormatada);
 
 
         Pessoa userOn = (Pessoa) session.getAttribute("cache");
