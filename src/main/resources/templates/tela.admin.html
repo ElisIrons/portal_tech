@@ -109,8 +109,7 @@
                                     <input type="hidden" name="id_status" th:value="${chamado.id_status.id}"/>
 
                                 </td>
-
-                                <td>Data finalização</td>
+                                <td th:text="${dtFimFormatada[i.index]}">Data Fim</td>
                                 <td>
                                         <input type="hidden" name="id_chamado" th:value="${chamado.id}"/>
                                         <button type="submit" class="botao-salvar">salvar</button>

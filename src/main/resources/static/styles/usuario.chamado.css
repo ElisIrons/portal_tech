@@ -6,8 +6,8 @@
 
 :root {
   --primeira-cor: #c6c3c3;
-  --segunda-cor: #ffffff;
-  --black-cor: #000000;
+  --segunda-cor: #fff;
+  --black-cor: #000;
   --hover-cor: rgb(245, 207, 242);
 }
 
@@ -228,11 +228,7 @@ font-family: "Orbitron", sans-serif;
   margin-top: 20px;
   text-align: center;
 }
-/*
-.campo {
-  margin-bottom: 10px;
-}
-*/
+
 .campo-container input[type="text"],
 .campo-container textarea,
 .campo-container select {
@@ -315,7 +311,6 @@ font-family: "Orbitron", sans-serif;
   margin-top: 60px;
 }
 
-/*Seção da tabela do Usuário chamados*/
 
 .tabela-container {
   margin-top: 40px;
@@ -341,7 +336,7 @@ font-family: "Orbitron", sans-serif;
 }
 
 .tabela th {
-  background-color: var(--primeira-cor);
+  background-color: #03e9f4;
   color: var(--black-cor);
 }
 

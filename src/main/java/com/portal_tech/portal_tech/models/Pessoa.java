@@ -19,7 +19,7 @@ public class Pessoa {
     @Column(length = 8)
     private String senha;
 
-    @Column(length = 10)
+    @Column(length = 30)
     private String telefone;
 
     @ManyToOne(cascade = CascadeType.PERSIST, optional = false)
