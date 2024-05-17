@@ -42,34 +42,47 @@ public class TecnicoController { //implements TecnicoControllerOpenApi {
 
     @GetMapping("/tecnico")
     public String findAllChamados(Model model, HttpSession session) { //abertos sem técnico
-        List<ChamadoDTO> chamadoDTO = chamadoServiceFront.findChamadosSemTecnico(); //findAllChamados().getBody();                                      //this.chamadoService.findAllChamados();
-        model.addAttribute("chamados", chamadoDTO);
+        //List<ChamadoDTO> chamadoDTO = chamadoServiceFront.findChamadosSemTecnico(); //findAllChamados().getBody();                                      //this.chamadoService.findAllChamados();
+        List<Chamado> chamados = chamadoRepository.findChamadosSemTecnico();
+        if (chamados.isEmpty()) {
+            Pessoa userOn = (Pessoa) session.getAttribute("cache");
+            String nomeUsuario = userOn.getNome();
+            model.addAttribute("userOn", nomeUsuario);
+            return "tela.tecnico";
+        } else {
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        List<String> dataFormatada = new ArrayList<>();
-        List<String> dataFimFormatada = new ArrayList<>();
-        for (ChamadoDTO chamado : chamadoDTO) {
-            LocalDate dtAbertura = chamado.getDt_abertura();
-            String dtFormatada = dtAbertura.format(formatter);
-            dataFormatada.add(dtFormatada);
-
-            LocalDate dtFim = chamado.getDt_fim();
-            if (dtFim != null) {
-                String dtFimFormatada = dtFim.format(formatter);
-                dataFimFormatada.add(dtFimFormatada);
-            } else {
-                dataFimFormatada.add("");
+            List<ChamadoDTO> chamadoDTO = new ArrayList<>();
+            for (Chamado chamado : chamados) {
+                chamadoDTO.add(new ChamadoDTO(chamado));
             }
+
+            model.addAttribute("chamados", chamadoDTO);
+
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            List<String> dataFormatada = new ArrayList<>();
+            List<String> dataFimFormatada = new ArrayList<>();
+            for (ChamadoDTO chamado : chamadoDTO) {
+                LocalDate dtAbertura = chamado.getDt_abertura();
+                String dtFormatada = dtAbertura.format(formatter);
+                dataFormatada.add(dtFormatada);
+
+                LocalDate dtFim = chamado.getDt_fim();
+                if (dtFim != null) {
+                    String dtFimFormatada = dtFim.format(formatter);
+                    dataFimFormatada.add(dtFimFormatada);
+                } else {
+                    dataFimFormatada.add("");
+                }
+            }
+            model.addAttribute("dtFormatada", dataFormatada);
+            model.addAttribute("dtFimFormatada", dataFimFormatada);
+
+            //sempre terá alguém logado
+            Pessoa userOn = (Pessoa) session.getAttribute("cache");
+            String nomeUsuario = userOn.getNome();
+            model.addAttribute("userOn", nomeUsuario);
+            /*      model.addAttribute("userOn", userOn);*/
         }
-        model.addAttribute("dtFormatada", dataFormatada);
-        model.addAttribute("dtFimFormatada", dataFimFormatada);
-
-//sempre terá alguém logado
-        Pessoa userOn = (Pessoa) session.getAttribute("cache");
-        String nomeUsuario = userOn.getNome();
-        model.addAttribute("userOn", nomeUsuario);
-        /*      model.addAttribute("userOn", userOn);*/
-
         return "tela.tecnico";
 
 
