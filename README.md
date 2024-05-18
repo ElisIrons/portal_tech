@@ -81,11 +81,7 @@ TELA ADMINISTRADOR
 - `Comunicação Integrada:` Recurso que facilita a comunicação entre usuários, técnicos e administradores através de mensagens internas no sistema, permitindo discussões sobre os chamados em andamento.
 - `Spring Security:` Implementação de uma etapa de verificação se um determinado usuário possui credenciais (geralmente, combinação de login e senha) válidas para acessar a nossa aplicação.
 - `Edição do chamado:` Permitir a atualização, correção e manutenção das informações relacionadas a um chamado específico. Essa funcionalidade pode incluir várias ações, como:
-   `1.` Atualização de Informações;
-   `2.` Adição de Comentários;
-   `3.` Anexação de Arquivos;
-   `4.` Atualização de Status;
-   `5.` Histórico de Alterações.
+   `1.` Atualização de Informações;    `2.` Adição de Comentários;    `3.` Anexação de Arquivos;    `4.` Atualização de Status;    `5.` Histórico de Alterações.
 
 # Autores
 
