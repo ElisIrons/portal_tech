@@ -187,7 +187,6 @@ public class TecnicoController { //implements TecnicoControllerOpenApi {
               }
 
 
-            // pro técnico atribuir chamado em aberto para ele mesmo
             Pessoa userOn = (Pessoa) session.getAttribute("cache");
             long id_tecnico = userOn.getId();
             Pessoa tecnico = this.pessoaRepository.findById(id_tecnico).orElse(null);
