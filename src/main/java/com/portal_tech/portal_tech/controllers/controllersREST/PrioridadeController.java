@@ -31,10 +31,6 @@ public class PrioridadeController implements PrioridadeControllerOpenApi {
 
     }
 
-    /*@RequestMapping(value = "/salvar", method = RequestMethod.POST)
-    public Prioridade save (@RequestBody Prioridade prioridade) {
-        return this.prioridadeService.save(prioridade);
-    }*/
 
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK"),
