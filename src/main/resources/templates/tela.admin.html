@@ -66,7 +66,7 @@
                                 <td th:text="${dtFormatada[i.index]}">Data Abertura</td>
                                 <td th:text="${chamado.id_usuario.nome}">Usuario</td>
                                 <td th:text="${chamado.id_usuario.setor.nome}">Setor</td>
-                                <td th:text="${chamado.descricao}">Descrição</td>
+                                <td th:text="${chamado.descricao}" style="width:35%;">Descrição</td>
                                 <td><label for="prioridade"></label>
                                     <select id="prioridade" name="prioridade">
                                         <option value="baixa" th:selected="${chamado.id_prioridade.nome == 'Baixa'}">Baixa</option>

@@ -21,4 +21,5 @@ public interface PessoaRepository extends JpaRepository<Pessoa, Long> {
     public List<Pessoa> findByTipo(@Param("nome") String nome);
 
 
+
 }
