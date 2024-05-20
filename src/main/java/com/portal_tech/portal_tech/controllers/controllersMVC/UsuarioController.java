@@ -3,7 +3,7 @@ package com.portal_tech.portal_tech.controllers.controllersMVC;
 import com.portal_tech.portal_tech.models.Chamado;
 import com.portal_tech.portal_tech.models.Pessoa;
 import com.portal_tech.portal_tech.models.Prioridade;
-import com.portal_tech.portal_tech.models.Status;
+
 import com.portal_tech.portal_tech.models.dtos.ChamadoDTO;
 import com.portal_tech.portal_tech.models.dtos.PrioridadeDTO;
 import com.portal_tech.portal_tech.repositores.ChamadoRepository;
@@ -11,8 +11,6 @@ import com.portal_tech.portal_tech.repositores.PrioridadeRepository;
 import com.portal_tech.portal_tech.repositores.StatusRepository;
 import com.portal_tech.portal_tech.services.serviceFront.ChamadoServiceFront;
 
-
-import com.portal_tech.portal_tech.swaggerDoc.SetorControllerOpenApi;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 
