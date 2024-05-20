@@ -23,12 +23,65 @@ Cada chamado técnico registra informações essenciais, como o nome do usuário
 - `Priorização de Chamados:` Permite a definição de prioridades para os chamados com base na gravidade do problema ou na importância da solicitação.
 - `Gestão Integrada:` Possui painel de gestão da fila de chamados pelo administrador, facilitando a comunicação entre gestor e técnico.
 
-# 🚧 Implementações
+# 🛠️ Conhecendo o Projeto
+
+BANCO MYSQL
+
+![WhatsApp Image 2024-05-17 at 21 03 09](https://github.com/keilaarakaki/portal_tech/assets/163216275/69c8a78f-cba8-4358-9299-b40a1d2191a1)
+
+API
+
+![WhatsApp Image 2024-05-17 at 20 57 01](https://github.com/keilaarakaki/portal_tech/assets/163216275/acff17aa-e63b-4aa9-99ee-07478fda144f)
+
+![WhatsApp Image 2024-05-17 at 20 57 01 (1)](https://github.com/keilaarakaki/portal_tech/assets/163216275/a898fe3d-160b-4d00-9bba-d535deae3942)
+
+TELA INICIAL
+
+![WhatsApp Image 2024-05-17 at 20 57 02](https://github.com/keilaarakaki/portal_tech/assets/163216275/8780de34-bdaa-4a69-8d76-45112381c9f4)
+
+TELA DE LOGIN
+
+![WhatsApp Image 2024-05-17 at 20 57 02 (1)](https://github.com/keilaarakaki/portal_tech/assets/163216275/66bef68b-13fe-413b-8768-72cae991317e)
+
+TELA DE CADASTRO
+
+![WhatsApp Image 2024-05-17 at 20 57 02 (2)](https://github.com/keilaarakaki/portal_tech/assets/163216275/8c4ebb32-b601-4172-a9c8-6f0dfe4b5960)
+
+TELA DE CHAMADOS
+
+![WhatsApp Image 2024-05-17 at 20 57 03 (1)](https://github.com/keilaarakaki/portal_tech/assets/163216275/7798d8de-3da3-4923-8445-35fac4f76498)
+
+CRIAÇÃO DE CHAMADO
+
+![WhatsApp Image 2024-05-17 at 20 57 03 (2)](https://github.com/keilaarakaki/portal_tech/assets/163216275/92baffac-c9ff-40dc-a2a4-052a948b0915)
+
+CHAMADOS CRIADOS
+
+![WhatsApp Image 2024-05-17 at 20 57 04](https://github.com/keilaarakaki/portal_tech/assets/163216275/b92ecf12-fd38-46e1-884e-23a9417cf6d9)
+
+TELA DO TÉCNICO
+
+![WhatsApp Image 2024-05-17 at 20 57 04 (2)](https://github.com/keilaarakaki/portal_tech/assets/163216275/419b9508-08c5-4694-8bea-f9fda54bbda0)
+
+![WhatsApp Image 2024-05-17 at 20 57 04 (3)](https://github.com/keilaarakaki/portal_tech/assets/163216275/e7312c8b-0fa9-4ae5-b6b7-640f7ffc9caa)
+
+TELA ADMINISTRADOR 
+
+![WhatsApp Image 2024-05-17 at 20 57 06 (1)](https://github.com/keilaarakaki/portal_tech/assets/163216275/3c88430f-b8c5-4fb7-bbec-b1b28330adf7)
+
+![WhatsApp Image 2024-05-17 at 20 57 06 (2)](https://github.com/keilaarakaki/portal_tech/assets/163216275/07eb07fe-1a0e-412a-908c-9b12899de9d2)
+
+![WhatsApp Image 2024-05-17 at 20 57 06 (3)](https://github.com/keilaarakaki/portal_tech/assets/163216275/7bae04e2-1f6b-4bf1-b38a-13fe59063f80)
+
+
+# 🚧 Implementações Futuras
 
 - `Atribuição Automática de Chamados:` Automatizar o processo de atribuição de chamados aos técnicos com base em critérios predefinidos, como especialização, disponibilidade ou carga de trabalho.
 - `Geração de Relatórios e Métricas:` Capacidade de gerar relatórios e métricas detalhadas sobre o desempenho do suporte técnico, incluindo tempo médio de resolução, volume de chamados e SLAs.
 - `Comunicação Integrada:` Recurso que facilita a comunicação entre usuários, técnicos e administradores através de mensagens internas no sistema, permitindo discussões sobre os chamados em andamento.
-
+- `Spring Security:` Implementação de uma etapa de verificação se um determinado usuário possui credenciais (geralmente, combinação de login e senha) válidas para acessar a nossa aplicação.
+- `Edição do chamado:` Permitir a atualização, correção e manutenção das informações relacionadas a um chamado específico. Essa funcionalidade pode incluir várias ações, como:
+   `1.` Atualização de Informações;    `2.` Adição de Comentários;    `3.` Anexação de Arquivos;    `4.` Atualização de Status;    `5.` Histórico de Alterações.
 
 # Autores
 

@@ -114,35 +114,45 @@ public class UsuarioController {
 
     @GetMapping("/usuario/chamados/{id_usuario}")
     public String findById_Usuario(@PathVariable("id_usuario") Long id_usuario, Model model, HttpSession session) {
-        List<ChamadoDTO> chamadoDTO = (List<ChamadoDTO>) chamadoServiceFront.findById_Usuario(id_usuario).getBody();
-        model.addAttribute("chamados", chamadoDTO);
+        List<Chamado> chamados = this.chamadoRepository.findById_Usuario(id_usuario);
+        if(chamados.isEmpty()) {
+            Pessoa userOn = (Pessoa) session.getAttribute("cache");
+            String nomeUsuario = userOn.getNome();
+            model.addAttribute("userOn", userOn);
+            return "usuario.chamados";
+        }else {
+            List<ChamadoDTO> chamadoDTO = new ArrayList<>();
+            for (Chamado chamado : chamados) {
+                chamadoDTO.add(new ChamadoDTO(chamado));
+            }
+            model.addAttribute("chamados", chamadoDTO);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            List<String> dataFormatada = new ArrayList<>();
+            List<String> dataFimFormatada = new ArrayList<>();
+            for (ChamadoDTO chamado : chamadoDTO) {
+                LocalDate dtAbertura = chamado.getDt_abertura();
+                String dtFormadata = dtAbertura.format(formatter);
+                dataFormatada.add(dtFormadata);
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        List<String> dataFormatada = new ArrayList<>();
-        List<String> dataFimFormatada = new ArrayList<>();
-        for (ChamadoDTO chamado : chamadoDTO) {
-            LocalDate dtAbertura = chamado.getDt_abertura();
-            String dtFormadata = dtAbertura.format(formatter);
-            dataFormatada.add(dtFormadata);
+                LocalDate dtFim = chamado.getDt_fim();
+                if (dtFim != null) {
+                    String dtFimFormatada = dtFim.format(formatter);
+                    dataFimFormatada.add(dtFimFormatada);
+                } else {
+                    dataFimFormatada.add("");
+                }
 
-            LocalDate dtFim = chamado.getDt_fim();
-            if (dtFim != null) {
-                String dtFimFormatada = dtFim.format(formatter);
-                dataFimFormatada.add(dtFimFormatada);
-            } else {
-                dataFimFormatada.add("");
             }
 
+            Pessoa userOn = (Pessoa) session.getAttribute("cache");
+            String nomeUsuario = userOn.getNome();
+            model.addAttribute("userOn", userOn);
+
+            model.addAttribute("dtFormatada", dataFormatada);
+            model.addAttribute("dtFimFormatada", dataFimFormatada);
+
+            return "usuario.chamados";
         }
-
-        Pessoa userOn = (Pessoa) session.getAttribute("cache");
-        String nomeUsuario = userOn.getNome();
-        model.addAttribute("userOn", userOn);
-
-        model.addAttribute("dtFormatada", dataFormatada);
-        model.addAttribute("dtFimFormatada", dataFimFormatada);
-
-        return "usuario.chamados";
     }
 
     @PostMapping("/usuario/chamado/{id}/excluir")
