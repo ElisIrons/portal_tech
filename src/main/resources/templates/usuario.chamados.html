@@ -52,8 +52,8 @@
                             <th>Data de Abertura</th>
                             <th>Usuário</th>
                             <th>Setor</th>
-                            <th>Prioridade</th>
                             <th>Descrição</th>
+                            <th>Prioridade</th>
                             <th>Data da Finalização</th>
                             <th>Excluir</th>
                         </tr>
@@ -64,8 +64,8 @@
                             <td th:text="${dtFormatada[i.index]}">Data Abertura</td>
                             <td th:text="${chamado.id_usuario.nome}">Usuario</td>
                             <td th:text="${chamado.id_usuario.setor.nome}">Setor</td>
-                            <td th:text="${chamado.id_prioridade.nome}">Prioridade</td>
                             <td th:text="${chamado.descricao}">Descrição</td>
+                            <td th:text="${chamado.id_prioridade.nome}">Prioridade</td>
                             <td th:text="${dtFimFormatada[i.index]}">Data Fim</td>
                             <td>
                             <form th:action="@{/usuario/chamado/{id}/excluir(id=${chamado.id})}" method="post" id="deleteForm">

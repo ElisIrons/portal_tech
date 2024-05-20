@@ -112,21 +112,6 @@ public class UsuarioController {
 
 
 
-//        return "redirect:usuario.novo.chamado"; // + pessoa.getId();
-
-
-
-/*
-    @PostMapping("/usuario/novo/chamado")
-    public String criarNovoChamado(@ModelAttribute ChamadoDTO novoChamado, Model model, HttpSession session) {
-        Pessoa userOn = (Pessoa) session.getAttribute("cache");
-        novoChamado.setId_usuario(userOn);
-        novoChamado.setDt_abertura(LocalDate.now());
-        chamadoServiceFront.save(novoChamado);
-        return "redirect:/tela-usuario";
-    }*/
-
-
     @GetMapping("/usuario/chamados/{id_usuario}")
     public String findById_Usuario(@PathVariable("id_usuario") Long id_usuario, Model model, HttpSession session) {
         List<Chamado> chamados = this.chamadoRepository.findById_Usuario(id_usuario);

@@ -42,7 +42,7 @@ public class TecnicoController { //implements TecnicoControllerOpenApi {
 
     @GetMapping("/tecnico")
     public String findAllChamados(Model model, HttpSession session) { //abertos sem técnico
-        //List<ChamadoDTO> chamadoDTO = chamadoServiceFront.findChamadosSemTecnico(); //findAllChamados().getBody();                                      //this.chamadoService.findAllChamados();
+
         List<Chamado> chamados = chamadoRepository.findChamadosSemTecnico();
         if (chamados.isEmpty()) {
             Pessoa userOn = (Pessoa) session.getAttribute("cache");
@@ -138,8 +138,6 @@ public class TecnicoController { //implements TecnicoControllerOpenApi {
                                  @RequestParam("prioridade") String prioridade,
                                  @RequestParam Long id_chamado,
                                  Model model,
-                                 //@RequestParam("id_tecnico") Long id_tecnico,
-                                // @PathVariable("id") Long id_tecnico,
                                  HttpSession session){
             Chamado chamado = this.buscaChamado(id_chamado);
 
@@ -162,12 +160,6 @@ public class TecnicoController { //implements TecnicoControllerOpenApi {
             Status statusmodified = null;
             Status statusbd = chamado.getIdStatus();
 
-/*  aqui testar qdo tiver id            Pessoa pessoa = (Pessoa) session.getAttribute("cache");
-              session.setAttribute("cache", pessoa.getNome());
-
-              long idPessoa= pessoa.getId();
-              Pessoa pessoaDados = this.pessoaRepository.getReferenceById(idPessoa);
- */
 
               switch (status) {
                   case "em-analise":
@@ -214,7 +206,7 @@ public class TecnicoController { //implements TecnicoControllerOpenApi {
                   chamado.setIdPrioridade(prioridadeBd);
               }
 
-            return "redirect:/tecnico/" + chamado.getIdTecnico().getId(); //{id}"; // + pessoa.getId();
+            return "redirect:/tecnico/" + chamado.getIdTecnico().getId();
 
         }
 
@@ -234,29 +226,6 @@ public class TecnicoController { //implements TecnicoControllerOpenApi {
         }
 
 
-
-        // TECNICO NÃO EXCLUIRÁ NEM CRIARÁ NOVO CHAMADO
-
-
-        @GetMapping("/usuario/chamado/{id}")
-        public String findById (@PathVariable("id") Long id, Model model){
-            ChamadoDTO chamadoDTO = chamadoServiceFront.findById(id);
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-            String dtFormatada = null, dtFimFormatada = null;
-            if (chamadoDTO.getDt_abertura() != null) {
-                dtFormatada = chamadoDTO.getDt_abertura().format(formatter);
-            }
-            if (chamadoDTO.getDt_fim() != null) {
-                dtFimFormatada = chamadoDTO.getDt_fim().format(formatter);
-            }
-            model.addAttribute("chamados", chamadoDTO);
-            model.addAttribute("dtFormatada", dtFormatada);
-            model.addAttribute("dtFimFormatada", dtFimFormatada);
-            return "usuario.chamados";
-        }
-
-
-    // não sei se precisará
         @PostMapping("/tecnico/{id_tecnico}")  //     /{id_chamado}")
         public String updateById (@PathVariable("id_tecnico") Long id_tecnico, @PathVariable("id_chamado") Long
         id_chamado, @ModelAttribute("chamadoDTO") ChamadoDTO chamadoDTO){
